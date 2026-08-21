@@ -1,0 +1,51 @@
+{
+  "name": "glimmer-baseball-flywheel",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Hill-climb flywheel for fine-tuning Meta Glimmer on MLB baseball knowledge — grounded dataset, web-search judge, SFT/DPO training, recursive curriculum",
+  "type": "module",
+  "bin": {
+    "glimmer-bb": "bin/glimmer-bb",
+    "glimmer-baseball": "bin/glimmer-bb"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "pnpm@11.22.0",
+  "scripts": {
+    "cli": "tsx --env-file-if-exists=.env.local src/cli.ts",
+    "dev": "tsx --env-file-if-exists=.env.local src/cli.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "biome check",
+    "format": "biome format --write",
+    "typecheck": "tsc --noEmit",
+    "build": "tsc --noEmit",
+    "eval": "tsx --env-file-if-exists=.env.local src/eval/runner.ts",
+    "eval:mock": "tsx --env-file-if-exists=.env.local src/eval/runner.ts --mock",
+    "eval:baseball": "tsx --env-file-if-exists=.env.local src/eval/runner.ts --dataset dataset/v1/baseball.json",
+    "judge": "tsx --env-file-if-exists=.env.local src/judge/verifier.ts",
+    "dataset:build": "tsx --env-file-if-exists=.env.local src/dataset/builder.ts",
+    "dataset:verify": "tsx --env-file-if-exists=.env.local src/dataset/verifier.ts",
+    "train:sft": "tsx --env-file-if-exists=.env.local src/training/sft.ts",
+    "train:dpo": "tsx --env-file-if-exists=.env.local src/training/dpo.ts",
+    "train:synthetic": "tsx --env-file-if-exists=.env.local src/training/synthetic.ts",
+    "train:pipeline": "tsx --env-file-if-exists=.env.local src/training/pipeline.ts",
+    "flywheel": "tsx --env-file-if-exists=.env.local src/flywheel/orchestrator.ts",
+    "flywheel:once": "tsx --env-file-if-exists=.env.local src/flywheel/orchestrator.ts --once",
+    "flywheel:status": "tsx --env-file-if-exists=.env.local src/flywheel/orchestrator.ts --status",
+    "glimmer:setup": "tsx --env-file-if-exists=.env.local scripts/glimmer-setup.ts"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@anthropic-ai/sdk": "^0.96.0",
+    "@biomejs/biome": "2.2.0",
+    "@types/node": "^20",
+    "@vitest/coverage-v8": "^4.1.6",
+    "tsx": "^4.22.0",
+    "typescript": "^5",
+    "vitest": "^4.1.6",
+    "yaml": "^2.8.0",
+    "zod": "^3.25.0"
+  }
+}

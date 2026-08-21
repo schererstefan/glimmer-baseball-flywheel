@@ -1,0 +1,17 @@
+node_modules
+dist
+.env.local
+.env
+.DS_Store
+evals/results/*.json
+evals/results/*.md
+!evals/results/.gitkeep
+training/runs/*
+!training/runs/.gitkeep
+flywheel/state/*.json
+!flywheel/state/.gitkeep
+flywheel/reports/*.md
+dataset/synthetic/*.json
+coverage
+.tmp
+training/datasets/*.jsonl

@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+set -e
+exec npx tsx --env-file-if-exists=.env.local "$(dirname "$0")/../src/cli.ts" "$@"
