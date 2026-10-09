@@ -76,7 +76,10 @@ export async function handleWebSearch(
   input: Record<string, unknown>,
 ): Promise<ToolResult> {
   const query = typeof input.query === "string" ? input.query : "";
-  const count = typeof input.count === "number" ? input.count : 5;
+  const count =
+    typeof input.count === "number"
+      ? Math.min(10, Math.max(1, Math.floor(input.count)))
+      : 5;
   if (!query) return { result: { error: "web_search requires query" } };
 
   // If live keys present and not in mock mode, try live fetch
@@ -167,17 +170,111 @@ export async function handleGetWeather(
   };
 }
 
+// Self-contained arithmetic evaluator (recursive descent). Supports numbers,
+// + - * / % and ^ / **, parentheses, unary +/- and arbitrary whitespace.
+// Anything outside that grammar is a parse error — never executed as code.
+function evaluateArithmetic(src: string): number {
+  let pos = 0;
+
+  function fail(msg: string): never {
+    throw new Error(msg);
+  }
+
+  function skipWs(): void {
+    while (pos < src.length && /\s/.test(src.charAt(pos))) pos++;
+  }
+
+  function parseExpression(): number {
+    let value = parseTerm();
+    for (;;) {
+      skipWs();
+      const c = src.charAt(pos);
+      if (c !== "+" && c !== "-") return value;
+      pos++;
+      const rhs = parseTerm();
+      value = c === "+" ? value + rhs : value - rhs;
+    }
+  }
+
+  function parseTerm(): number {
+    let value = parseUnary();
+    for (;;) {
+      skipWs();
+      const c = src.charAt(pos);
+      if (c !== "*" && c !== "/" && c !== "%") return value;
+      if (c === "*" && src.charAt(pos + 1) === "*")
+        fail(`Unexpected operator '**' at position ${pos}`);
+      pos++;
+      const rhs = parseUnary();
+      if (c === "*") value *= rhs;
+      else if (c === "/") value /= rhs;
+      else value %= rhs;
+    }
+  }
+
+  // Unary binds looser than exponent: -2^2 === -(2^2).
+  function parseUnary(): number {
+    skipWs();
+    const c = src.charAt(pos);
+    if (c === "+") {
+      pos++;
+      return parseUnary();
+    }
+    if (c === "-") {
+      pos++;
+      return -parseUnary();
+    }
+    return parsePower();
+  }
+
+  // Exponent is right-associative: 2^3^2 === 2^(3^2).
+  function parsePower(): number {
+    const base = parsePrimary();
+    skipWs();
+    let op: string | null = null;
+    if (src.startsWith("**", pos)) op = "**";
+    else if (src.charAt(pos) === "^") op = "^";
+    if (op === null) return base;
+    pos += op.length;
+    return Math.pow(base, parseUnary());
+  }
+
+  function parsePrimary(): number {
+    skipWs();
+    if (src.charAt(pos) === "(") {
+      pos++;
+      const value = parseExpression();
+      skipWs();
+      if (src.charAt(pos) !== ")") fail(`Expected ')' at position ${pos}`);
+      pos++;
+      return value;
+    }
+    const match = /^(\d+(\.\d*)?|\.\d+)/.exec(src.slice(pos));
+    if (!match) {
+      if (pos >= src.length) fail("Unexpected end of expression");
+      fail(`Unexpected character '${src.charAt(pos)}' at position ${pos}`);
+    }
+    pos += match[0].length;
+    return Number(match[0]);
+  }
+
+  const value = parseExpression();
+  skipWs();
+  if (pos < src.length)
+    fail(`Unexpected character '${src.charAt(pos)}' at position ${pos}`);
+  if (!Number.isFinite(value)) fail("not finite");
+  return value;
+}
+
 export async function handleCalculate(
   input: Record<string, unknown>,
 ): Promise<ToolResult> {
   const expr = typeof input.expression === "string" ? input.expression : "";
-  if (!expr) return { result: { error: "calculate requires expression" } };
+  if (!expr.trim())
+    return { result: { error: "calculate requires expression" } };
   try {
-    const fn = new Function(`return (${expr});`);
-    const val = fn();
-    if (typeof val !== "number" || !Number.isFinite(val))
-      throw new Error("not finite");
-    return { result: { expression: expr, value: val } };
+    const value = evaluateArithmetic(expr);
+    return { result: { expression: expr, value } };
   } catch (e) {
     return { result: { error: e instanceof Error ? e.message : String(e) } };
   }
