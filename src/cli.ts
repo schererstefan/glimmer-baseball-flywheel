@@ -27,7 +27,10 @@ Env:
 `);
 }
 
-if (args.length === 0 || args.includes("--help") || args.includes("-h")) { help(); process.exit(0); }
+if (args.length === 0 || args.includes("--help") || args.includes("-h")) {
+  help();
+  process.exit(0);
+}
 
 const cmd = args[0]!;
 const rest = args.slice(1);
@@ -44,10 +47,17 @@ async function dispatch() {
     pipeline: "src/training/pipeline.ts",
   };
   const target = map[cmd];
-  if (!target) { console.error(`unknown command: ${cmd}`); help(); process.exit(1); }
+  if (!target) {
+    console.error(`unknown command: ${cmd}`);
+    help();
+    process.exit(1);
+  }
   // re-exec with tsx and forwarded args
   const { spawn } = await import("node:child_process");
-  const child = spawn("npx", ["tsx", target, ...rest], { stdio: "inherit", env: process.env });
+  const child = spawn("npx", ["tsx", target, ...rest], {
+    stdio: "inherit",
+    env: process.env,
+  });
   child.on("exit", (code) => process.exit(code ?? 0));
 }
 

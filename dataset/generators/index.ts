@@ -755,7 +755,9 @@ export async function buildDataset(
   manifest: import("../schema.ts").DatasetManifest;
   synthetic: BaseballCase[];
 }> {
-  seed.forEach((c) => BaseballCaseSchema.parse(c));
+  seed.forEach((c) => {
+    BaseballCaseSchema.parse(c);
+  });
   const rng = makeRng(opts.seed ?? 42);
   const provider = opts.provider ?? new MockFactProvider();
   const defaults: Record<Category, number> = {

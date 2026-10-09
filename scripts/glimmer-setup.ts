@@ -7,14 +7,17 @@ async function check() {
     const res = await fetch(`${host}/api/tags`);
     if (!res.ok) throw new Error(`${res.status}`);
     const j: any = await res.json();
-    const models = (j.models ?? []).map((m: any)=>m.name);
+    const models = (j.models ?? []).map((m: any) => m.name);
     console.log(`Ollama at ${host}: ${models.join(", ") || "(no models)"}`);
-    if (models.some((m:string)=>m.includes(model))) console.log(`✓ ${model} present`);
+    if (models.some((m: string) => m.includes(model)))
+      console.log(`✓ ${model} present`);
     else console.log(`→ pull ${model}: ollama pull ${model}`);
     if (process.argv.includes("--dry-run")) return;
     // try pull via API
   } catch (e) {
-    console.error(`Ollama not reachable at ${host}: ${e instanceof Error ? e.message : String(e)}`);
+    console.error(
+      `Ollama not reachable at ${host}: ${e instanceof Error ? e.message : String(e)}`,
+    );
     console.log(`Install: brew install ollama && ollama serve &`);
     console.log(`Pull: ollama pull ${model} (fallback ${fallback})`);
   }

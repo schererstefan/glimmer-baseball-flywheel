@@ -9,8 +9,8 @@
 import fs from "node:fs";
 import path from "node:path";
 import type { BaseballCase } from "@/src/dataset/schema.ts";
-import { judgeAnswer } from "@/src/judge/verifier.ts";
 import { CachedRetriever, getRetriever } from "@/src/judge/retriever.ts";
+import { judgeAnswer } from "@/src/judge/verifier.ts";
 
 // ---------------------------------------------------------------------------
 // Templates
@@ -55,11 +55,24 @@ const TEMPLATES: Record<string, string[]> = {
 };
 
 const SAMPLE_VALUES: Record<string, string[]> = {
-  team: ["New York Yankees", "Los Angeles Dodgers", "Houston Astros", "Atlanta Braves", "Texas Rangers", "Boston Red Sox"],
+  team: [
+    "New York Yankees",
+    "Los Angeles Dodgers",
+    "Houston Astros",
+    "Atlanta Braves",
+    "Texas Rangers",
+    "Boston Red Sox",
+  ],
   position: ["shortstop", "center field", "ace pitcher", "catcher", "closer"],
   season: ["2024", "2023", "2025"],
   year: ["2024", "2023", "2022", "2016"],
-  player: ["Shohei Ohtani", "Aaron Judge", "Mookie Betts", "Gerrit Cole", "Ronald Acuña Jr."],
+  player: [
+    "Shohei Ohtani",
+    "Aaron Judge",
+    "Mookie Betts",
+    "Gerrit Cole",
+    "Ronald Acuña Jr.",
+  ],
   stat: ["batting average", "home runs", "ERA", "WAR", "stolen bases"],
   rule: ["infield fly", "pitch clock", "ghost runner"],
   term: ["Mendoza Line", "can of corn", "yakker"],
@@ -121,7 +134,10 @@ export function mineHardSlices(
   const topK = opts.topK ?? 5;
   const minCount = opts.minCount ?? 1;
   type Key = string;
-  const buckets = new Map<Key, { slice: WeakSlice; correct: number; total: number }>();
+  const buckets = new Map<
+    Key,
+    { slice: WeakSlice; correct: number; total: number }
+  >();
 
   function keyFor(r: (typeof evalResults)[number]): Key {
     const cat = r.category ?? "unknown";
@@ -132,7 +148,13 @@ export function mineHardSlices(
 
   function isCorrect(r: (typeof evalResults)[number]): boolean {
     if (typeof r.correct === "boolean") return r.correct;
-    const v = (r.verdict ?? r.judgeVerdict ?? r.finalVerdict ?? r.status ?? "").toLowerCase();
+    const v = (
+      r.verdict ??
+      r.judgeVerdict ??
+      r.finalVerdict ??
+      r.status ??
+      ""
+    ).toLowerCase();
     if (v === "pass" || v === "correct") return true;
     if (v === "fail" || v === "incorrect") return false;
     return false;
@@ -143,7 +165,13 @@ export function mineHardSlices(
     let b = buckets.get(k);
     if (!b) {
       b = {
-        slice: { category: r.category ?? "unknown", team: r.team, difficulty: r.difficulty ?? "unknown", accuracy: 0, count: 0 },
+        slice: {
+          category: r.category ?? "unknown",
+          team: r.team,
+          difficulty: r.difficulty ?? "unknown",
+          accuracy: 0,
+          count: 0,
+        },
         correct: 0,
         total: 0,
       };
@@ -157,7 +185,14 @@ export function mineHardSlices(
   for (const [, b] of buckets) {
     if (b.total < minCount) continue;
     const acc = b.total ? b.correct / b.total : 0;
-    slices.push({ category: b.slice.category, team: b.slice.team, difficulty: b.slice.difficulty, accuracy: Number(acc.toFixed(4)), count: b.total, failRate: Number((1 - acc).toFixed(4)) });
+    slices.push({
+      category: b.slice.category,
+      team: b.slice.team,
+      difficulty: b.slice.difficulty,
+      accuracy: Number(acc.toFixed(4)),
+      count: b.total,
+      failRate: Number((1 - acc).toFixed(4)),
+    });
   }
   slices.sort((a, b) => a.accuracy - b.accuracy || b.count - a.count);
   return slices.slice(0, topK);
@@ -167,12 +202,45 @@ export function mineHardSlices(
 // Augmentation — 5x
 // ---------------------------------------------------------------------------
 
-const AUGMENT_STRATEGIES: Array<{ id: string; rewrite: (q: string, a: string) => { q: string; a: string } }> = [
-  { id: "paraphrase", rewrite: (q, a) => ({ q: q.replace("What was", "What is").replace("Who", "Which player"), a }) },
-  { id: "reverse", rewrite: (q, a) => ({ q: `${a.slice(0, 80)} — what question does this answer? ${q}`, a }) },
-  { id: "concise", rewrite: (q, a) => ({ q: `${q} (Answer concisely.)`, a: a.split(".")[0] ?? a }) },
-  { id: "cloze", rewrite: (q, a) => ({ q: `Fill in the blank: ${q.replace("Who", "___").replace("What", "___")}`, a }) },
-  { id: "multi_hop", rewrite: (q, a) => ({ q: `${q} Explain briefly why.`, a: `${a} (verified via MLB official records).` }) },
+const AUGMENT_STRATEGIES: Array<{
+  id: string;
+  rewrite: (q: string, a: string) => { q: string; a: string };
+}> = [
+  {
+    id: "paraphrase",
+    rewrite: (q, a) => ({
+      q: q.replace("What was", "What is").replace("Who", "Which player"),
+      a,
+    }),
+  },
+  {
+    id: "reverse",
+    rewrite: (q, a) => ({
+      q: `${a.slice(0, 80)} — what question does this answer? ${q}`,
+      a,
+    }),
+  },
+  {
+    id: "concise",
+    rewrite: (q, a) => ({
+      q: `${q} (Answer concisely.)`,
+      a: a.split(".")[0] ?? a,
+    }),
+  },
+  {
+    id: "cloze",
+    rewrite: (q, a) => ({
+      q: `Fill in the blank: ${q.replace("Who", "___").replace("What", "___")}`,
+      a,
+    }),
+  },
+  {
+    id: "multi_hop",
+    rewrite: (q, a) => ({
+      q: `${q} Explain briefly why.`,
+      a: `${a} (verified via MLB official records).`,
+    }),
+  },
 ];
 
 function augmentCase(base: BaseballCase, factor: number): BaseballCase[] {
@@ -198,20 +266,28 @@ function augmentCase(base: BaseballCase, factor: number): BaseballCase[] {
 export async function generateSynthetic(
   baseDataset: BaseballCase[],
   opts: SyntheticOptions,
-): Promise<{ candidates: BaseballCase[]; kept: BaseballCase[]; rejected: Array<{ id: string; reason: string }> }> {
+): Promise<{
+  candidates: BaseballCase[];
+  kept: BaseballCase[];
+  rejected: Array<{ id: string; reason: string }>;
+}> {
   const target = opts.targetCount ?? opts.n ?? 20;
   const augmentFactor = opts.augmentationFactor ?? 5;
   const maxDepth = opts.maxDepth ?? 2;
 
   const n = opts.n ?? target;
   const catsFromSlices = opts.weakSlices
-    .map((s) => (s.slice.split(":")[0] === "category" ? s.slice.split(":")[1]! : null))
+    .map((s) =>
+      s.slice.split(":")[0] === "category" ? s.slice.split(":")[1]! : null,
+    )
     .filter(Boolean) as string[];
-  const pool = catsFromSlices.length ? catsFromSlices : ["stats", "history", "roster"];
+  const pool = catsFromSlices.length
+    ? catsFromSlices
+    : ["stats", "history", "roster"];
 
-  let allCandidates: BaseballCase[] = [];
-  let allKept: BaseballCase[] = [];
-  let allRejected: Array<{ id: string; reason: string }> = [];
+  const allCandidates: BaseballCase[] = [];
+  const allKept: BaseballCase[] = [];
+  const allRejected: Array<{ id: string; reason: string }> = [];
   let depth = 0;
 
   async function oneRound(remaining: number): Promise<void> {
@@ -235,7 +311,10 @@ export async function generateSynthetic(
           const retr = new CachedRetriever(getRetriever());
           const hits = await retr.search(q, 3);
           if (hits.length && hits[0]) {
-            const snippet = (hits[0].extracted ?? hits[0].snippet).slice(0, 300);
+            const snippet = (hits[0].extracted ?? hits[0].snippet).slice(
+              0,
+              300,
+            );
             answer = snippet.length > 20 ? snippet : answer;
             sources = hits.map((h) => h.url).slice(0, 2);
             mustCite = hits[0].title.split(/\W+/).slice(0, 3);
@@ -269,7 +348,7 @@ export async function generateSynthetic(
 
     // Judge filter
     let kept: BaseballCase[] = [];
-    let rejected: Array<{ id: string; reason: string }> = [];
+    const rejected: Array<{ id: string; reason: string }> = [];
     if (opts.judgeFilter !== false) {
       for (const c of candidates) {
         try {
@@ -284,7 +363,12 @@ export async function generateSynthetic(
             },
             { mock: true },
           );
-          if (v.verdict === "correct" || v.verdict === "partial" || Math.random() < 0.35) kept.push(c);
+          if (
+            v.verdict === "correct" ||
+            v.verdict === "partial" ||
+            Math.random() < 0.35
+          )
+            kept.push(c);
           else rejected.push({ id: c.id, reason: v.reasoning.slice(0, 200) });
         } catch (e) {
           rejected.push({ id: c.id, reason: String(e).slice(0, 200) });
@@ -308,7 +392,11 @@ export async function generateSynthetic(
 
   // Trim to target
   const keptTrimmed = allKept.slice(0, target);
-  return { candidates: allCandidates, kept: keptTrimmed, rejected: allRejected };
+  return {
+    candidates: allCandidates,
+    kept: keptTrimmed,
+    rejected: allRejected,
+  };
 }
 
 // Aliases for task spec
@@ -337,13 +425,29 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   if (fs.existsSync(full)) {
     try {
       const parsed = JSON.parse(fs.readFileSync(full, "utf-8"));
-      base = (Array.isArray(parsed) ? parsed : parsed.cases ?? []) as BaseballCase[];
+      base = (
+        Array.isArray(parsed) ? parsed : (parsed.cases ?? [])
+      ) as BaseballCase[];
     } catch {}
   }
-  const weak = [{ slice: "category:stats", acc: 0.5 }, { slice: "category:history", acc: 0.6 }];
+  const weak = [
+    { slice: "category:stats", acc: 0.5 },
+    { slice: "category:history", acc: 0.6 },
+  ];
   generateSynthetic(base, { weakSlices: weak, n, mock }).then(({ kept }) => {
     fs.mkdirSync(path.dirname(path.resolve(out)), { recursive: true });
-    fs.writeFileSync(path.resolve(out), JSON.stringify({ version: `synth-${Date.now()}`, created_at: new Date().toISOString(), cases: kept }, null, 2));
+    fs.writeFileSync(
+      path.resolve(out),
+      JSON.stringify(
+        {
+          version: `synth-${Date.now()}`,
+          created_at: new Date().toISOString(),
+          cases: kept,
+        },
+        null,
+        2,
+      ),
+    );
     console.log(`[synthetic] kept ${kept.length} / target ${n} (out=${out})`);
   });
 }

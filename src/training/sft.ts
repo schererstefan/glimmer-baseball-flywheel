@@ -18,7 +18,13 @@ import type { BaseballCase } from "@/src/dataset/schema.ts";
 export type SFTRecord = {
   id: string;
   messages: Array<{ role: "system" | "user" | "assistant"; content: string }>;
-  metadata: { category: string; team: string | null; difficulty: string; freshness: string; source: string };
+  metadata: {
+    category: string;
+    team: string | null;
+    difficulty: string;
+    freshness: string;
+    source: string;
+  };
   // Extended fields for training backends and generic compatibility
   format?: "glimmer" | "openai";
   prompt?: string;
@@ -63,11 +69,26 @@ const SYS = `You are a baseball-knowledgeable assistant. Answer accurately and c
 // Instruction templates — baseball grounded
 // ---------------------------------------------------------------------------
 
-export const DEFAULT_TEMPLATES: Array<{ id: string; build: (q: string) => string }> = [
+export const DEFAULT_TEMPLATES: Array<{
+  id: string;
+  build: (q: string) => string;
+}> = [
   { id: "qa_v1", build: (q) => q },
-  { id: "instruct_v1", build: (q) => `Answer the following baseball question accurately and concisely.\n\nQuestion: ${q}` },
-  { id: "instruct_v2", build: (q) => `You are a knowledgeable MLB assistant. Use only verified baseball facts.\n\nQuestion: ${q}\n\nAnswer:` },
-  { id: "grounded_v1", build: (q) => `Given the question about Major League Baseball, provide a grounded answer. If unsure, say you do not know.\n\nQuestion: ${q}` },
+  {
+    id: "instruct_v1",
+    build: (q) =>
+      `Answer the following baseball question accurately and concisely.\n\nQuestion: ${q}`,
+  },
+  {
+    id: "instruct_v2",
+    build: (q) =>
+      `You are a knowledgeable MLB assistant. Use only verified baseball facts.\n\nQuestion: ${q}\n\nAnswer:`,
+  },
+  {
+    id: "grounded_v1",
+    build: (q) =>
+      `Given the question about Major League Baseball, provide a grounded answer. If unsure, say you do not know.\n\nQuestion: ${q}`,
+  },
   { id: "short_v1", build: (q) => `Q: ${q}\nA:` },
 ];
 
@@ -83,7 +104,9 @@ export function estimateTokens(text: string): number {
   return Math.max(1, Math.round((byChars + byWords) / 2));
 }
 
-export function estimateMessagesTokens(messages: Array<{ role: string; content: string }>): number {
+export function estimateMessagesTokens(
+  messages: Array<{ role: string; content: string }>,
+): number {
   let total = 0;
   for (const m of messages) total += estimateTokens(m.content) + 3;
   total += 3;
@@ -96,7 +119,8 @@ function hashNorm(s: string): string {
 
 function mulberry32(a: number): () => number {
   return () => {
-    let t = (a += 0x6d2b79f5);
+    a += 0x6d2b79f5;
+    let t = a;
     t = Math.imul(t ^ (t >>> 15), t | 1);
     t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
     return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
@@ -196,8 +220,12 @@ function caseToSFT(
     tplId = `legacy_v${variant}`;
   }
 
-  const answerRaw = n.explanation ? `${n.answer}\n\n${n.explanation}` : n.answer;
-  const cited = n.sources.length ? `${answerRaw}\n\nSources: ${n.sources.join(", ")}` : answerRaw;
+  const answerRaw = n.explanation
+    ? `${n.answer}\n\n${n.explanation}`
+    : n.answer;
+  const cited = n.sources.length
+    ? `${answerRaw}\n\nSources: ${n.sources.join(", ")}`
+    : answerRaw;
 
   const messages: SFTRecord["messages"] = [
     { role: "system", content: sys },
@@ -207,7 +235,10 @@ function caseToSFT(
 
   const tokenCount = estimateMessagesTokens(messages);
 
-  const id = variant === 0 && !templateId ? n.id : `${n.id}_v${variant}${templateId ? `_${tplId}` : ""}`;
+  const id =
+    variant === 0 && !templateId
+      ? n.id
+      : `${n.id}_v${variant}${templateId ? `_${tplId}` : ""}`;
 
   return {
     id,
@@ -222,7 +253,9 @@ function caseToSFT(
     prompt: qBase,
     completion: cited,
     tokenCount,
-    format: (opts.format === "openai" ? "openai" : "glimmer") as SFTRecord["format"],
+    format: (opts.format === "openai"
+      ? "openai"
+      : "glimmer") as SFTRecord["format"],
   };
 }
 
@@ -242,7 +275,10 @@ export function buildSFT(
   const shuffle = opts.shuffle ?? false;
 
   let filtered: Array<BaseballCase | GoldRecordLike> = [...cases];
-  if (opts.filterFreshness) filtered = filtered.filter((c) => opts.filterFreshness!.includes(normalizeCase(c).freshness));
+  if (opts.filterFreshness)
+    filtered = filtered.filter((c) =>
+      opts.filterFreshness!.includes(normalizeCase(c).freshness),
+    );
 
   const rand = pseudoRandom(seed);
   const out: SFTRecord[] = [];
@@ -250,7 +286,10 @@ export function buildSFT(
   const seenMessages = new Set<string>();
 
   // For "both" format we emit two records per case (glimmer + openai)
-  const formats: Array<"glimmer" | "openai"> = format === "both" ? ["glimmer", "openai"] : [format as "glimmer" | "openai"];
+  const formats: Array<"glimmer" | "openai"> =
+    format === "both"
+      ? ["glimmer", "openai"]
+      : [format as "glimmer" | "openai"];
 
   for (const c of filtered) {
     const n = normalizeCase(c);
@@ -267,7 +306,12 @@ export function buildSFT(
     for (const fmt of formats) {
       const fmtOpts = { ...opts, format: fmt } as BuildSFTOpts;
       // Base
-      const baseRec = caseToSFT(c, 0, fmtOpts, activeTemplates ? activeTemplates[0]?.id : undefined);
+      const baseRec = caseToSFT(
+        c,
+        0,
+        fmtOpts,
+        activeTemplates ? activeTemplates[0]?.id : undefined,
+      );
       // Token filter
       if (baseRec.tokenCount! > maxTokens || baseRec.tokenCount! < minTokens) {
         // skip if out of budget
@@ -294,10 +338,12 @@ export function buildSFT(
           tplId = activeTemplates[idx]?.id;
         }
         const rec = caseToSFT(c, v, fmtOpts, tplId);
-        if (rec.tokenCount! > maxTokens || rec.tokenCount! < minTokens) continue;
+        if (rec.tokenCount! > maxTokens || rec.tokenCount! < minTokens)
+          continue;
         const msgKey2 = `${fmt}::${hashNorm(JSON.stringify(rec.messages))}`;
         const idKey2 = `${fmt}::${rec.id}`;
-        if (doDedupe && (seenIds.has(idKey2) || seenMessages.has(msgKey2))) continue;
+        if (doDedupe && (seenIds.has(idKey2) || seenMessages.has(msgKey2)))
+          continue;
         seenIds.add(idKey2);
         seenMessages.add(msgKey2);
         out.push({ ...rec, format: fmt });
@@ -317,7 +363,10 @@ export function buildSFT(
 export const buildSFTFromGold = buildSFT;
 
 export function toJsonl(records: SFTRecord[]): string {
-  return records.map((r) => JSON.stringify(r)).join("\n") + (records.length ? "\n" : "");
+  return (
+    records.map((r) => JSON.stringify(r)).join("\n") +
+    (records.length ? "\n" : "")
+  );
 }
 
 export function fromJsonl(jsonl: string): SFTRecord[] {
@@ -339,12 +388,16 @@ export function writeSFTJsonl(records: SFTRecord[], outPath: string): string {
   return outPath;
 }
 
-export function loadGoldDataset(filePath: string): Array<BaseballCase | GoldRecordLike> {
+export function loadGoldDataset(
+  filePath: string,
+): Array<BaseballCase | GoldRecordLike> {
   const raw = fs.readFileSync(filePath, "utf-8");
   const parsed = JSON.parse(raw);
   if (Array.isArray(parsed)) return parsed as GoldRecordLike[];
-  if (parsed && Array.isArray(parsed.cases)) return parsed.cases as BaseballCase[];
-  if (parsed && Array.isArray(parsed.data)) return parsed.data as GoldRecordLike[];
+  if (parsed && Array.isArray(parsed.cases))
+    return parsed.cases as BaseballCase[];
+  if (parsed && Array.isArray(parsed.data))
+    return parsed.data as GoldRecordLike[];
   throw new Error(`Unsupported gold dataset shape in ${filePath}`);
 }
 
@@ -352,7 +405,9 @@ export function loadGoldDataset(filePath: string): Array<BaseballCase | GoldReco
 // CLI
 // ---------------------------------------------------------------------------
 
-function parseCliArgs(argv: string[]): BuildSFTOpts & { dataset: string; out: string } {
+function parseCliArgs(
+  argv: string[],
+): BuildSFTOpts & { dataset: string; out: string } {
   const args = argv.slice(2);
   const get = (flag: string): string | undefined => {
     const idx = args.indexOf(flag);
@@ -364,7 +419,11 @@ function parseCliArgs(argv: string[]): BuildSFTOpts & { dataset: string; out: st
   return {
     dataset: get("--dataset") ?? "dataset/v1/baseball.json",
     out: get("--out") ?? "training/datasets/sft.jsonl",
-    augment: get("--augment") ? Number(get("--augment")) : get("--aug") ? Number(get("--aug")) : 0,
+    augment: get("--augment")
+      ? Number(get("--augment"))
+      : get("--aug")
+        ? Number(get("--aug"))
+        : 0,
     format: (get("--format") as BuildSFTOpts["format"]) ?? "glimmer",
     maxTokens: get("--max-tokens") ? Number(get("--max-tokens")) : 2048,
     minTokens: get("--min-tokens") ? Number(get("--min-tokens")) : 4,
@@ -384,13 +443,19 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   }
   const raw = fs.readFileSync(datasetPath, "utf-8");
   const parsed = JSON.parse(raw);
-  const cases: Array<BaseballCase | GoldRecordLike> = Array.isArray(parsed) ? parsed : parsed.cases ?? parsed.data ?? [];
+  const cases: Array<BaseballCase | GoldRecordLike> = Array.isArray(parsed)
+    ? parsed
+    : (parsed.cases ?? parsed.data ?? []);
   const sft = buildSFT(cases, opts);
   const outPath = path.resolve(opts.out);
   writeSFTJsonl(sft, outPath);
   const glimmer = sft.filter((r) => r.format === "glimmer").length;
   const openai = sft.filter((r) => r.format === "openai").length;
-  const avgTok = sft.length ? Math.round(sft.reduce((s, r) => s + (r.tokenCount ?? 0), 0) / sft.length) : 0;
-  console.log(`[sft] read ${cases.length} cases -> ${sft.length} records (glimmer=${glimmer} openai=${openai} avgTok=${avgTok})`);
+  const avgTok = sft.length
+    ? Math.round(sft.reduce((s, r) => s + (r.tokenCount ?? 0), 0) / sft.length)
+    : 0;
+  console.log(
+    `[sft] read ${cases.length} cases -> ${sft.length} records (glimmer=${glimmer} openai=${openai} avgTok=${avgTok})`,
+  );
   console.log(`[sft] wrote ${path.relative(process.cwd(), outPath)}`);
 }

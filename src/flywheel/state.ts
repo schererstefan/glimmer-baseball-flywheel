@@ -8,7 +8,15 @@ export type FlywheelState = {
   bestRunId: string | null;
   bestAccuracy: number;
   bestModel: string | null;
-  history: Array<{ iteration: number; runId: string; accuracy: number; weightedAccuracy: number; model: string; promoted: boolean; at: string }>;
+  history: Array<{
+    iteration: number;
+    runId: string;
+    accuracy: number;
+    weightedAccuracy: number;
+    model: string;
+    promoted: boolean;
+    at: string;
+  }>;
   curriculum: {
     weakSlices: Array<{ slice: string; acc: number }>;
     focusCategories: string[];
@@ -26,7 +34,11 @@ const DEFAULT_STATE: FlywheelState = {
   bestAccuracy: 0,
   bestModel: null,
   history: [],
-  curriculum: { weakSlices: [], focusCategories: ["stats","live_season"], freshnessRefreshDue: new Date(Date.now()+7*86400000).toISOString() },
+  curriculum: {
+    weakSlices: [],
+    focusCategories: ["stats", "live_season"],
+    freshnessRefreshDue: new Date(Date.now() + 7 * 86400000).toISOString(),
+  },
   nextAction: "eval",
   totalIters: 0,
 };
@@ -42,10 +54,14 @@ export function loadState(): FlywheelState {
   const specP = SPEC_STATE_PATH;
   // Prefer legacy, but also check spec path for compatibility
   if (fs.existsSync(p)) {
-    try { return JSON.parse(fs.readFileSync(p, "utf8")) as FlywheelState; } catch {}
+    try {
+      return JSON.parse(fs.readFileSync(p, "utf8")) as FlywheelState;
+    } catch {}
   }
   if (fs.existsSync(specP)) {
-    try { return JSON.parse(fs.readFileSync(specP, "utf8")) as FlywheelState; } catch {}
+    try {
+      return JSON.parse(fs.readFileSync(specP, "utf8")) as FlywheelState;
+    } catch {}
   }
   return { ...DEFAULT_STATE };
 }
@@ -64,7 +80,10 @@ export function saveState(s: FlywheelState) {
   } catch {}
 }
 
-export function bumpIteration(s: FlywheelState, entry: FlywheelState["history"][number]): FlywheelState {
+export function bumpIteration(
+  s: FlywheelState,
+  entry: FlywheelState["history"][number],
+): FlywheelState {
   s.iteration += 1;
   s.totalIters += 1;
   s.history.push(entry);

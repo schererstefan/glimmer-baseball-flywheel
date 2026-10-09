@@ -10,7 +10,11 @@ export function percentile(arr: number[], p: number): number {
   return s[Math.max(0, idx)]!;
 }
 
-export function wilsonCI(successes: number, total: number, z = 1.96): [number, number] {
+export function wilsonCI(
+  successes: number,
+  total: number,
+  z = 1.96,
+): [number, number] {
   if (total === 0) return [0, 0];
   const p = successes / total;
   const denom = 1 + (z * z) / total;
@@ -29,7 +33,8 @@ export function bootstrapCI(
   const boots: number[] = [];
   for (let i = 0; i < nBoot; i++) {
     let s = 0;
-    for (let j = 0; j < scores.length; j++) s += scores[Math.floor(Math.random() * scores.length)]!;
+    for (let j = 0; j < scores.length; j++)
+      s += scores[Math.floor(Math.random() * scores.length)]!;
     boots.push(s / scores.length);
   }
   boots.sort((a, b) => a - b);
@@ -45,7 +50,7 @@ export function pValueMcNemar(b: number, c: number): number {
   // Exact binomial two-sided
   const k = Math.min(b, c);
   let p = 0;
-  for (let i = 0; i <= k; i++) p += binom(n, i) * Math.pow(0.5, n);
+  for (let i = 0; i <= k; i++) p += binom(n, i) * 0.5 ** n;
   return Math.min(1, p * 2);
 }
 

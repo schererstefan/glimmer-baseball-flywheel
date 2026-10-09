@@ -13,8 +13,13 @@ export type Curriculum = {
   nextN: number; // how many synthetic to generate per slice
 };
 
-export function buildCurriculum(run: EvalRun, allCases?: Array<{ id: string; freshness: string; verified_at: string }>): Curriculum {
-  const sortedCats = Object.entries(run.metrics.byCategory).sort((a, b) => a[1].acc - b[1].acc);
+export function buildCurriculum(
+  run: EvalRun,
+  allCases?: Array<{ id: string; freshness: string; verified_at: string }>,
+): Curriculum {
+  const sortedCats = Object.entries(run.metrics.byCategory).sort(
+    (a, b) => a[1].acc - b[1].acc,
+  );
   const focusCategories = sortedCats.slice(0, 3).map(([k]) => k);
 
   const upweighted = run.weakestSlices.map((ws) => ({
@@ -25,17 +30,32 @@ export function buildCurriculum(run: EvalRun, allCases?: Array<{ id: string; fre
   let freshnessRefresh: string[] = [];
   if (allCases) {
     const weekAgo = Date.now() - 7 * 86400000;
-    freshnessRefresh = allCases.filter((c) => (c.freshness === "live" || c.freshness === "seasonal") && new Date(c.verified_at).getTime() < weekAgo).map((c) => c.id);
+    freshnessRefresh = allCases
+      .filter(
+        (c) =>
+          (c.freshness === "live" || c.freshness === "seasonal") &&
+          new Date(c.verified_at).getTime() < weekAgo,
+      )
+      .map((c) => c.id);
   }
 
   const gap = 1 - run.metrics.accuracy;
   const nextN = Math.min(80, Math.max(10, Math.round(gap * 80)));
 
-  return { focusCategories, upweightedSlices: upweighted, freshnessRefresh, nextN };
+  return {
+    focusCategories,
+    upweightedSlices: upweighted,
+    freshnessRefresh,
+    nextN,
+  };
 }
 
-export function curriculumToSyntheticArgs(c: Curriculum): { n: number; categoryOverride?: string } {
-  if (c.focusCategories.length === 1) return { n: c.nextN, categoryOverride: c.focusCategories[0] };
+export function curriculumToSyntheticArgs(c: Curriculum): {
+  n: number;
+  categoryOverride?: string;
+} {
+  if (c.focusCategories.length === 1)
+    return { n: c.nextN, categoryOverride: c.focusCategories[0] };
   return { n: c.nextN };
 }
 
@@ -69,7 +89,13 @@ export type CurriculumWeight = {
 export type CurriculumState = {
   iter: number;
   weights: CurriculumWeight[];
-  queue: Array<{ id: string; priority: number; slices: SliceKey[]; createdAt: number; enqueuedIter: number }>;
+  queue: Array<{
+    id: string;
+    priority: number;
+    slices: SliceKey[];
+    createdAt: number;
+    enqueuedIter: number;
+  }>;
   seenIds: string[];
   updatedAt: string;
 };
@@ -89,7 +115,11 @@ export type UpdateInput = {
   recentIds?: string[];
 };
 
-function sliceKey(s: { category?: string; team?: string; difficulty?: string }): SliceKey {
+function sliceKey(s: {
+  category?: string;
+  team?: string;
+  difficulty?: string;
+}): SliceKey {
   const c = s.category ?? "unknown";
   const d = s.difficulty ?? "unknown";
   const t = s.team ?? "unknown";
@@ -110,7 +140,11 @@ function defaultWeight(s: SliceStats, iter: number): CurriculumWeight {
   };
 }
 
-export function updateCurriculum(prev: CurriculumState | null, input: UpdateInput, opts: CurriculumOpts = {}): CurriculumState {
+export function updateCurriculum(
+  prev: CurriculumState | null,
+  input: UpdateInput,
+  opts: CurriculumOpts = {},
+): CurriculumState {
   const decay = opts.decay ?? 0.9;
   const failBoost = opts.failBoost ?? 2.0;
   const minWeight = opts.minWeight ?? 0.05;
@@ -128,9 +162,12 @@ export function updateCurriculum(prev: CurriculumState | null, input: UpdateInpu
     const key = s.key ?? sliceKey(s);
     seenKeys.add(key);
     const prevW = prevMap.get(key);
-    const base = prevW ? prevW.weight * decay : defaultWeight({ ...s, key }, iter).weight;
+    const base = prevW
+      ? prevW.weight * decay
+      : defaultWeight({ ...s, key }, iter).weight;
     const boosted = base + s.failRate * failBoost * (1 + (1 - s.accuracy));
-    const diffBonus = s.difficulty === "hard" ? 0.35 : s.difficulty === "medium" ? 0.12 : 0;
+    const diffBonus =
+      s.difficulty === "hard" ? 0.35 : s.difficulty === "medium" ? 0.12 : 0;
     let w = boosted + diffBonus;
     w = Math.max(minWeight, w);
     nextWeights.push({
@@ -149,7 +186,7 @@ export function updateCurriculum(prev: CurriculumState | null, input: UpdateInpu
     for (const pw of prev.weights) {
       if (seenKeys.has(pw.key)) continue;
       const age = iter - pw.lastSeenIter;
-      let w = pw.weight * Math.pow(decay, age);
+      let w = pw.weight * decay ** age;
       if (age >= freshnessWindow) w += freshnessBoost;
       w = Math.max(minWeight, Number(w.toFixed(4)));
       nextWeights.push({ ...pw, weight: w });
@@ -162,7 +199,8 @@ export function updateCurriculum(prev: CurriculumState | null, input: UpdateInpu
   const queue = prev ? [...prev.queue] : [];
   const recentSet = new Set(input.recentIds ?? []);
   const topKeys = nextWeights.slice(0, 3).map((w) => w.key);
-  const topPriority = nextWeights.slice(0, 3).reduce((s, w) => s + w.weight, 0) / 3;
+  const topPriority =
+    nextWeights.slice(0, 3).reduce((s, w) => s + w.weight, 0) / 3;
   if (topKeys.length) {
     const queueKeys = new Set(queue.flatMap((q) => q.slices));
     const hasOverlap = topKeys.some((k) => queueKeys.has(k));
@@ -177,15 +215,28 @@ export function updateCurriculum(prev: CurriculumState | null, input: UpdateInpu
     }
   }
   queue.sort((a, b) => b.priority - a.priority);
-  const trimmedQueue = queue.slice(0, maxQueue).filter((q) => !recentSet.has(q.id));
+  const trimmedQueue = queue
+    .slice(0, maxQueue)
+    .filter((q) => !recentSet.has(q.id));
   const seenIds = prev ? [...prev.seenIds] : [];
-  for (const id of input.recentIds ?? []) if (!seenIds.includes(id)) seenIds.push(id);
+  for (const id of input.recentIds ?? [])
+    if (!seenIds.includes(id)) seenIds.push(id);
   const cappedSeen = seenIds.slice(-500);
 
-  return { iter, weights: nextWeights, queue: trimmedQueue, seenIds: cappedSeen, updatedAt: new Date().toISOString() };
+  return {
+    iter,
+    weights: nextWeights,
+    queue: trimmedQueue,
+    seenIds: cappedSeen,
+    updatedAt: new Date().toISOString(),
+  };
 }
 
-export function sampleSlices(state: CurriculumState, k: number, seed = 42): CurriculumWeight[] {
+export function sampleSlices(
+  state: CurriculumState,
+  k: number,
+  seed = 42,
+): CurriculumWeight[] {
   if (!state.weights.length) return [];
   const weights = state.weights;
   const total = weights.reduce((s, w) => s + w.weight, 0);
@@ -213,20 +264,33 @@ export function sampleSlices(state: CurriculumState, k: number, seed = 42): Curr
   return sampled;
 }
 
-export function dequeueNext(state: CurriculumState): { item: CurriculumState["queue"][number] | null; next: CurriculumState } {
+export function dequeueNext(state: CurriculumState): {
+  item: CurriculumState["queue"][number] | null;
+  next: CurriculumState;
+} {
   if (!state.queue.length) return { item: null, next: state };
   const [head, ...rest] = state.queue;
-  return { item: head ?? null, next: { ...state, queue: rest, updatedAt: new Date().toISOString() } };
+  return {
+    item: head ?? null,
+    next: { ...state, queue: rest, updatedAt: new Date().toISOString() },
+  };
 }
 
 export function curriculumToString(state: CurriculumState): string {
   const lines: string[] = [];
   lines.push(`curriculum iter=${state.iter} ${state.updatedAt}`);
   lines.push(`weights (${state.weights.length}):`);
-  for (const w of state.weights.slice(0, 8)) lines.push(`  ${w.key} acc=${w.accuracy.toFixed(2)} fail=${(1 - w.accuracy).toFixed(2)} weight=${w.weight.toFixed(2)}`);
-  if (state.weights.length > 8) lines.push(`  ... and ${state.weights.length - 8} more`);
+  for (const w of state.weights.slice(0, 8))
+    lines.push(
+      `  ${w.key} acc=${w.accuracy.toFixed(2)} fail=${(1 - w.accuracy).toFixed(2)} weight=${w.weight.toFixed(2)}`,
+    );
+  if (state.weights.length > 8)
+    lines.push(`  ... and ${state.weights.length - 8} more`);
   lines.push(`queue (${state.queue.length}):`);
-  for (const q of state.queue.slice(0, 5)) lines.push(`  ${q.id} pri=${q.priority.toFixed(2)} slices=${q.slices.join(",")}`);
+  for (const q of state.queue.slice(0, 5))
+    lines.push(
+      `  ${q.id} pri=${q.priority.toFixed(2)} slices=${q.slices.join(",")}`,
+    );
   return lines.join("\n");
 }
 
@@ -242,7 +306,10 @@ export function loadCurriculumState(p?: string): CurriculumState | null {
   }
 }
 
-export function saveCurriculumState(state: CurriculumState, p?: string): string {
+export function saveCurriculumState(
+  state: CurriculumState,
+  p?: string,
+): string {
   const file = path.resolve(p ?? CURRICULUM_STATE_PATH);
   fs.mkdirSync(path.dirname(file), { recursive: true });
   fs.writeFileSync(file, JSON.stringify(state, null, 2), "utf-8");
@@ -256,9 +323,27 @@ export function saveCurriculumState(state: CurriculumState, p?: string): string 
 }
 
 export function statsFromEvalResults(
-  results: Array<{ category?: string; team?: string; difficulty?: string; verdict?: string; judgeVerdict?: string; finalVerdict?: string; status?: string; correct?: boolean }>,
+  results: Array<{
+    category?: string;
+    team?: string;
+    difficulty?: string;
+    verdict?: string;
+    judgeVerdict?: string;
+    finalVerdict?: string;
+    status?: string;
+    correct?: boolean;
+  }>,
 ): SliceStats[] {
-  const buckets = new Map<string, { cat?: string; team?: string; diff?: string; correct: number; total: number }>();
+  const buckets = new Map<
+    string,
+    {
+      cat?: string;
+      team?: string;
+      diff?: string;
+      correct: number;
+      total: number;
+    }
+  >();
   for (const r of results) {
     const cat = r.category ?? "unknown";
     const diff = r.difficulty ?? "unknown";
@@ -270,14 +355,31 @@ export function statsFromEvalResults(
       buckets.set(key, b);
     }
     b.total++;
-    const v = (r.verdict ?? r.judgeVerdict ?? r.finalVerdict ?? r.status ?? "").toLowerCase();
-    const isCorrect = typeof r.correct === "boolean" ? r.correct : v === "pass" || v === "correct";
+    const v = (
+      r.verdict ??
+      r.judgeVerdict ??
+      r.finalVerdict ??
+      r.status ??
+      ""
+    ).toLowerCase();
+    const isCorrect =
+      typeof r.correct === "boolean"
+        ? r.correct
+        : v === "pass" || v === "correct";
     if (isCorrect) b.correct++;
   }
   const out: SliceStats[] = [];
   for (const [key, b] of buckets) {
     const acc = b.total ? b.correct / b.total : 0;
-    out.push({ key, category: b.cat, team: b.team, difficulty: b.diff, accuracy: Number(acc.toFixed(4)), count: b.total, failRate: Number((1 - acc).toFixed(4)) });
+    out.push({
+      key,
+      category: b.cat,
+      team: b.team,
+      difficulty: b.diff,
+      accuracy: Number(acc.toFixed(4)),
+      count: b.total,
+      failRate: Number((1 - acc).toFixed(4)),
+    });
   }
   out.sort((a, b) => a.accuracy - b.accuracy);
   return out;

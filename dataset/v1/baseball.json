@@ -38,31 +38,18 @@
       "id": "bb_roster_001",
       "question": "Where do the New York Yankees play their home games?",
       "answer": "Yankee Stadium in the Bronx, New York City",
-      "alternates": [
-        "Yankee Stadium",
-        "the Bronx"
-      ],
+      "alternates": ["Yankee Stadium", "the Bronx"],
       "category": "ballpark",
       "team": "NYY",
       "difficulty": "easy",
       "freshness": "static",
-      "gold_sources": [
-        "https://en.wikipedia.org/wiki/Yankee_Stadium"
-      ],
-      "must_cite": [
-        "Yankee Stadium",
-        "Bronx"
-      ],
+      "gold_sources": ["https://en.wikipedia.org/wiki/Yankee_Stadium"],
+      "must_cite": ["Yankee Stadium", "Bronx"],
       "numeric_answer": null,
       "tolerance": null,
-      "tags": [
-        "stadium",
-        "home"
-      ],
+      "tags": ["stadium", "home"],
       "verified_at": "2026-08-16",
-      "expected_tools": [
-        "web_search"
-      ],
+      "expected_tools": ["web_search"],
       "explanation": "Yankee Stadium has been the Yankees' home since 1923 (original) and the current stadium since 2009, located at 1 East 161st Street, Bronx, NY."
     },
     {
@@ -77,63 +64,38 @@
       "team": null,
       "difficulty": "easy",
       "freshness": "seasonal",
-      "gold_sources": [
-        "https://en.wikipedia.org/wiki/2024_World_Series"
-      ],
-      "must_cite": [
-        "Dodgers",
-        "Yankees",
-        "4-1"
-      ],
+      "gold_sources": ["https://en.wikipedia.org/wiki/2024_World_Series"],
+      "must_cite": ["Dodgers", "Yankees", "4-1"],
       "numeric_answer": null,
       "tolerance": null,
-      "tags": [
-        "world_series",
-        "2024"
-      ],
+      "tags": ["world_series", "2024"],
       "verified_at": "2026-08-16",
-      "expected_tools": [
-        "web_search"
-      ],
+      "expected_tools": ["web_search"],
       "explanation": "2024 World Series: Dodgers over Yankees in 5 games; Freddie Freeman won WS MVP."
     },
     {
       "id": "bb_history_002",
       "question": "Who won the 2023 World Series?",
       "answer": "Texas Rangers defeated the Arizona Diamondbacks 4-1",
-      "alternates": [
-        "Texas Rangers beat Diamondbacks 4-1"
-      ],
+      "alternates": ["Texas Rangers beat Diamondbacks 4-1"],
       "category": "history",
       "team": null,
       "difficulty": "easy",
       "freshness": "static",
-      "gold_sources": [
-        "https://en.wikipedia.org/wiki/2023_World_Series"
-      ],
-      "must_cite": [
-        "Texas Rangers",
-        "Arizona Diamondbacks"
-      ],
+      "gold_sources": ["https://en.wikipedia.org/wiki/2023_World_Series"],
+      "must_cite": ["Texas Rangers", "Arizona Diamondbacks"],
       "numeric_answer": null,
       "tolerance": null,
-      "tags": [
-        "world_series",
-        "2023"
-      ],
+      "tags": ["world_series", "2023"],
       "verified_at": "2026-08-16",
-      "expected_tools": [
-        "web_search"
-      ],
+      "expected_tools": ["web_search"],
       "explanation": "First championship in Rangers franchise history."
     },
     {
       "id": "bb_history_003",
       "question": "Which team has won the most World Series titles and how many?",
       "answer": "New York Yankees with 27 World Series championships",
-      "alternates": [
-        "Yankees 27 titles"
-      ],
+      "alternates": ["Yankees 27 titles"],
       "category": "history",
       "team": "NYY",
       "difficulty": "easy",
@@ -141,30 +103,19 @@
       "gold_sources": [
         "https://en.wikipedia.org/wiki/List_of_World_Series_champions"
       ],
-      "must_cite": [
-        "Yankees",
-        "27"
-      ],
+      "must_cite": ["Yankees", "27"],
       "numeric_answer": 27,
       "tolerance": 0,
-      "tags": [
-        "titles",
-        "records"
-      ],
+      "tags": ["titles", "records"],
       "verified_at": "2026-08-16",
-      "expected_tools": [
-        "web_search"
-      ],
+      "expected_tools": ["web_search"],
       "explanation": "Yankees lead MLB with 27; next is Cardinals with 11."
     },
     {
       "id": "bb_roster_002",
       "question": "Which team does Shohei Ohtani play for as of the 2024 season and what positions does he play?",
       "answer": "Los Angeles Dodgers \u2014 designated hitter and pitcher (two-way), though he only DH'd in 2024 while recovering from elbow surgery",
-      "alternates": [
-        "Los Angeles Dodgers DH/P",
-        "Dodgers"
-      ],
+      "alternates": ["Los Angeles Dodgers DH/P", "Dodgers"],
       "category": "roster",
       "team": "LAD",
       "difficulty": "easy",
@@ -173,30 +124,19 @@
         "https://www.mlb.com/player/shohei-ohtani-660271",
         "https://en.wikipedia.org/wiki/Shohei_Ohtani"
       ],
-      "must_cite": [
-        "Dodgers",
-        "Ohtani"
-      ],
+      "must_cite": ["Dodgers", "Ohtani"],
       "numeric_answer": null,
       "tolerance": null,
-      "tags": [
-        "ohtani",
-        "dodgers",
-        "two-way"
-      ],
+      "tags": ["ohtani", "dodgers", "two-way"],
       "verified_at": "2026-08-16",
-      "expected_tools": [
-        "web_search"
-      ],
+      "expected_tools": ["web_search"],
       "explanation": "Ohtani signed 10-year $700M deal with Dodgers Dec 2023; did not pitch in 2024, won NL MVP as DH with 54 HR / 59 SB (first 50/50 season)."
     },
     {
       "id": "bb_stats_001",
       "question": "What were Aaron Judge's stats in the 2024 regular season (AVG, HR, RBI) and what award did he win?",
       "answer": ".322 AVG, 58 home runs, 144 RBI \u2014 won 2024 AL MVP",
-      "alternates": [
-        ".322/58/144 AL MVP"
-      ],
+      "alternates": [".322/58/144 AL MVP"],
       "category": "stats",
       "team": "NYY",
       "difficulty": "medium",
@@ -205,32 +145,19 @@
         "https://www.baseball-reference.com/players/j/judgeaa01.shtml",
         "https://www.mlb.com/news/aaron-judge-wins-2024-al-mvp"
       ],
-      "must_cite": [
-        "Judge",
-        "58",
-        "144"
-      ],
+      "must_cite": ["Judge", "58", "144"],
       "numeric_answer": 58,
       "tolerance": 0,
-      "tags": [
-        "judge",
-        "mvp",
-        "yankees"
-      ],
+      "tags": ["judge", "mvp", "yankees"],
       "verified_at": "2026-08-16",
-      "expected_tools": [
-        "web_search"
-      ],
+      "expected_tools": ["web_search"],
       "explanation": "Judge's second MVP (also 2022); led AL in HR, RBI, OBP, SLG."
     },
     {
       "id": "bb_stats_002",
       "question": "Who won the 2024 NL MVP and what historic milestone did he achieve?",
       "answer": "Shohei Ohtani \u2014 first 50 home run / 50 stolen base season in MLB history (54 HR, 59 SB)",
-      "alternates": [
-        "Ohtani 50-50",
-        "54 HR 59 SB"
-      ],
+      "alternates": ["Ohtani 50-50", "54 HR 59 SB"],
       "category": "stats",
       "team": "LAD",
       "difficulty": "medium",
@@ -238,30 +165,19 @@
       "gold_sources": [
         "https://www.mlb.com/news/shohei-ohtani-2024-nl-mvp-50-50"
       ],
-      "must_cite": [
-        "Ohtani",
-        "50-50",
-        "54"
-      ],
+      "must_cite": ["Ohtani", "50-50", "54"],
       "numeric_answer": 54,
       "tolerance": 0,
-      "tags": [
-        "mvp",
-        "50-50"
-      ],
+      "tags": ["mvp", "50-50"],
       "verified_at": "2026-08-16",
-      "expected_tools": [
-        "web_search"
-      ],
+      "expected_tools": ["web_search"],
       "explanation": "Ohtani unanimous NL MVP; created the 50/50 club."
     },
     {
       "id": "bb_stats_003",
       "question": "Who led MLB in ERA in 2024 (qualified starters) and what was his ERA?",
       "answer": "Tarik Skubal (DET) led qualified starters with a 2.39 ERA and also won the AL Cy Young",
-      "alternates": [
-        "Skubal 2.39"
-      ],
+      "alternates": ["Skubal 2.39"],
       "category": "stats",
       "team": "DET",
       "difficulty": "hard",
@@ -269,29 +185,19 @@
       "gold_sources": [
         "https://www.baseball-reference.com/leagues/majors/2024-pitching-leaders.shtml"
       ],
-      "must_cite": [
-        "Skubal",
-        "2.39"
-      ],
+      "must_cite": ["Skubal", "2.39"],
       "numeric_answer": 2.39,
       "tolerance": 0.02,
-      "tags": [
-        "era",
-        "cy_young"
-      ],
+      "tags": ["era", "cy_young"],
       "verified_at": "2026-08-16",
-      "expected_tools": [
-        "web_search"
-      ],
+      "expected_tools": ["web_search"],
       "explanation": "Skubal won AL pitching Triple Crown (wins, ERA, strikeouts)."
     },
     {
       "id": "bb_stats_004",
       "question": "What is the MLB single-season home run record and who holds it?",
       "answer": "Barry Bonds holds the single-season record with 73 home runs in 2001",
-      "alternates": [
-        "Bonds 73 in 2001"
-      ],
+      "alternates": ["Bonds 73 in 2001"],
       "category": "history",
       "team": null,
       "difficulty": "easy",
@@ -299,91 +205,55 @@
       "gold_sources": [
         "https://en.wikipedia.org/wiki/List_of_Major_League_Baseball_single-season_records"
       ],
-      "must_cite": [
-        "Barry Bonds",
-        "73",
-        "2001"
-      ],
+      "must_cite": ["Barry Bonds", "73", "2001"],
       "numeric_answer": 73,
       "tolerance": 0,
-      "tags": [
-        "records",
-        "home_runs"
-      ],
+      "tags": ["records", "home_runs"],
       "verified_at": "2026-08-16",
-      "expected_tools": [
-        "web_search"
-      ],
+      "expected_tools": ["web_search"],
       "explanation": "Aaron Judge holds AL record with 62 (2022); Maris held previous AL/NL combined before Bonds."
     },
     {
       "id": "bb_roster_003",
       "question": "Which pitcher won the 2023 AL Cy Young and what team was he on?",
       "answer": "Gerrit Cole of the New York Yankees (unanimous 2023 AL Cy Young)",
-      "alternates": [
-        "Gerrit Cole Yankees 2023 Cy Young"
-      ],
+      "alternates": ["Gerrit Cole Yankees 2023 Cy Young"],
       "category": "roster",
       "team": "NYY",
       "difficulty": "medium",
       "freshness": "static",
-      "gold_sources": [
-        "https://www.mlb.com/news/2023-cy-young-winners"
-      ],
-      "must_cite": [
-        "Gerrit Cole",
-        "Yankees"
-      ],
+      "gold_sources": ["https://www.mlb.com/news/2023-cy-young-winners"],
+      "must_cite": ["Gerrit Cole", "Yankees"],
       "numeric_answer": null,
       "tolerance": null,
-      "tags": [
-        "cy_young",
-        "pitcher"
-      ],
+      "tags": ["cy_young", "pitcher"],
       "verified_at": "2026-08-16",
-      "expected_tools": [
-        "web_search"
-      ],
+      "expected_tools": ["web_search"],
       "explanation": "Cole went 15-4, 2.63 ERA."
     },
     {
       "id": "bb_transactions_001",
       "question": "What was the contract Juan Soto signed going into the 2025 season and with which team?",
       "answer": "15-year, $765 million contract with the New York Mets (signed December 2024, largest in professional sports history)",
-      "alternates": [
-        "Mets 15yr $765M Soto"
-      ],
+      "alternates": ["Mets 15yr $765M Soto"],
       "category": "transactions",
       "team": "NYM",
       "difficulty": "medium",
       "freshness": "live",
-      "gold_sources": [
-        "https://www.mlb.com/news/juan-soto-mets-contract"
-      ],
-      "must_cite": [
-        "Soto",
-        "Mets",
-        "765"
-      ],
+      "gold_sources": ["https://www.mlb.com/news/juan-soto-mets-contract"],
+      "must_cite": ["Soto", "Mets", "765"],
       "numeric_answer": 765,
       "tolerance": 1,
-      "tags": [
-        "contract",
-        "free_agency"
-      ],
+      "tags": ["contract", "free_agency"],
       "verified_at": "2026-08-16",
-      "expected_tools": [
-        "web_search"
-      ],
+      "expected_tools": ["web_search"],
       "explanation": "Soto's deal broke Ohtani's $700M record; includes no deferrals and opt-out after 2029."
     },
     {
       "id": "bb_rules_001",
       "question": "How many strikes is a batter allowed before striking out under current MLB rules, and how many balls for a walk?",
       "answer": "3 strikes for a strikeout, 4 balls for a walk \u2014 the count goes to 3-2 as a full count",
-      "alternates": [
-        "3 strikes, 4 balls"
-      ],
+      "alternates": ["3 strikes, 4 balls"],
       "category": "rules",
       "team": null,
       "difficulty": "easy",
@@ -391,16 +261,10 @@
       "gold_sources": [
         "https://en.wikipedia.org/wiki/Baseball_rules#The_field_and_gameplay"
       ],
-      "must_cite": [
-        "3 strikes",
-        "4 balls"
-      ],
+      "must_cite": ["3 strikes", "4 balls"],
       "numeric_answer": null,
       "tolerance": null,
-      "tags": [
-        "rules",
-        "count"
-      ],
+      "tags": ["rules", "count"],
       "verified_at": "2026-08-16",
       "expected_tools": [],
       "explanation": "Foul balls with 2 strikes are not counted as strike three (except bunt foul)."
@@ -409,10 +273,7 @@
       "id": "bb_rules_002",
       "question": "What is the distance from the pitcher's rubber to home plate in MLB?",
       "answer": "60 feet 6 inches (18.44 meters)",
-      "alternates": [
-        "60'6\"",
-        "60 feet 6 inches"
-      ],
+      "alternates": ["60'6\"", "60 feet 6 inches"],
       "category": "rules",
       "team": null,
       "difficulty": "easy",
@@ -420,15 +281,10 @@
       "gold_sources": [
         "https://en.wikipedia.org/wiki/Baseball_field#Pitcher.27s_mound"
       ],
-      "must_cite": [
-        "60 feet 6 inches"
-      ],
+      "must_cite": ["60 feet 6 inches"],
       "numeric_answer": 60.5,
       "tolerance": 0.01,
-      "tags": [
-        "rules",
-        "field"
-      ],
+      "tags": ["rules", "field"],
       "verified_at": "2026-08-16",
       "expected_tools": [],
       "explanation": "Established in 1893; previously 50 feet."
@@ -437,9 +293,7 @@
       "id": "bb_ballpark_001",
       "question": "What is unique about Fenway Park's left field wall and what is it called?",
       "answer": "The Green Monster \u2014 a 37-foot-2-inch high left field wall, the tallest and oldest in MLB (built 1912)",
-      "alternates": [
-        "Green Monster 37 feet"
-      ],
+      "alternates": ["Green Monster 37 feet"],
       "category": "ballpark",
       "team": "BOS",
       "difficulty": "easy",
@@ -447,29 +301,19 @@
       "gold_sources": [
         "https://en.wikipedia.org/wiki/Fenway_Park#The_Green_Monster"
       ],
-      "must_cite": [
-        "Green Monster",
-        "37"
-      ],
+      "must_cite": ["Green Monster", "37"],
       "numeric_answer": 37,
       "tolerance": 1,
-      "tags": [
-        "fenway",
-        "wall"
-      ],
+      "tags": ["fenway", "wall"],
       "verified_at": "2026-08-16",
-      "expected_tools": [
-        "web_search"
-      ],
+      "expected_tools": ["web_search"],
       "explanation": "Originally covered in ads, painted green in 1947; includes manual scoreboard."
     },
     {
       "id": "bb_ballpark_002",
       "question": "Which MLB stadium has the deepest center field at 409 feet and which has the shortest porch?",
       "answer": "Coors Field (DEN) and Comerica Park are among deepest (~412+), but Oracle Park's Triples Alley 421' is deepest; Fenway's Pesky Pole is shortest at 302' to right field",
-      "alternates": [
-        "Pesky Pole 302 feet shortest"
-      ],
+      "alternates": ["Pesky Pole 302 feet shortest"],
       "category": "ballpark",
       "team": null,
       "difficulty": "hard",
@@ -477,29 +321,19 @@
       "gold_sources": [
         "https://en.wikipedia.org/wiki/List_of_Major_League_Baseball_stadiums_by_capacity"
       ],
-      "must_cite": [
-        "Fenway",
-        "302"
-      ],
+      "must_cite": ["Fenway", "302"],
       "numeric_answer": null,
       "tolerance": null,
-      "tags": [
-        "distances",
-        "dimensions"
-      ],
+      "tags": ["distances", "dimensions"],
       "verified_at": "2026-08-16",
-      "expected_tools": [
-        "web_search"
-      ],
+      "expected_tools": ["web_search"],
       "explanation": "Trick: exact dimensions vary; judge accepts Fenway 302' as canonical shortest."
     },
     {
       "id": "bb_history_004",
       "question": "Why did the Houston Astros' 2017 World Series title become controversial?",
       "answer": "Sign-stealing scandal: Astros used a center-field camera and trash-can banging to illegally steal signs during the 2017 season and postseason",
-      "alternates": [
-        "Astros sign stealing trash can"
-      ],
+      "alternates": ["Astros sign stealing trash can"],
       "category": "history",
       "team": "HOU",
       "difficulty": "medium",
@@ -507,29 +341,19 @@
       "gold_sources": [
         "https://en.wikipedia.org/wiki/Houston_Astros_sign_stealing_scandal"
       ],
-      "must_cite": [
-        "sign stealing",
-        "trash can"
-      ],
+      "must_cite": ["sign stealing", "trash can"],
       "numeric_answer": null,
       "tolerance": null,
-      "tags": [
-        "scandal",
-        "astros"
-      ],
+      "tags": ["scandal", "astros"],
       "verified_at": "2026-08-16",
-      "expected_tools": [
-        "web_search"
-      ],
+      "expected_tools": ["web_search"],
       "explanation": "MLB investigation Jan 2020; GM Jeff Luhnow and manager A.J. Hinch suspended then fired."
     },
     {
       "id": "bb_stats_005",
       "question": "What does WAR stand for in baseball analytics and who had the highest bWAR in 2024?",
       "answer": "Wins Above Replacement \u2014 Aaron Judge led MLB with 10.8 bWAR (Baseball-Reference) in 2024; Shohei Ohtani led fWAR at 9.2 (FanGraphs) as DH-only",
-      "alternates": [
-        "Wins Above Replacement Judge 10.8"
-      ],
+      "alternates": ["Wins Above Replacement Judge 10.8"],
       "category": "stats",
       "team": null,
       "difficulty": "hard",
@@ -537,108 +361,64 @@
       "gold_sources": [
         "https://www.baseball-reference.com/leagues/majors/2024-batting-leaders.shtml"
       ],
-      "must_cite": [
-        "Wins Above Replacement",
-        "Judge"
-      ],
+      "must_cite": ["Wins Above Replacement", "Judge"],
       "numeric_answer": 10.8,
       "tolerance": 0.5,
-      "tags": [
-        "war",
-        "analytics"
-      ],
+      "tags": ["war", "analytics"],
       "verified_at": "2026-08-16",
-      "expected_tools": [
-        "web_search"
-      ],
+      "expected_tools": ["web_search"],
       "explanation": "bWAR vs fWAR differ; either answer with citation accepted if grounded."
     },
     {
       "id": "bb_transactions_002",
       "question": "Which team drafted Paul Skenes 1st overall and when did he debut?",
       "answer": "Pittsburgh Pirates drafted him 1st overall in 2023; debuted May 11, 2024 vs Cubs; won 2024 NL Rookie of the Year",
-      "alternates": [
-        "Pirates 1st 2023 Skenes debut May 11 2024"
-      ],
+      "alternates": ["Pirates 1st 2023 Skenes debut May 11 2024"],
       "category": "transactions",
       "team": "PIT",
       "difficulty": "medium",
       "freshness": "seasonal",
-      "gold_sources": [
-        "https://www.mlb.com/news/paul-skenes-debut-2024"
-      ],
-      "must_cite": [
-        "Pirates",
-        "May 11",
-        "2024"
-      ],
+      "gold_sources": ["https://www.mlb.com/news/paul-skenes-debut-2024"],
+      "must_cite": ["Pirates", "May 11", "2024"],
       "numeric_answer": null,
       "tolerance": null,
-      "tags": [
-        "draft",
-        "rookie"
-      ],
+      "tags": ["draft", "rookie"],
       "verified_at": "2026-08-16",
-      "expected_tools": [
-        "web_search"
-      ],
+      "expected_tools": ["web_search"],
       "explanation": "LSU product; 11-3, 1.96 ERA rookie year."
     },
     {
       "id": "bb_live_001",
       "question": "Who are the current top 3 teams in the AL East standings as of the most recent completed season (2024)?",
       "answer": "New York Yankees (94-68), Baltimore Orioles (91-71), Boston Red Sox (81-81) \u2014 standings vary by date; answer must cite a live source with timestamp",
-      "alternates": [
-        "Yankees Orioles 2024 AL East"
-      ],
+      "alternates": ["Yankees Orioles 2024 AL East"],
       "category": "live_season",
       "team": null,
       "difficulty": "medium",
       "freshness": "live",
-      "gold_sources": [
-        "https://www.mlb.com/standings/2024/regular-season"
-      ],
-      "must_cite": [
-        "Yankees",
-        "Orioles"
-      ],
+      "gold_sources": ["https://www.mlb.com/standings/2024/regular-season"],
+      "must_cite": ["Yankees", "Orioles"],
       "numeric_answer": null,
       "tolerance": null,
-      "tags": [
-        "standings",
-        "al_east",
-        "live"
-      ],
+      "tags": ["standings", "al_east", "live"],
       "verified_at": "2026-08-16",
-      "expected_tools": [
-        "web_search"
-      ],
+      "expected_tools": ["web_search"],
       "explanation": "Live cases intentionally decay \u2014 judge requires citation with fetch date; stale answer counts as incorrect."
     },
     {
       "id": "bb_trivia_001",
       "question": "What is a 'Mendoza Line' in baseball and what batting average does it refer to?",
       "answer": "A .200 batting average \u2014 named after Mario Mendoza (career .215), it denotes a poor offensive threshold",
-      "alternates": [
-        ".200 Mendoza"
-      ],
+      "alternates": [".200 Mendoza"],
       "category": "trivia",
       "team": null,
       "difficulty": "easy",
       "freshness": "static",
-      "gold_sources": [
-        "https://en.wikipedia.org/wiki/Mendoza_Line"
-      ],
-      "must_cite": [
-        ".200",
-        "Mario Mendoza"
-      ],
+      "gold_sources": ["https://en.wikipedia.org/wiki/Mendoza_Line"],
+      "must_cite": [".200", "Mario Mendoza"],
       "numeric_answer": 0.2,
       "tolerance": 0.001,
-      "tags": [
-        "slang",
-        "average"
-      ],
+      "tags": ["slang", "average"],
       "verified_at": "2026-08-16",
       "expected_tools": [],
       "explanation": "Coined in late 1970s by teammates joking about Mendoza's average."
