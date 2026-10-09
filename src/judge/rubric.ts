@@ -57,7 +57,9 @@ export function extractAllNumbers(text: string): number[] {
   const out: number[] = [];
   const re = /-?\d+(?:\.\d+)?/g;
   let m: RegExpExecArray | null;
-  while ((m = re.exec(text)) !== null) {
+  while (true) {
+    m = re.exec(text);
+    if (m === null) break;
     const n = Number(m[0]);
     if (Number.isFinite(n)) out.push(n);
   }
@@ -324,7 +326,11 @@ export function extractNumbers(s: string): number[] {
   const re = /-?\d+(?:\.\d+)?/g;
   const out: number[] = [];
   let m: RegExpExecArray | null;
-  while ((m = re.exec(s)) !== null) out.push(Number(m[0]));
+  while (true) {
+    m = re.exec(s);
+    if (m === null) break;
+    out.push(Number(m[0]));
+  }
   return out.filter((n) => Number.isFinite(n));
 }
 
