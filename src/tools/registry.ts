@@ -20,6 +20,8 @@ const HANDLERS: Record<
 export async function runTool(name: string, input: Record<string, unknown>) {
   const h = HANDLERS[name];
   if (!h) return { result: { error: `Unknown tool: ${name}` } };
+  const validationError = validateToolInput(name, input);
+  if (validationError) return { result: { error: validationError } };
   return h(input);
 }
 
