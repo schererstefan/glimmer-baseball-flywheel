@@ -7,7 +7,11 @@ export class OllamaProvider implements ModelProvider {
 
   constructor(opts: { model?: string; baseUrl?: string } = {}) {
     this.model = opts.model ?? process.env.GLIMMER_MODEL ?? "muse-glimmer";
-    this.baseUrl = (opts.baseUrl ?? process.env.OLLAMA_HOST ?? "http://localhost:11434").replace(/\/$/, "");
+    this.baseUrl = (
+      opts.baseUrl ??
+      process.env.OLLAMA_HOST ??
+      "http://localhost:11434"
+    ).replace(/\/$/, "");
   }
 
   async *chat(options: ChatOptions): AsyncIterable<Delta> {
@@ -44,12 +48,16 @@ export class OllamaProvider implements ModelProvider {
         body: JSON.stringify(body),
       });
     } catch (e) {
-      throw new Error(`Ollama fetch failed at ${url}: ${e instanceof Error ? e.message : String(e)}`);
+      throw new Error(
+        `Ollama fetch failed at ${url}: ${e instanceof Error ? e.message : String(e)}`,
+      );
     }
 
     if (!res.ok || !res.body) {
       const txt = await res.text().catch(() => "");
-      throw new Error(`Ollama ${res.status} ${res.statusText}: ${txt.slice(0, 500)}`);
+      throw new Error(
+        `Ollama ${res.status} ${res.statusText}: ${txt.slice(0, 500)}`,
+      );
     }
 
     const reader = res.body.getReader();
@@ -67,7 +75,8 @@ export class OllamaProvider implements ModelProvider {
         if (!trimmed) continue;
         try {
           const obj = JSON.parse(trimmed);
-          if (obj.message?.content) yield { type: "text", text: obj.message.content } as Delta;
+          if (obj.message?.content)
+            yield { type: "text", text: obj.message.content } as Delta;
           if (obj.message?.tool_calls) {
             for (const tc of obj.message.tool_calls) {
               const call: ToolCall = {
@@ -77,12 +86,18 @@ export class OllamaProvider implements ModelProvider {
               };
               // Ollama sometimes returns arguments as string
               if (typeof call.input === "string") {
-                try { call.input = JSON.parse(call.input); } catch {}
+                try {
+                  call.input = JSON.parse(call.input);
+                } catch {}
               }
               yield { type: "tool_use", toolCall: call } as Delta;
             }
           }
-          if (obj.done) yield { type: "done", reason: obj.message?.tool_calls ? "tool_use" : "stop" } as Delta;
+          if (obj.done)
+            yield {
+              type: "done",
+              reason: obj.message?.tool_calls ? "tool_use" : "stop",
+            } as Delta;
         } catch {
           // ignore parse errors for partial lines
         }
@@ -91,7 +106,9 @@ export class OllamaProvider implements ModelProvider {
     yield { type: "done", reason: "stop" } as Delta;
   }
 
-  async complete(options: ChatOptions): Promise<{ text: string; toolCalls: ToolCall[] }> {
+  async complete(
+    options: ChatOptions,
+  ): Promise<{ text: string; toolCalls: ToolCall[] }> {
     let text = "";
     const toolCalls: ToolCall[] = [];
     for await (const d of this.chat(options)) {

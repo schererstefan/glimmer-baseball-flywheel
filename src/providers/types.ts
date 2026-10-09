@@ -47,7 +47,9 @@ export interface ModelProvider {
   readonly id: string;
   readonly model: string;
   chat(options: ChatOptions): AsyncIterable<Delta>;
-  complete(options: ChatOptions): Promise<{ text: string; toolCalls: ToolCall[] }>;
+  complete(
+    options: ChatOptions,
+  ): Promise<{ text: string; toolCalls: ToolCall[] }>;
 }
 
 export type ProviderInfo = {

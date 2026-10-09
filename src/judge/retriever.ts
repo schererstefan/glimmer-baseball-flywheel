@@ -20,7 +20,7 @@ export function normalizeUrl(u: string): string {
   try {
     const parsed = new URL(u);
     parsed.hash = "";
-    let s = parsed.toString().replace(/\/$/, "");
+    const s = parsed.toString().replace(/\/$/, "");
     return s.toLowerCase();
   } catch {
     return u.trim().toLowerCase().replace(/\/$/, "");
@@ -46,13 +46,21 @@ export class QueryCache {
     const k = normalizeQuery(q);
     const h = this.store.get(k);
     if (!h) return null;
-    if (Date.now() > h.expiresAt) { this.store.delete(k); return null; }
+    if (Date.now() > h.expiresAt) {
+      this.store.delete(k);
+      return null;
+    }
     return h.hits;
   }
   set(q: string, hits: Evidence[]): void {
-    this.store.set(normalizeQuery(q), { hits, expiresAt: Date.now() + this.ttlMs });
+    this.store.set(normalizeQuery(q), {
+      hits,
+      expiresAt: Date.now() + this.ttlMs,
+    });
   }
-  clear(): void { this.store.clear(); }
+  clear(): void {
+    this.store.clear();
+  }
 }
 
 export class RateLimiter {
@@ -73,16 +81,24 @@ export function shouldUseMock(): boolean {
   return !process.env.TAVILY_API_KEY && !process.env.BRAVE_API_KEY;
 }
 
-export function createRetriever(opts: { prefer?: "tavily" | "brave" | "mock"; maxResults?: number } = {}): Retriever {
+export function createRetriever(
+  opts: { prefer?: "tavily" | "brave" | "mock"; maxResults?: number } = {},
+): Retriever {
   if (shouldUseMock() || opts.prefer === "mock") return new MockRetriever();
-  if (opts.prefer === "tavily" && process.env.TAVILY_API_KEY) return new TavilyRetriever(process.env.TAVILY_API_KEY);
-  if (opts.prefer === "brave" && process.env.BRAVE_API_KEY) return new BraveRetriever(process.env.BRAVE_API_KEY);
-  if (process.env.TAVILY_API_KEY) return new TavilyRetriever(process.env.TAVILY_API_KEY);
-  if (process.env.BRAVE_API_KEY) return new BraveRetriever(process.env.BRAVE_API_KEY);
+  if (opts.prefer === "tavily" && process.env.TAVILY_API_KEY)
+    return new TavilyRetriever(process.env.TAVILY_API_KEY);
+  if (opts.prefer === "brave" && process.env.BRAVE_API_KEY)
+    return new BraveRetriever(process.env.BRAVE_API_KEY);
+  if (process.env.TAVILY_API_KEY)
+    return new TavilyRetriever(process.env.TAVILY_API_KEY);
+  if (process.env.BRAVE_API_KEY)
+    return new BraveRetriever(process.env.BRAVE_API_KEY);
   return new MockRetriever();
 }
 
-export function getDefaultRetriever(): Retriever { return createRetriever(); }
+export function getDefaultRetriever(): Retriever {
+  return createRetriever();
+}
 
 export class MockRetriever implements Retriever {
   name = "mock";
@@ -91,7 +107,8 @@ export class MockRetriever implements Retriever {
     "where do the yankees play": {
       url: "https://en.wikipedia.org/wiki/Yankee_Stadium",
       title: "Yankee Stadium - Wikipedia",
-      snippet: "Yankee Stadium is located in the Bronx, New York City; home of the New York Yankees since 2009. The Yankees play at Yankee Stadium.",
+      snippet:
+        "Yankee Stadium is located in the Bronx, New York City; home of the New York Yankees since 2009. The Yankees play at Yankee Stadium.",
       fetchedAt: new Date().toISOString(),
       source: "mock",
       score: 0.99,
@@ -99,7 +116,8 @@ export class MockRetriever implements Retriever {
     "yankee stadium": {
       url: "https://en.wikipedia.org/wiki/Yankee_Stadium",
       title: "Yankee Stadium - Wikipedia",
-      snippet: "Yankee Stadium is located in the Bronx, New York City; home of the New York Yankees since 2009.",
+      snippet:
+        "Yankee Stadium is located in the Bronx, New York City; home of the New York Yankees since 2009.",
       fetchedAt: new Date().toISOString(),
       source: "mock",
       score: 0.99,
@@ -107,7 +125,8 @@ export class MockRetriever implements Retriever {
     "2024 world series": {
       url: "https://en.wikipedia.org/wiki/2024_World_Series",
       title: "2024 World Series",
-      snippet: "The Los Angeles Dodgers defeated the New York Yankees 4-1 to win the 2024 World Series. Freddie Freeman was MVP.",
+      snippet:
+        "The Los Angeles Dodgers defeated the New York Yankees 4-1 to win the 2024 World Series. Freddie Freeman was MVP.",
       fetchedAt: new Date().toISOString(),
       source: "mock",
       score: 0.99,
@@ -115,7 +134,8 @@ export class MockRetriever implements Retriever {
     "2023 world series": {
       url: "https://en.wikipedia.org/wiki/2023_World_Series",
       title: "2023 World Series",
-      snippet: "The Texas Rangers defeated the Arizona Diamondbacks 4-1 to win the 2023 World Series.",
+      snippet:
+        "The Texas Rangers defeated the Arizona Diamondbacks 4-1 to win the 2023 World Series.",
       fetchedAt: new Date().toISOString(),
       source: "mock",
       score: 0.99,
@@ -123,7 +143,8 @@ export class MockRetriever implements Retriever {
     "shohei ohtani": {
       url: "https://www.mlb.com/player/shohei-ohtani-660271",
       title: "Shohei Ohtani - MLB.com",
-      snippet: "Shohei Ohtani, Los Angeles Dodgers DH/P, 2024 NL MVP with 54 HR and 59 SB, first 50/50 season.",
+      snippet:
+        "Shohei Ohtani, Los Angeles Dodgers DH/P, 2024 NL MVP with 54 HR and 59 SB, first 50/50 season.",
       fetchedAt: new Date().toISOString(),
       source: "mock",
       score: 0.99,
@@ -166,13 +187,29 @@ export class TavilyRetriever implements Retriever {
     const res = await fetch("https://api.tavily.com/search", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ api_key: this.apiKey, query, max_results: count, search_depth: "advanced", include_answer: false }),
+      body: JSON.stringify({
+        api_key: this.apiKey,
+        query,
+        max_results: count,
+        search_depth: "advanced",
+        include_answer: false,
+      }),
     });
-    if (!res.ok) throw new Error(`Tavily ${res.status}: ${await res.text().then(t=>t.slice(0,300))}`);
+    if (!res.ok)
+      throw new Error(
+        `Tavily ${res.status}: ${await res.text().then((t) => t.slice(0, 300))}`,
+      );
     const j: any = await res.json();
-    return (j.results ?? []).map((r: any): Evidence => ({
-      url: r.url, title: r.title, snippet: (r.content ?? "").slice(0, 500), fetchedAt: new Date().toISOString(), source: "tavily", score: r.score,
-    }));
+    return (j.results ?? []).map(
+      (r: any): Evidence => ({
+        url: r.url,
+        title: r.title,
+        snippet: (r.content ?? "").slice(0, 500),
+        fetchedAt: new Date().toISOString(),
+        source: "tavily",
+        score: r.score,
+      }),
+    );
   }
 }
 
@@ -180,32 +217,59 @@ export class BraveRetriever implements Retriever {
   name = "brave";
   constructor(private apiKey: string) {}
   async search(query: string, count = 5): Promise<Evidence[]> {
-    const res = await fetch(`https://api.search.brave.com/res/v1/web/search?q=${encodeURIComponent(query)}&count=${count}`, {
-      headers: { Accept: "application/json", "X-Subscription-Token": this.apiKey },
-    });
-    if (!res.ok) throw new Error(`Brave ${res.status}: ${await res.text().then(t=>t.slice(0,300))}`);
+    const res = await fetch(
+      `https://api.search.brave.com/res/v1/web/search?q=${encodeURIComponent(query)}&count=${count}`,
+      {
+        headers: {
+          Accept: "application/json",
+          "X-Subscription-Token": this.apiKey,
+        },
+      },
+    );
+    if (!res.ok)
+      throw new Error(
+        `Brave ${res.status}: ${await res.text().then((t) => t.slice(0, 300))}`,
+      );
     const j: any = await res.json();
-    return (j.web?.results ?? []).map((r: any): Evidence => ({
-      url: r.url, title: r.title, snippet: (r.description ?? "").slice(0, 500), fetchedAt: new Date().toISOString(), source: "brave",
-    }));
+    return (j.web?.results ?? []).map(
+      (r: any): Evidence => ({
+        url: r.url,
+        title: r.title,
+        snippet: (r.description ?? "").slice(0, 500),
+        fetchedAt: new Date().toISOString(),
+        source: "brave",
+      }),
+    );
   }
 }
 
 export function getRetriever(): Retriever {
   const mockForced = process.env.MOCK_JUDGE === "1";
-  const autoMock = !process.env.TAVILY_API_KEY && !process.env.BRAVE_API_KEY && !process.env.SERP_API_KEY;
-  if (mockForced || (process.env.MOCK_JUDGE === "auto" && autoMock) || autoMock) {
+  const autoMock =
+    !process.env.TAVILY_API_KEY &&
+    !process.env.BRAVE_API_KEY &&
+    !process.env.SERP_API_KEY;
+  if (
+    mockForced ||
+    (process.env.MOCK_JUDGE === "auto" && autoMock) ||
+    autoMock
+  ) {
     return new MockRetriever();
   }
-  if (process.env.TAVILY_API_KEY) return new TavilyRetriever(process.env.TAVILY_API_KEY);
-  if (process.env.BRAVE_API_KEY) return new BraveRetriever(process.env.BRAVE_API_KEY);
+  if (process.env.TAVILY_API_KEY)
+    return new TavilyRetriever(process.env.TAVILY_API_KEY);
+  if (process.env.BRAVE_API_KEY)
+    return new BraveRetriever(process.env.BRAVE_API_KEY);
   return new MockRetriever();
 }
 
 export class CachedRetriever implements Retriever {
   name: string;
   private mem = new Map<string, { at: number; hits: Evidence[] }>();
-  constructor(private inner: Retriever, private ttlMs = 1000 * 60 * 60) {
+  constructor(
+    private inner: Retriever,
+    private ttlMs = 1000 * 60 * 60,
+  ) {
     this.name = `cached(${inner.name})`;
   }
   async search(query: string, count = 5): Promise<Evidence[]> {
@@ -214,7 +278,11 @@ export class CachedRetriever implements Retriever {
     if (hit && Date.now() - hit.at < this.ttlMs) return hit.hits;
     const res = await this.inner.search(query, count);
     const seen = new Set<string>();
-    const deduped = res.filter(e => { if (seen.has(e.url)) return false; seen.add(e.url); return true; });
+    const deduped = res.filter((e) => {
+      if (seen.has(e.url)) return false;
+      seen.add(e.url);
+      return true;
+    });
     this.mem.set(key, { at: Date.now(), hits: deduped });
     return deduped;
   }

@@ -16,32 +16,19 @@
       "https://en.wikipedia.org/wiki/2024_World_Series",
       "https://www.mlb.com/news/2024-world-series-dodgers-yankees"
     ],
-    "must_cite": [
-      "Dodgers",
-      "Yankees",
-      "4-1"
-    ],
+    "must_cite": ["Dodgers", "Yankees", "4-1"],
     "numeric_answer": null,
     "tolerance": null,
-    "tags": [
-      "world_series",
-      "2024",
-      "postseason"
-    ],
+    "tags": ["world_series", "2024", "postseason"],
     "verified_at": "2026-08-15",
-    "expected_tools": [
-      "web_search"
-    ],
+    "expected_tools": ["web_search"],
     "explanation": "2024 WS at Dodger Stadium/Yankee Stadium; Freddie Freeman won MVP with record-tying 12 RBI."
   },
   {
     "id": "bb_002",
     "question": "Who holds the MLB single-season home run record and how many did he hit?",
     "answer": "Barry Bonds holds the record with 73 home runs in 2001",
-    "alternates": [
-      "Bonds 73 in 2001",
-      "Barry Bonds 73 HR 2001"
-    ],
+    "alternates": ["Bonds 73 in 2001", "Barry Bonds 73 HR 2001"],
     "category": "stats",
     "team": "SF",
     "difficulty": "easy",
@@ -50,32 +37,19 @@
       "https://en.wikipedia.org/wiki/List_of_Major_League_Baseball_single-season_records",
       "https://www.baseball-reference.com/leaders/HR_season.shtml"
     ],
-    "must_cite": [
-      "Barry Bonds",
-      "73",
-      "2001"
-    ],
+    "must_cite": ["Barry Bonds", "73", "2001"],
     "numeric_answer": 73,
     "tolerance": 0,
-    "tags": [
-      "home_runs",
-      "records",
-      "single_season"
-    ],
+    "tags": ["home_runs", "records", "single_season"],
     "verified_at": "2026-08-15",
-    "expected_tools": [
-      "web_search"
-    ],
+    "expected_tools": ["web_search"],
     "explanation": "AL record is Aaron Judge 62 (2022); Bonds 73 passed McGwire's 70 (1998)."
   },
   {
     "id": "bb_003",
     "question": "How many strikes are required for a strikeout under MLB rules?",
     "answer": "3 strikes",
-    "alternates": [
-      "Three strikes",
-      "3"
-    ],
+    "alternates": ["Three strikes", "3"],
     "category": "rules",
     "team": null,
     "difficulty": "easy",
@@ -84,16 +58,10 @@
       "https://en.wikipedia.org/wiki/Strikeout",
       "https://www.mlb.com/glossary/rules/strikeout"
     ],
-    "must_cite": [
-      "3 strikes"
-    ],
+    "must_cite": ["3 strikes"],
     "numeric_answer": 3,
     "tolerance": 0,
-    "tags": [
-      "rules",
-      "count",
-      "basics"
-    ],
+    "tags": ["rules", "count", "basics"],
     "verified_at": "2026-08-15",
     "expected_tools": [],
     "explanation": "A batter is out after three strikes; a foul with two strikes is not a third strike except bunt."
@@ -102,10 +70,7 @@
     "id": "bb_004",
     "question": "What is the nickname of the 37-foot left-field wall at Fenway Park, home of the Boston Red Sox?",
     "answer": "The Green Monster",
-    "alternates": [
-      "Green Monster",
-      "The Monster"
-    ],
+    "alternates": ["Green Monster", "The Monster"],
     "category": "ballpark",
     "team": "BOS",
     "difficulty": "easy",
@@ -114,31 +79,19 @@
       "https://en.wikipedia.org/wiki/Fenway_Park",
       "https://www.mlb.com/redsox/ballpark"
     ],
-    "must_cite": [
-      "Green Monster",
-      "Fenway"
-    ],
+    "must_cite": ["Green Monster", "Fenway"],
     "numeric_answer": null,
     "tolerance": null,
-    "tags": [
-      "ballpark",
-      "fenway",
-      "dimensions"
-    ],
+    "tags": ["ballpark", "fenway", "dimensions"],
     "verified_at": "2026-08-15",
-    "expected_tools": [
-      "web_search"
-    ],
+    "expected_tools": ["web_search"],
     "explanation": "37'2\" high, 231 ft to left field line; built 1934, painted green in 1947."
   },
   {
     "id": "bb_005",
     "question": "Who is the captain of the New York Yankees as of the 2025 season and what position does he play?",
     "answer": "Aaron Judge \u2014 captain and right fielder (also DH) for the Yankees since December 2022",
-    "alternates": [
-      "Aaron Judge RF/Captain Yankees",
-      "Judge Yankees captain"
-    ],
+    "alternates": ["Aaron Judge RF/Captain Yankees", "Judge Yankees captain"],
     "category": "roster",
     "team": "NYY",
     "difficulty": "easy",
@@ -147,33 +100,19 @@
       "https://www.mlb.com/yankees/player/aaron-judge-592450",
       "https://en.wikipedia.org/wiki/Aaron_Judge"
     ],
-    "must_cite": [
-      "Aaron Judge",
-      "Yankees",
-      "captain"
-    ],
+    "must_cite": ["Aaron Judge", "Yankees", "captain"],
     "numeric_answer": null,
     "tolerance": null,
-    "tags": [
-      "yankees",
-      "captain",
-      "roster"
-    ],
+    "tags": ["yankees", "captain", "roster"],
     "verified_at": "2026-08-15",
-    "expected_tools": [
-      "web_search",
-      "baseball_lookup"
-    ],
+    "expected_tools": ["web_search", "baseball_lookup"],
     "explanation": "Named 16th Yankees captain after re-signing 9yr/$360M in Dec 2022."
   },
   {
     "id": "bb_006",
     "question": "What contract did Juan Soto sign before the 2025 season and with which team?",
     "answer": "15-year, $765 million contract with the New York Mets (signed December 2024, largest in professional sports history)",
-    "alternates": [
-      "Mets 15yr $765M Soto",
-      "Soto Mets $765 million 15 years"
-    ],
+    "alternates": ["Mets 15yr $765M Soto", "Soto Mets $765 million 15 years"],
     "category": "transactions",
     "team": "NYM",
     "difficulty": "medium",
@@ -182,22 +121,12 @@
       "https://www.mlb.com/news/juan-soto-mets-contract",
       "https://en.wikipedia.org/wiki/Juan_Soto"
     ],
-    "must_cite": [
-      "Soto",
-      "Mets",
-      "765"
-    ],
+    "must_cite": ["Soto", "Mets", "765"],
     "numeric_answer": 765,
     "tolerance": 0,
-    "tags": [
-      "free_agency",
-      "mets",
-      "record_contract"
-    ],
+    "tags": ["free_agency", "mets", "record_contract"],
     "verified_at": "2026-08-15",
-    "expected_tools": [
-      "web_search"
-    ],
+    "expected_tools": ["web_search"],
     "explanation": "Opt-out after 2029; surpassed Ohtani's $700M (with deferrals) as largest present-day value."
   },
   {
@@ -216,22 +145,12 @@
       "https://en.wikipedia.org/wiki/2024_Detroit_Tigers_season",
       "https://www.baseball-reference.com/postseason/2024_ALWC.shtml"
     ],
-    "must_cite": [
-      "Tigers",
-      "86-76",
-      "Astros"
-    ],
+    "must_cite": ["Tigers", "86-76", "Astros"],
     "numeric_answer": null,
     "tolerance": null,
-    "tags": [
-      "postseason",
-      "2024",
-      "wild_card"
-    ],
+    "tags": ["postseason", "2024", "wild_card"],
     "verified_at": "2026-08-15",
-    "expected_tools": [
-      "web_search"
-    ],
+    "expected_tools": ["web_search"],
     "explanation": "Tigers won 31 of last 44 to clinch; Tarik Skubal started Game 1."
   },
   {
@@ -250,31 +169,19 @@
       "https://www.mlb.com/news/wyatt-langford-hits-for-cycle-2024",
       "https://en.wikipedia.org/wiki/List_of_Major_League_Baseball_players_to_hit_for_the_cycle"
     ],
-    "must_cite": [
-      "Wyatt Langford",
-      "cycle"
-    ],
+    "must_cite": ["Wyatt Langford", "cycle"],
     "numeric_answer": null,
     "tolerance": null,
-    "tags": [
-      "cycle",
-      "rookie",
-      "rangers"
-    ],
+    "tags": ["cycle", "rookie", "rangers"],
     "verified_at": "2026-08-15",
-    "expected_tools": [
-      "web_search"
-    ],
+    "expected_tools": ["web_search"],
     "explanation": "At Globe Life Field; 4-for-5 with 1B, 2B, 3B, HR."
   },
   {
     "id": "bb_009",
     "question": "Who is the longtime center fielder for the Los Angeles Angels who has won 3 American League MVP awards (2014, 2016, 2019) and is widely regarded as the best player of the 2010s?",
     "answer": "Mike Trout \u2014 center fielder for the Los Angeles Angels, 3-time AL MVP (2014, 2016, 2019)",
-    "alternates": [
-      "Mike Trout Angels 3x MVP",
-      "Trout LAA MVP"
-    ],
+    "alternates": ["Mike Trout Angels 3x MVP", "Trout LAA MVP"],
     "category": "roster",
     "team": "LAA",
     "difficulty": "expert",
@@ -283,21 +190,12 @@
       "https://www.baseball-reference.com/players/t/troutmi01.shtml",
       "https://en.wikipedia.org/wiki/Mike_Trout"
     ],
-    "must_cite": [
-      "Mike Trout",
-      "Angels"
-    ],
+    "must_cite": ["Mike Trout", "Angels"],
     "numeric_answer": null,
     "tolerance": null,
-    "tags": [
-      "angels",
-      "mvp",
-      "center_field"
-    ],
+    "tags": ["angels", "mvp", "center_field"],
     "verified_at": "2026-08-15",
-    "expected_tools": [
-      "web_search"
-    ],
+    "expected_tools": ["web_search"],
     "explanation": "Trout debuted 2011, 11x All-Star, also 2012 ROY; injuries limited him 2021-24 but still active in 2025."
   },
   {
@@ -316,32 +214,19 @@
       "https://www.mlb.com/orioles/player/gunnar-henderson-680704",
       "https://en.wikipedia.org/wiki/Gunnar_Henderson"
     ],
-    "must_cite": [
-      "Gunnar Henderson",
-      "Orioles"
-    ],
+    "must_cite": ["Gunnar Henderson", "Orioles"],
     "numeric_answer": null,
     "tolerance": null,
-    "tags": [
-      "orioles",
-      "rookie",
-      "shortstop"
-    ],
+    "tags": ["orioles", "rookie", "shortstop"],
     "verified_at": "2026-08-15",
-    "expected_tools": [
-      "web_search",
-      "baseball_lookup"
-    ],
+    "expected_tools": ["web_search", "baseball_lookup"],
     "explanation": "Henderson hit 28 HR in 2023; also 2024 All-Star, Silver Slugger."
   },
   {
     "id": "bb_011",
     "question": "Which franchise is second to the Yankees in World Series titles with 11 championships, most recently in 2011?",
     "answer": "St. Louis Cardinals with 11 World Series titles (last in 2011 vs Texas Rangers)",
-    "alternates": [
-      "Cardinals 11 titles",
-      "St. Louis 11 World Series"
-    ],
+    "alternates": ["Cardinals 11 titles", "St. Louis 11 World Series"],
     "category": "history",
     "team": "STL",
     "difficulty": "hard",
@@ -350,21 +235,12 @@
       "https://en.wikipedia.org/wiki/List_of_World_Series_champions",
       "https://www.mlb.com/cardinals/history/timeline-2011"
     ],
-    "must_cite": [
-      "Cardinals",
-      "11"
-    ],
+    "must_cite": ["Cardinals", "11"],
     "numeric_answer": 11,
     "tolerance": 0,
-    "tags": [
-      "world_series",
-      "titles",
-      "cardinals"
-    ],
+    "tags": ["world_series", "titles", "cardinals"],
     "verified_at": "2026-08-15",
-    "expected_tools": [
-      "web_search"
-    ],
+    "expected_tools": ["web_search"],
     "explanation": "Cards beat Rangers 4-3 in 2011; David Freese WS MVP."
   },
   {
@@ -383,31 +259,19 @@
       "https://www.mlb.com/news/mlb-rules-changes-2024-pitch-clock",
       "https://en.wikipedia.org/wiki/Pitch_clock"
     ],
-    "must_cite": [
-      "15",
-      "18"
-    ],
+    "must_cite": ["15", "18"],
     "numeric_answer": 15,
     "tolerance": 0,
-    "tags": [
-      "pitch_clock",
-      "rules",
-      "2024"
-    ],
+    "tags": ["pitch_clock", "rules", "2024"],
     "verified_at": "2026-08-15",
-    "expected_tools": [
-      "web_search"
-    ],
+    "expected_tools": ["web_search"],
     "explanation": "2024 reduction from 20 to 18 with runners; violations are automatic balls."
   },
   {
     "id": "bb_013",
     "question": "Which ballpark is known as the most hitter-friendly in MLB due to its mile-high altitude (5,280 feet) in Denver?",
     "answer": "Coors Field, home of the Colorado Rockies",
-    "alternates": [
-      "Coors Field Rockies",
-      "Colorado Rockies Coors"
-    ],
+    "alternates": ["Coors Field Rockies", "Colorado Rockies Coors"],
     "category": "ballpark",
     "team": "COL",
     "difficulty": "easy",
@@ -416,21 +280,12 @@
       "https://en.wikipedia.org/wiki/Coors_Field",
       "https://www.mlb.com/rockies/ballpark"
     ],
-    "must_cite": [
-      "Coors Field",
-      "Colorado"
-    ],
+    "must_cite": ["Coors Field", "Colorado"],
     "numeric_answer": null,
     "tolerance": null,
-    "tags": [
-      "ballpark",
-      "altitude",
-      "rockies"
-    ],
+    "tags": ["ballpark", "altitude", "rockies"],
     "verified_at": "2026-08-15",
-    "expected_tools": [
-      "web_search"
-    ],
+    "expected_tools": ["web_search"],
     "explanation": "Altitude lowers air density; humidor installed 2002 to normalize scoring."
   },
   {
@@ -449,31 +304,19 @@
       "https://www.mlb.com/news/josh-hader-trade-padres-brewers-2022",
       "https://en.wikipedia.org/wiki/Josh_Hader"
     ],
-    "must_cite": [
-      "Josh Hader",
-      "Brewers",
-      "Padres"
-    ],
+    "must_cite": ["Josh Hader", "Brewers", "Padres"],
     "numeric_answer": null,
     "tolerance": null,
-    "tags": [
-      "trade",
-      "closer",
-      "deadline"
-    ],
+    "tags": ["trade", "closer", "deadline"],
     "verified_at": "2026-08-15",
-    "expected_tools": [
-      "web_search"
-    ],
+    "expected_tools": ["web_search"],
     "explanation": "Return included Taylor Rogers, Dinelson Lamet, Esteury Ruiz, Robert Gasser."
   },
   {
     "id": "bb_015",
     "question": "Which ballpark, home to the Pittsburgh Pirates, is located on the Allegheny River and is consistently ranked as one of MLB's most beautiful stadiums?",
     "answer": "PNC Park in Pittsburgh",
-    "alternates": [
-      "PNC Park Pirates"
-    ],
+    "alternates": ["PNC Park Pirates"],
     "category": "ballpark",
     "team": "PIT",
     "difficulty": "easy",
@@ -482,31 +325,19 @@
       "https://en.wikipedia.org/wiki/PNC_Park",
       "https://www.mlb.com/pirates/ballpark"
     ],
-    "must_cite": [
-      "PNC Park",
-      "Pirates"
-    ],
+    "must_cite": ["PNC Park", "Pirates"],
     "numeric_answer": null,
     "tolerance": null,
-    "tags": [
-      "ballpark",
-      "pittsburgh",
-      "river"
-    ],
+    "tags": ["ballpark", "pittsburgh", "river"],
     "verified_at": "2026-08-15",
-    "expected_tools": [
-      "web_search"
-    ],
+    "expected_tools": ["web_search"],
     "explanation": "Opened 2001; view of Roberto Clemente Bridge and downtown skyline."
   },
   {
     "id": "bb_016",
     "question": "Who set the MLB single-season hits record with 262 hits in 2004 and which team was he on?",
     "answer": "Ichiro Suzuki set the record with 262 hits in 2004 for the Seattle Mariners",
-    "alternates": [
-      "Ichiro 262 2004 Mariners",
-      "Suzuki 262 hits"
-    ],
+    "alternates": ["Ichiro 262 2004 Mariners", "Suzuki 262 hits"],
     "category": "stats",
     "team": "SEA",
     "difficulty": "hard",
@@ -515,32 +346,19 @@
       "https://en.wikipedia.org/wiki/Ichiro_Suzuki",
       "https://www.baseball-reference.com/players/s/suzukic01.shtml"
     ],
-    "must_cite": [
-      "Ichiro",
-      "262",
-      "2004"
-    ],
+    "must_cite": ["Ichiro", "262", "2004"],
     "numeric_answer": 262,
     "tolerance": 0,
-    "tags": [
-      "hits",
-      "record",
-      "mariners"
-    ],
+    "tags": ["hits", "record", "mariners"],
     "verified_at": "2026-08-15",
-    "expected_tools": [
-      "web_search"
-    ],
+    "expected_tools": ["web_search"],
     "explanation": "Broke George Sisler's 1920 record of 257; also holds professional hits record (4,367 including NPB)."
   },
   {
     "id": "bb_017",
     "question": "Which team ended a 108-year World Series drought by beating the Cleveland Indians 4-3 in the 2016 World Series?",
     "answer": "Chicago Cubs beat the Cleveland Indians 4-3 in the 2016 World Series",
-    "alternates": [
-      "Cubs 2016 4-3 Indians",
-      "Chicago Cubs 2016 champions"
-    ],
+    "alternates": ["Cubs 2016 4-3 Indians", "Chicago Cubs 2016 champions"],
     "category": "history",
     "team": "CHC",
     "difficulty": "medium",
@@ -549,32 +367,19 @@
       "https://en.wikipedia.org/wiki/2016_World_Series",
       "https://www.mlb.com/cubs/history/timeline-2016"
     ],
-    "must_cite": [
-      "Cubs",
-      "2016",
-      "Indians"
-    ],
+    "must_cite": ["Cubs", "2016", "Indians"],
     "numeric_answer": null,
     "tolerance": null,
-    "tags": [
-      "world_series",
-      "2016",
-      "drought"
-    ],
+    "tags": ["world_series", "2016", "drought"],
     "verified_at": "2026-08-15",
-    "expected_tools": [
-      "web_search"
-    ],
+    "expected_tools": ["web_search"],
     "explanation": "Cubs trailed 3-1, forced Game 7, Rajai Davis HR, Ben Zobrist MVP."
   },
   {
     "id": "bb_018",
     "question": "Which flamethrowing reliever represented the Athletics (still listed as Oakland Athletics in 2024) as their lone All-Star on the 2024 AL roster?",
     "answer": "Mason Miller \u2014 Athletics closer, 2024 AL All-Star",
-    "alternates": [
-      "Mason Miller Athletics All-Star 2024",
-      "Miller Oakland"
-    ],
+    "alternates": ["Mason Miller Athletics All-Star 2024", "Miller Oakland"],
     "category": "live_season",
     "team": "OAK",
     "difficulty": "hard",
@@ -583,31 +388,19 @@
       "https://www.mlb.com/news/2024-all-star-rosters",
       "https://en.wikipedia.org/wiki/Mason_Miller_(pitcher)"
     ],
-    "must_cite": [
-      "Mason Miller",
-      "Athletics"
-    ],
+    "must_cite": ["Mason Miller", "Athletics"],
     "numeric_answer": null,
     "tolerance": null,
-    "tags": [
-      "all_star",
-      "athletics",
-      "2024"
-    ],
+    "tags": ["all_star", "athletics", "2024"],
     "verified_at": "2026-08-15",
-    "expected_tools": [
-      "web_search"
-    ],
+    "expected_tools": ["web_search"],
     "explanation": "Miller threw 103.6 mph in All-Star Game; 28 saves in 2024 despite team record."
   },
   {
     "id": "bb_019",
     "question": "Who is the star third baseman for the Cleveland Guardians known for his switch-hitting and multiple All-Star selections, who signed a 7-year extension in 2022?",
     "answer": "Jos\u00e9 Ram\u00edrez \u2014 third baseman for the Cleveland Guardians, 7yr/$141M extension in 2022",
-    "alternates": [
-      "Jose Ramirez Guardians 3B",
-      "Ramirez Cleveland"
-    ],
+    "alternates": ["Jose Ramirez Guardians 3B", "Ramirez Cleveland"],
     "category": "roster",
     "team": "CLE",
     "difficulty": "medium",
@@ -616,31 +409,19 @@
       "https://www.mlb.com/guardians/player/jose-ramirez-608070",
       "https://en.wikipedia.org/wiki/Jos%C3%A9_Ram%C3%ADrez_(infielder)"
     ],
-    "must_cite": [
-      "Jos\u00e9 Ram\u00edrez",
-      "Guardians"
-    ],
+    "must_cite": ["Jos\u00e9 Ram\u00edrez", "Guardians"],
     "numeric_answer": null,
     "tolerance": null,
-    "tags": [
-      "guardians",
-      "third_base",
-      "extension"
-    ],
+    "tags": ["guardians", "third_base", "extension"],
     "verified_at": "2026-08-15",
-    "expected_tools": [
-      "web_search",
-      "baseball_lookup"
-    ],
+    "expected_tools": ["web_search", "baseball_lookup"],
     "explanation": "6x All-Star, 4x Silver Slugger; has played entire career with Cleveland since 2013."
   },
   {
     "id": "bb_020",
     "question": "How many outs are there per half-inning in a regulation MLB game?",
     "answer": "3 outs per half-inning",
-    "alternates": [
-      "Three outs"
-    ],
+    "alternates": ["Three outs"],
     "category": "rules",
     "team": null,
     "difficulty": "easy",
@@ -649,16 +430,10 @@
       "https://en.wikipedia.org/wiki/Inning",
       "https://www.mlb.com/glossary/rules/inning"
     ],
-    "must_cite": [
-      "3 outs"
-    ],
+    "must_cite": ["3 outs"],
     "numeric_answer": 3,
     "tolerance": 0,
-    "tags": [
-      "rules",
-      "basics",
-      "inning"
-    ],
+    "tags": ["rules", "basics", "inning"],
     "verified_at": "2026-08-15",
     "expected_tools": [],
     "explanation": "Three outs end the offensive half; 6 outs per full inning, 27 outs per 9-inning regulation game per team."
@@ -667,10 +442,7 @@
     "id": "bb_021",
     "question": "Who holds the MLB career stolen base record and how many did he steal?",
     "answer": "Rickey Henderson holds the career record with 1,406 stolen bases",
-    "alternates": [
-      "Rickey Henderson 1406 SB",
-      "Henderson 1406 stolen bases"
-    ],
+    "alternates": ["Rickey Henderson 1406 SB", "Henderson 1406 stolen bases"],
     "category": "trivia",
     "team": "OAK",
     "difficulty": "expert",
@@ -679,31 +451,19 @@
       "https://en.wikipedia.org/wiki/List_of_Major_League_Baseball_career_stolen_bases_leaders",
       "https://www.baseball-reference.com/players/h/henderi01.shtml"
     ],
-    "must_cite": [
-      "Rickey Henderson",
-      "1,406"
-    ],
+    "must_cite": ["Rickey Henderson", "1,406"],
     "numeric_answer": 1406,
     "tolerance": 0,
-    "tags": [
-      "stolen_bases",
-      "records",
-      "career"
-    ],
+    "tags": ["stolen_bases", "records", "career"],
     "verified_at": "2026-08-15",
-    "expected_tools": [
-      "web_search"
-    ],
+    "expected_tools": ["web_search"],
     "explanation": "Lou Brock was previous record holder with 938; Henderson also holds single-season record 130 (1982)."
   },
   {
     "id": "bb_022",
     "question": "Who became the first player to achieve a 40 home run / 70 stolen base season in 2023 and what were his exact totals?",
     "answer": "Ronald Acu\u00f1a Jr. of the Atlanta Braves \u2014 41 HR and 73 SB in 2023, also first 40/70, won NL MVP",
-    "alternates": [
-      "Acuna 41 HR 73 SB 2023",
-      "Ronald Acuna Jr 40/70"
-    ],
+    "alternates": ["Acuna 41 HR 73 SB 2023", "Ronald Acuna Jr 40/70"],
     "category": "stats",
     "team": "ATL",
     "difficulty": "medium",
@@ -712,22 +472,12 @@
       "https://www.baseball-reference.com/players/a/acunaro01.shtml",
       "https://en.wikipedia.org/wiki/Ronald_Acu%C3%B1a_Jr."
     ],
-    "must_cite": [
-      "Acu\u00f1a",
-      "41",
-      "73"
-    ],
+    "must_cite": ["Acu\u00f1a", "41", "73"],
     "numeric_answer": 41,
     "tolerance": 0,
-    "tags": [
-      "40_70",
-      "mvp",
-      "braves"
-    ],
+    "tags": ["40_70", "mvp", "braves"],
     "verified_at": "2026-08-15",
-    "expected_tools": [
-      "web_search"
-    ],
+    "expected_tools": ["web_search"],
     "explanation": "Also created 30/60 club earlier in season; stole 70th on Sept 27."
   },
   {
@@ -746,32 +496,19 @@
       "https://www.mlb.com/news/corbin-burnes-trade-orioles-brewers",
       "https://en.wikipedia.org/wiki/Corbin_Burnes"
     ],
-    "must_cite": [
-      "Corbin Burnes",
-      "Orioles",
-      "Brewers"
-    ],
+    "must_cite": ["Corbin Burnes", "Orioles", "Brewers"],
     "numeric_answer": null,
     "tolerance": null,
-    "tags": [
-      "trade",
-      "ace",
-      "orioles"
-    ],
+    "tags": ["trade", "ace", "orioles"],
     "verified_at": "2026-08-15",
-    "expected_tools": [
-      "web_search"
-    ],
+    "expected_tools": ["web_search"],
     "explanation": "Return: DL Hall, Joey Ortiz, 2024 comp pick; Burnes was 2021 NL Cy Young."
   },
   {
     "id": "bb_024",
     "question": "Which domed ballpark, home to the Tampa Bay Rays since 1998, features catwalks and a fixed roof due to Florida weather?",
     "answer": "Tropicana Field (The Trop) in St. Petersburg, home of the Tampa Bay Rays",
-    "alternates": [
-      "Tropicana Field Rays",
-      "The Trop"
-    ],
+    "alternates": ["Tropicana Field Rays", "The Trop"],
     "category": "ballpark",
     "team": "TB",
     "difficulty": "medium",
@@ -780,21 +517,12 @@
       "https://en.wikipedia.org/wiki/Tropicana_Field",
       "https://www.mlb.com/rays/ballpark"
     ],
-    "must_cite": [
-      "Tropicana Field",
-      "Rays"
-    ],
+    "must_cite": ["Tropicana Field", "Rays"],
     "numeric_answer": null,
     "tolerance": null,
-    "tags": [
-      "ballpark",
-      "rays",
-      "dome"
-    ],
+    "tags": ["ballpark", "rays", "dome"],
     "verified_at": "2026-08-15",
-    "expected_tools": [
-      "web_search"
-    ],
+    "expected_tools": ["web_search"],
     "explanation": "Only fixed-roof MLB park from 2020-2024; damaged by Hurricane Milton in Oct 2024 requiring repairs."
   },
   {
@@ -813,32 +541,19 @@
       "https://en.wikipedia.org/wiki/2005_World_Series",
       "https://www.mlb.com/whitesox/history/timeline-2005"
     ],
-    "must_cite": [
-      "White Sox",
-      "Astros",
-      "2005"
-    ],
+    "must_cite": ["White Sox", "Astros", "2005"],
     "numeric_answer": null,
     "tolerance": null,
-    "tags": [
-      "world_series",
-      "2005",
-      "sweep"
-    ],
+    "tags": ["world_series", "2005", "sweep"],
     "verified_at": "2026-08-15",
-    "expected_tools": [
-      "web_search"
-    ],
+    "expected_tools": ["web_search"],
     "explanation": "Jermaine Dye MVP; only White Sox title since 1917."
   },
   {
     "id": "bb_026",
     "question": "Which team won the National League East in 2024 with a 95-67 record and was the No. 2 seed in the NL?",
     "answer": "Philadelphia Phillies won the NL East in 2024 with a 95-67 record",
-    "alternates": [
-      "Phillies 95-67 NL East 2024",
-      "Philadelphia NL East 2024"
-    ],
+    "alternates": ["Phillies 95-67 NL East 2024", "Philadelphia NL East 2024"],
     "category": "live_season",
     "team": "PHI",
     "difficulty": "medium",
@@ -847,31 +562,19 @@
       "https://www.mlb.com/standings/2024/regular-season",
       "https://en.wikipedia.org/wiki/2024_Philadelphia_Phillies_season"
     ],
-    "must_cite": [
-      "Phillies",
-      "95-67"
-    ],
+    "must_cite": ["Phillies", "95-67"],
     "numeric_answer": 95,
     "tolerance": 0,
-    "tags": [
-      "standings",
-      "2024",
-      "nl_east"
-    ],
+    "tags": ["standings", "2024", "nl_east"],
     "verified_at": "2026-08-15",
-    "expected_tools": [
-      "web_search"
-    ],
+    "expected_tools": ["web_search"],
     "explanation": "Lost NLDS 3-1 to Mets despite division title."
   },
   {
     "id": "bb_027",
     "question": "Which Cincinnati Reds shortstop wears #44 and was the fastest player in MLB in 2024 with 30.2 ft/sec sprint speed and 67 steals?",
     "answer": "Elly De La Cruz \u2014 Cincinnati Reds SS, #44, 67 stolen bases in 2024",
-    "alternates": [
-      "Elly De La Cruz 44 Reds",
-      "De La Cruz 67 SB"
-    ],
+    "alternates": ["Elly De La Cruz 44 Reds", "De La Cruz 67 SB"],
     "category": "roster",
     "team": "CIN",
     "difficulty": "expert",
@@ -880,32 +583,19 @@
       "https://www.mlb.com/reds/player/elly-de-la-cruz-682829",
       "https://en.wikipedia.org/wiki/Elly_De_La_Cruz"
     ],
-    "must_cite": [
-      "Elly De La Cruz",
-      "Reds"
-    ],
+    "must_cite": ["Elly De La Cruz", "Reds"],
     "numeric_answer": 67,
     "tolerance": 0,
-    "tags": [
-      "reds",
-      "shortstop",
-      "stolen_bases"
-    ],
+    "tags": ["reds", "shortstop", "stolen_bases"],
     "verified_at": "2026-08-15",
-    "expected_tools": [
-      "web_search",
-      "baseball_lookup"
-    ],
+    "expected_tools": ["web_search", "baseball_lookup"],
     "explanation": "Debuted June 2023; also hit 25 HR in 2024."
   },
   {
     "id": "bb_028",
     "question": "Who won 2024 National League Rookie of the Year as a Pittsburgh Pirates pitcher with an 11-3 record and 1.96 ERA after debuting May 11, 2024?",
     "answer": "Paul Skenes \u2014 Pittsburgh Pirates, 11-3, 1.96 ERA, 2024 NL Rookie of the Year",
-    "alternates": [
-      "Paul Skenes 11-3 1.96 ROY 2024",
-      "Skenes Pirates ROY"
-    ],
+    "alternates": ["Paul Skenes 11-3 1.96 ROY 2024", "Skenes Pirates ROY"],
     "category": "stats",
     "team": "PIT",
     "difficulty": "hard",
@@ -914,32 +604,19 @@
       "https://www.mlb.com/news/paul-skenes-nl-rookie-of-year-2024",
       "https://www.baseball-reference.com/players/s/skenepa01.shtml"
     ],
-    "must_cite": [
-      "Paul Skenes",
-      "Pirates"
-    ],
+    "must_cite": ["Paul Skenes", "Pirates"],
     "numeric_answer": 1.96,
     "tolerance": 0.03,
-    "tags": [
-      "rookie",
-      "pitcher",
-      "roy"
-    ],
+    "tags": ["rookie", "pitcher", "roy"],
     "verified_at": "2026-08-15",
-    "expected_tools": [
-      "web_search"
-    ],
+    "expected_tools": ["web_search"],
     "explanation": "LSU product drafted 1-1 in 2023; also started 2024 All-Star Game for NL."
   },
   {
     "id": "bb_029",
     "question": "What is the distance from the pitcher's rubber to home plate in MLB?",
     "answer": "60 feet, 6 inches",
-    "alternates": [
-      "60'6\"",
-      "60 feet 6 inches",
-      "18.44 meters"
-    ],
+    "alternates": ["60'6\"", "60 feet 6 inches", "18.44 meters"],
     "category": "rules",
     "team": null,
     "difficulty": "easy",
@@ -948,17 +625,10 @@
       "https://en.wikipedia.org/wiki/Pitcher%27s_mound",
       "https://www.mlb.com/glossary/rules/pitchers-mound"
     ],
-    "must_cite": [
-      "60 feet",
-      "6 inches"
-    ],
+    "must_cite": ["60 feet", "6 inches"],
     "numeric_answer": 60.5,
     "tolerance": 0,
-    "tags": [
-      "rules",
-      "mound",
-      "distance"
-    ],
+    "tags": ["rules", "mound", "distance"],
     "verified_at": "2026-08-15",
     "expected_tools": [],
     "explanation": "Measured from front of rubber to back point of home plate; set in 1893."
@@ -967,10 +637,7 @@
     "id": "bb_030",
     "question": "Who led the Kansas City Royals in 2024 with a .332 batting average, 32 home runs, and was the AL MVP runner-up?",
     "answer": "Bobby Witt Jr. \u2014 .332 AVG, 32 HR, 109 RBI, AL MVP runner-up in 2024",
-    "alternates": [
-      "Bobby Witt Jr .332 2024",
-      "Witt Royals 32 HR"
-    ],
+    "alternates": ["Bobby Witt Jr .332 2024", "Witt Royals 32 HR"],
     "category": "stats",
     "team": "KC",
     "difficulty": "expert",
@@ -979,31 +646,19 @@
       "https://www.baseball-reference.com/players/w/wittbo02.shtml",
       "https://www.mlb.com/news/bobby-witt-jr-2024-season"
     ],
-    "must_cite": [
-      "Bobby Witt Jr.",
-      ".332"
-    ],
+    "must_cite": ["Bobby Witt Jr.", ".332"],
     "numeric_answer": 0.332,
     "tolerance": 0.005,
-    "tags": [
-      "royals",
-      "batting_average",
-      "mvp"
-    ],
+    "tags": ["royals", "batting_average", "mvp"],
     "verified_at": "2026-08-15",
-    "expected_tools": [
-      "web_search"
-    ],
+    "expected_tools": ["web_search"],
     "explanation": "Also led AL in hits (211); signed 11yr/$288.8M extension Feb 2024."
   },
   {
     "id": "bb_031",
     "question": "What were the headline terms of Shohei Ohtani's contract with the Los Angeles Dodgers announced in December 2023?",
     "answer": "10-year, $700 million contract with the Dodgers \u2014 $680M deferred until after the contract, signed Dec 9, 2023",
-    "alternates": [
-      "Ohtani 10yr $700M Dodgers",
-      "700 million Dodgers Ohtani"
-    ],
+    "alternates": ["Ohtani 10yr $700M Dodgers", "700 million Dodgers Ohtani"],
     "category": "transactions",
     "team": "LAD",
     "difficulty": "medium",
@@ -1012,32 +667,19 @@
       "https://www.mlb.com/news/shohei-ohtani-dodgers-contract-700m",
       "https://en.wikipedia.org/wiki/Shohei_Ohtani"
     ],
-    "must_cite": [
-      "Ohtani",
-      "700",
-      "Dodgers"
-    ],
+    "must_cite": ["Ohtani", "700", "Dodgers"],
     "numeric_answer": 700,
     "tolerance": 0,
-    "tags": [
-      "free_agency",
-      "ohtani",
-      "deferral"
-    ],
+    "tags": ["free_agency", "ohtani", "deferral"],
     "verified_at": "2026-08-15",
-    "expected_tools": [
-      "web_search"
-    ],
+    "expected_tools": ["web_search"],
     "explanation": "Largest guarantee at signing; $68M deferred annually without interest 2034-2043."
   },
   {
     "id": "bb_032",
     "question": "Which ballpark, home to the Arizona Diamondbacks, features a retractable roof and a swimming pool beyond the outfield fence?",
     "answer": "Chase Field in Phoenix \u2014 home of the Arizona Diamondbacks, with a pool in right-center",
-    "alternates": [
-      "Chase Field Diamondbacks pool",
-      "Arizona Chase Field"
-    ],
+    "alternates": ["Chase Field Diamondbacks pool", "Arizona Chase Field"],
     "category": "ballpark",
     "team": "ARI",
     "difficulty": "expert",
@@ -1046,21 +688,12 @@
       "https://en.wikipedia.org/wiki/Chase_Field",
       "https://www.mlb.com/dbacks/ballpark"
     ],
-    "must_cite": [
-      "Chase Field",
-      "Diamondbacks"
-    ],
+    "must_cite": ["Chase Field", "Diamondbacks"],
     "numeric_answer": null,
     "tolerance": null,
-    "tags": [
-      "ballpark",
-      "diamondbacks",
-      "pool"
-    ],
+    "tags": ["ballpark", "diamondbacks", "pool"],
     "verified_at": "2026-08-15",
-    "expected_tools": [
-      "web_search"
-    ],
+    "expected_tools": ["web_search"],
     "explanation": "Opened 1998 as Bank One Ballpark; first MLB park with retractable roof over natural grass."
   },
   {
@@ -1079,31 +712,19 @@
       "https://www.mlb.com/news/2024-all-star-rosters-twins",
       "https://www.baseball-reference.com/players/c/correca01.shtml"
     ],
-    "must_cite": [
-      "Carlos Correa",
-      "Twins"
-    ],
+    "must_cite": ["Carlos Correa", "Twins"],
     "numeric_answer": null,
     "tolerance": null,
-    "tags": [
-      "all_star",
-      "twins",
-      "2024"
-    ],
+    "tags": ["all_star", "twins", "2024"],
     "verified_at": "2026-08-15",
-    "expected_tools": [
-      "web_search"
-    ],
+    "expected_tools": ["web_search"],
     "explanation": "Correa hit .310/.363/.484 before plantar fasciitis; replacement Willi Castro also named."
   },
   {
     "id": "bb_034",
     "question": "How many World Series championships have the New York Yankees won, and which team is second with 11?",
     "answer": "New York Yankees have 27 World Series titles \u2014 second is St. Louis Cardinals with 11",
-    "alternates": [
-      "Yankees 27 Cardinals 11",
-      "NYY 27 titles"
-    ],
+    "alternates": ["Yankees 27 Cardinals 11", "NYY 27 titles"],
     "category": "history",
     "team": "NYY",
     "difficulty": "expert",
@@ -1112,22 +733,12 @@
       "https://en.wikipedia.org/wiki/List_of_World_Series_champions",
       "https://www.mlb.com/yankees/history/timeline"
     ],
-    "must_cite": [
-      "Yankees",
-      "27",
-      "Cardinals"
-    ],
+    "must_cite": ["Yankees", "27", "Cardinals"],
     "numeric_answer": 27,
     "tolerance": 0,
-    "tags": [
-      "world_series",
-      "titles",
-      "yankees"
-    ],
+    "tags": ["world_series", "titles", "yankees"],
     "verified_at": "2026-08-15",
-    "expected_tools": [
-      "web_search"
-    ],
+    "expected_tools": ["web_search"],
     "explanation": "Yankees last won 2009 vs Phillies; 40 AL pennants also most."
   },
   {
@@ -1146,21 +757,12 @@
       "https://www.baseball-reference.com/players/a/arraelu01.shtml",
       "https://en.wikipedia.org/wiki/Luis_Arraez"
     ],
-    "must_cite": [
-      "Luis Arraez",
-      ".354"
-    ],
+    "must_cite": ["Luis Arraez", ".354"],
     "numeric_answer": 0.354,
     "tolerance": 0.002,
-    "tags": [
-      "batting_title",
-      "marlins",
-      "average"
-    ],
+    "tags": ["batting_title", "marlins", "average"],
     "verified_at": "2026-08-15",
-    "expected_tools": [
-      "web_search"
-    ],
+    "expected_tools": ["web_search"],
     "explanation": "Back-to-back batting titles AL 2022 (.316 MIN) and NL 2023; first since DJ LeMahieu."
   },
   {
@@ -1179,22 +781,12 @@
       "https://www.mlb.com/bluejays/player/vladimir-guerrero-jr-665489",
       "https://www.baseball-reference.com/players/g/guerrvl02.shtml"
     ],
-    "must_cite": [
-      "Vladimir Guerrero Jr.",
-      "Blue Jays"
-    ],
+    "must_cite": ["Vladimir Guerrero Jr.", "Blue Jays"],
     "numeric_answer": 30,
     "tolerance": 0,
-    "tags": [
-      "blue_jays",
-      "all_star",
-      "first_base"
-    ],
+    "tags": ["blue_jays", "all_star", "first_base"],
     "verified_at": "2026-08-15",
-    "expected_tools": [
-      "web_search",
-      "baseball_lookup"
-    ],
+    "expected_tools": ["web_search", "baseball_lookup"],
     "explanation": "Also won 2021 All-Star Game MVP; son of Hall of Famer Vladimir Guerrero."
   },
   {
@@ -1214,31 +806,19 @@
       "https://www.mlb.com/news/mlb-extra-inning-ghost-runner-rule",
       "https://en.wikipedia.org/wiki/Extra_inning#International_and_other_league_rules"
     ],
-    "must_cite": [
-      "ghost runner",
-      "second base"
-    ],
+    "must_cite": ["ghost runner", "second base"],
     "numeric_answer": null,
     "tolerance": null,
-    "tags": [
-      "rules",
-      "extra_innings",
-      "manfred_man"
-    ],
+    "tags": ["rules", "extra_innings", "manfred_man"],
     "verified_at": "2026-08-15",
-    "expected_tools": [
-      "web_search"
-    ],
+    "expected_tools": ["web_search"],
     "explanation": "Permanent since 2023; not used in postseason."
   },
   {
     "id": "bb_038",
     "question": "Who holds the career record for no-hitters with 7 and also holds the strikeout record with 5,714?",
     "answer": "Nolan Ryan \u2014 7 career no-hitters and 5,714 strikeouts",
-    "alternates": [
-      "Nolan Ryan 7 no-hitters",
-      "Ryan 5714 strikeouts"
-    ],
+    "alternates": ["Nolan Ryan 7 no-hitters", "Ryan 5714 strikeouts"],
     "category": "trivia",
     "team": "TEX",
     "difficulty": "hard",
@@ -1247,21 +827,12 @@
       "https://en.wikipedia.org/wiki/Nolan_Ryan",
       "https://www.baseball-reference.com/players/r/ryanno01.shtml"
     ],
-    "must_cite": [
-      "Nolan Ryan",
-      "7"
-    ],
+    "must_cite": ["Nolan Ryan", "7"],
     "numeric_answer": 7,
     "tolerance": 0,
-    "tags": [
-      "no_hitter",
-      "strikeouts",
-      "career"
-    ],
+    "tags": ["no_hitter", "strikeouts", "career"],
     "verified_at": "2026-08-15",
-    "expected_tools": [
-      "web_search"
-    ],
+    "expected_tools": ["web_search"],
     "explanation": "No-hitters with Angels (1), Astros (1), Rangers (2) and no-hitters not listed counted; also holds walk record 2,795."
   },
   {
@@ -1280,22 +851,12 @@
       "https://www.mlb.com/news/justin-verlander-trade-mets-astros-2023",
       "https://en.wikipedia.org/wiki/Justin_Verlander"
     ],
-    "must_cite": [
-      "Justin Verlander",
-      "Mets",
-      "Astros"
-    ],
+    "must_cite": ["Justin Verlander", "Mets", "Astros"],
     "numeric_answer": null,
     "tolerance": null,
-    "tags": [
-      "trade",
-      "verlander",
-      "deadline"
-    ],
+    "tags": ["trade", "verlander", "deadline"],
     "verified_at": "2026-08-15",
-    "expected_tools": [
-      "web_search"
-    ],
+    "expected_tools": ["web_search"],
     "explanation": "Mets paid $52.5M of remaining contract; return Drew Gilbert, Ryan Clifford."
   },
   {
@@ -1314,22 +875,12 @@
       "https://en.wikipedia.org/wiki/2019_World_Series",
       "https://www.mlb.com/nationals/history/timeline-2019"
     ],
-    "must_cite": [
-      "Nationals",
-      "Astros",
-      "2019"
-    ],
+    "must_cite": ["Nationals", "Astros", "2019"],
     "numeric_answer": null,
     "tolerance": null,
-    "tags": [
-      "world_series",
-      "2019",
-      "nationals"
-    ],
+    "tags": ["world_series", "2019", "nationals"],
     "verified_at": "2026-08-15",
-    "expected_tools": [
-      "web_search"
-    ],
+    "expected_tools": ["web_search"],
     "explanation": "All 7 games won by road team; Stephen Strasburg WS MVP; Howie Kendrick HR Game 7."
   }
 ]

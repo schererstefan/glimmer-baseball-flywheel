@@ -95,19 +95,48 @@ function jaccard(a: string, b: string): number {
 
 function isFailureVerdict(v: string): boolean {
   const n = v.toLowerCase();
-  return n === "incorrect" || n === "fail" || n === "wrong" || n === "false" || n === "incorrect";
+  return (
+    n === "incorrect" ||
+    n === "fail" ||
+    n === "wrong" ||
+    n === "false" ||
+    n === "incorrect"
+  );
 }
 
 function isGenericResult(r: unknown): r is GenericEvalResult {
-  return typeof (r as GenericEvalResult)?.id === "string" && !("verdict" in (r as EvalCaseResult) && typeof (r as EvalCaseResult).verdict === "object");
+  return (
+    typeof (r as GenericEvalResult)?.id === "string" &&
+    !(
+      "verdict" in (r as EvalCaseResult) &&
+      typeof (r as EvalCaseResult).verdict === "object"
+    )
+  );
 }
 
-function resolveGeneric(r: GenericEvalResult): { prompt: string; rejected: string; chosen: string; verdict: string; confidence?: number; category: string; team: string | null; difficulty: string } | null {
-  const verdict = r.verdict ?? r.judgeVerdict ?? r.finalVerdict ?? r.status ?? "";
+function resolveGeneric(r: GenericEvalResult): {
+  prompt: string;
+  rejected: string;
+  chosen: string;
+  verdict: string;
+  confidence?: number;
+  category: string;
+  team: string | null;
+  difficulty: string;
+} | null {
+  const verdict =
+    r.verdict ?? r.judgeVerdict ?? r.finalVerdict ?? r.status ?? "";
   if (!isFailureVerdict(verdict)) return null;
   const prompt = (r.question ?? r.prompt ?? "").trim();
   const rejected = (r.modelAnswer ?? r.answer ?? "").trim();
-  const chosen = (r.correctedAnswer ?? r.judgeCorrected ?? r.groundTruth ?? r.expectedAnswer ?? r.goldAnswer ?? "").trim();
+  const chosen = (
+    r.correctedAnswer ??
+    r.judgeCorrected ??
+    r.groundTruth ??
+    r.expectedAnswer ??
+    r.goldAnswer ??
+    ""
+  ).trim();
   if (!prompt || !chosen || !rejected) return null;
   return {
     prompt,
@@ -121,18 +150,28 @@ function resolveGeneric(r: GenericEvalResult): { prompt: string; rejected: strin
   };
 }
 
-function computeMargin(chosen: string, rejected: string, confidence?: number): number {
+function computeMargin(
+  chosen: string,
+  rejected: string,
+  confidence?: number,
+): number {
   const jac = jaccard(chosen, rejected);
   const distance = 1 - jac;
   const lenChosen = chosen.length;
   const lenRejected = rejected.length;
-  const lenRatio = Math.min(lenChosen, lenRejected) / Math.max(lenChosen, lenRejected || 1);
-  const conf = typeof confidence === "number" ? Math.max(0, Math.min(1, confidence)) : 0.7;
+  const lenRatio =
+    Math.min(lenChosen, lenRejected) / Math.max(lenChosen, lenRejected || 1);
+  const conf =
+    typeof confidence === "number" ? Math.max(0, Math.min(1, confidence)) : 0.7;
   const raw = 0.5 * distance + 0.3 * conf + 0.2 * lenRatio;
   return Math.max(0, Math.min(1, Number(raw.toFixed(4))));
 }
 
-function containsGoldOverlap(text: string, goldTexts: string[], threshold = 0.92): boolean {
+function containsGoldOverlap(
+  text: string,
+  goldTexts: string[],
+  threshold = 0.92,
+): boolean {
   const n = norm(text);
   for (const g of goldTexts) {
     const gn = norm(g);
@@ -167,8 +206,12 @@ export function buildDPO(
   for (const r of evalResults) {
     // Try generic first if it looks like generic
     const generic = r as GenericEvalResult;
-    const hasGenericVerdict = typeof generic.verdict === "string" || typeof generic.judgeVerdict === "string";
-    const isEvalCase = (r as EvalCaseResult).verdict !== undefined && typeof (r as EvalCaseResult).verdict === "object";
+    const hasGenericVerdict =
+      typeof generic.verdict === "string" ||
+      typeof generic.judgeVerdict === "string";
+    const isEvalCase =
+      (r as EvalCaseResult).verdict !== undefined &&
+      typeof (r as EvalCaseResult).verdict === "object";
 
     if (isEvalCase) {
       const ec = r as EvalCaseResult;
@@ -188,7 +231,8 @@ export function buildDPO(
       const tRejected = estimateTokens(ec.question + " " + rejected);
       if (tChosen > maxTokens || tRejected > maxTokens) continue;
       if (tChosen < minTokens || tRejected < minTokens) continue;
-      if (goldTexts.length && containsGoldOverlap(chosen, goldTexts, 0.92)) continue;
+      if (goldTexts.length && containsGoldOverlap(chosen, goldTexts, 0.92))
+        continue;
       const margin = computeMargin(chosen, rejected, ec.verdict.confidence);
       if (margin < minMargin) continue;
 
@@ -208,7 +252,11 @@ export function buildDPO(
           difficulty: ec.difficulty,
           verdict,
           scoreDelta: ec.verdict.score === 0 ? 1 : 0.5,
-          judgeModel: (ec.verdict as unknown as { judgeModel?: string; model?: string }).judgeModel ?? (ec.verdict as unknown as { model?: string }).model ?? "unknown",
+          judgeModel:
+            (ec.verdict as unknown as { judgeModel?: string; model?: string })
+              .judgeModel ??
+            (ec.verdict as unknown as { model?: string }).model ??
+            "unknown",
           margin,
           tokenCountChosen: tChosen,
           tokenCountRejected: tRejected,
@@ -222,11 +270,21 @@ export function buildDPO(
       const jac = jaccard(resolved.chosen, resolved.rejected);
       if (jac >= decontamThreshold) continue;
       const tChosen = estimateTokens(resolved.prompt + " " + resolved.chosen);
-      const tRejected = estimateTokens(resolved.prompt + " " + resolved.rejected);
+      const tRejected = estimateTokens(
+        resolved.prompt + " " + resolved.rejected,
+      );
       if (tChosen > maxTokens || tRejected > maxTokens) continue;
       if (tChosen < minTokens || tRejected < minTokens) continue;
-      if (goldTexts.length && containsGoldOverlap(resolved.chosen, goldTexts, 0.92)) continue;
-      const margin = computeMargin(resolved.chosen, resolved.rejected, resolved.confidence);
+      if (
+        goldTexts.length &&
+        containsGoldOverlap(resolved.chosen, goldTexts, 0.92)
+      )
+        continue;
+      const margin = computeMargin(
+        resolved.chosen,
+        resolved.rejected,
+        resolved.confidence,
+      );
       if (margin < minMargin) continue;
       const dedupeKey = `${norm(resolved.prompt)}::${norm(resolved.chosen)}`;
       if (doDedupe && seen.has(dedupeKey)) continue;
@@ -266,7 +324,9 @@ export function buildDPO(
 export const buildDpo = buildDPO;
 
 export function toDpoJsonl(pairs: DPOPair[]): string {
-  return pairs.map((p) => JSON.stringify(p)).join("\n") + (pairs.length ? "\n" : "");
+  return (
+    pairs.map((p) => JSON.stringify(p)).join("\n") + (pairs.length ? "\n" : "")
+  );
 }
 
 export function fromDpoJsonl(jsonl: string): DPOPair[] {
@@ -283,25 +343,34 @@ export function fromDpoJsonl(jsonl: string): DPOPair[] {
 
 export function writeDPOJsonl(pairs: DPOPair[], outPath: string): string {
   fs.mkdirSync(path.dirname(outPath), { recursive: true });
-  fs.writeFileSync(outPath, pairs.map((p) => JSON.stringify(p)).join("\n") + (pairs.length ? "\n" : ""));
+  fs.writeFileSync(
+    outPath,
+    pairs.map((p) => JSON.stringify(p)).join("\n") + (pairs.length ? "\n" : ""),
+  );
   return outPath;
 }
 
 // Keep old name for pipeline compatibility
 export const writeDpoJsonl = writeDPOJsonl;
 
-export function loadEvalResults(filePath: string): Array<EvalCaseResult | GenericEvalResult> {
+export function loadEvalResults(
+  filePath: string,
+): Array<EvalCaseResult | GenericEvalResult> {
   const raw = fs.readFileSync(filePath, "utf-8");
   const parsed = JSON.parse(raw);
   if (Array.isArray(parsed)) return parsed as GenericEvalResult[];
-  if (parsed && Array.isArray(parsed.results)) return parsed.results as GenericEvalResult[];
-  if (parsed && Array.isArray(parsed.cases)) return parsed.cases as EvalCaseResult[];
+  if (parsed && Array.isArray(parsed.results))
+    return parsed.results as GenericEvalResult[];
+  if (parsed && Array.isArray(parsed.cases))
+    return parsed.cases as EvalCaseResult[];
   if (parsed && parsed.providers && Array.isArray(parsed.providers)) {
     const all: EvalCaseResult[] = [];
-    for (const p of parsed.providers as Array<{ cases: EvalCaseResult[] }>) if (Array.isArray(p.cases)) all.push(...p.cases);
+    for (const p of parsed.providers as Array<{ cases: EvalCaseResult[] }>)
+      if (Array.isArray(p.cases)) all.push(...p.cases);
     return all;
   }
-  if (parsed && parsed.cases && Array.isArray(parsed.cases)) return parsed.cases as EvalCaseResult[];
+  if (parsed && parsed.cases && Array.isArray(parsed.cases))
+    return parsed.cases as EvalCaseResult[];
   return [];
 }
 
@@ -309,7 +378,12 @@ export function loadEvalResults(filePath: string): Array<EvalCaseResult | Generi
 // CLI
 // ---------------------------------------------------------------------------
 
-function parseArgs(argv: string[]): { evalPath: string; out: string; includePartial: boolean; minMargin: number } {
+function parseArgs(argv: string[]): {
+  evalPath: string;
+  out: string;
+  includePartial: boolean;
+  minMargin: number;
+} {
   const args = argv.slice(2);
   const get = (flag: string): string | undefined => {
     const idx = args.indexOf(flag);
@@ -337,11 +411,18 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const parsed = JSON.parse(raw);
   const cases: Array<EvalCaseResult | GenericEvalResult> = Array.isArray(parsed)
     ? parsed
-    : parsed.cases ?? parsed.results ?? [];
-  const pairs = buildDPO(cases as EvalCaseResult[], { includePartial: opts.includePartial, minMargin: opts.minMargin });
+    : (parsed.cases ?? parsed.results ?? []);
+  const pairs = buildDPO(cases as EvalCaseResult[], {
+    includePartial: opts.includePartial,
+    minMargin: opts.minMargin,
+  });
   const outPath = path.resolve(opts.out);
   writeDPOJsonl(pairs, outPath);
-  const avgMargin = pairs.length ? (pairs.reduce((s, p) => s + (p.margin ?? 0), 0) / pairs.length).toFixed(3) : "0";
-  console.log(`[dpo] ${cases.length} eval -> ${pairs.length} pairs (avg margin=${avgMargin})`);
+  const avgMargin = pairs.length
+    ? (pairs.reduce((s, p) => s + (p.margin ?? 0), 0) / pairs.length).toFixed(3)
+    : "0";
+  console.log(
+    `[dpo] ${cases.length} eval -> ${pairs.length} pairs (avg margin=${avgMargin})`,
+  );
   console.log(`[dpo] wrote ${path.relative(process.cwd(), outPath)}`);
 }

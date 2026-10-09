@@ -14,7 +14,13 @@ export function htmlToText(html: string): string {
   s = s.replace(/<!--[\s\S]*?-->/g, " ");
   s = s.replace(/<[^>]+>/g, " ");
   // decode entities
-  s = s.replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&nbsp;/g, " ");
+  s = s
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&nbsp;/g, " ");
   s = s.replace(/\s+/g, " ").trim();
   return s.slice(0, MAX_CHARS);
 }
@@ -24,27 +30,52 @@ export function truncateText(text: string, maxChars = MAX_CHARS): string {
   return `${text.slice(0, maxChars).trimEnd()}… [truncated]`;
 }
 
-export async function fetchAndExtract(url: string, opts: { timeoutMs?: number; maxChars?: number } = {}): Promise<{ extracted: string; fetchedAt: string; ok: boolean }> {
+export async function fetchAndExtract(
+  url: string,
+  opts: { timeoutMs?: number; maxChars?: number } = {},
+): Promise<{ extracted: string; fetchedAt: string; ok: boolean }> {
   const timeoutMs = opts.timeoutMs ?? FETCH_TIMEOUT_MS;
   const maxChars = opts.maxChars ?? MAX_CHARS;
   const fetchedAt = new Date().toISOString();
   const ctrl = new AbortController();
   const t = setTimeout(() => ctrl.abort(), timeoutMs);
   try {
-    const res = await fetch(url, { signal: ctrl.signal, headers: { "User-Agent": "glimmer-bb-judge/1.0", Accept: "text/html,*/*" } });
+    const res = await fetch(url, {
+      signal: ctrl.signal,
+      headers: {
+        "User-Agent": "glimmer-bb-judge/1.0",
+        Accept: "text/html,*/*",
+      },
+    });
     clearTimeout(t);
     if (!res.ok) return { ok: false, fetchedAt, extracted: "" };
     const html = await res.text();
-    return { ok: true, fetchedAt, extracted: truncateText(htmlToText(html), maxChars) };
+    return {
+      ok: true,
+      fetchedAt,
+      extracted: truncateText(htmlToText(html), maxChars),
+    };
   } catch {
     clearTimeout(t);
     return { ok: false, fetchedAt, extracted: "" };
   }
 }
 
-export function evidenceFromHtml(url: string, title: string, html: string, source = "html"): Evidence {
+export function evidenceFromHtml(
+  url: string,
+  title: string,
+  html: string,
+  source = "html",
+): Evidence {
   const text = htmlToText(html);
-  return { url, title, snippet: text.slice(0, 600), extracted: text, fetchedAt: new Date().toISOString(), source };
+  return {
+    url,
+    title,
+    snippet: text.slice(0, 600),
+    extracted: text,
+    fetchedAt: new Date().toISOString(),
+    source,
+  };
 }
 
 export async function extractEvidence(ev: Evidence): Promise<Evidence> {
@@ -52,18 +83,32 @@ export async function extractEvidence(ev: Evidence): Promise<Evidence> {
   try {
     const ctrl = new AbortController();
     const t = setTimeout(() => ctrl.abort(), FETCH_TIMEOUT_MS);
-    const res = await fetch(ev.url, { signal: ctrl.signal, headers: { "User-Agent": "glimmer-bb-judge/1.0 (+https://github.com/schererstefan/glimmer-baseball-flywheel)" } });
+    const res = await fetch(ev.url, {
+      signal: ctrl.signal,
+      headers: {
+        "User-Agent":
+          "glimmer-bb-judge/1.0 (+https://github.com/schererstefan/glimmer-baseball-flywheel)",
+      },
+    });
     clearTimeout(t);
     if (!res.ok) return ev;
     const html = await res.text();
     const text = htmlToText(html);
-    return { ...ev, extracted: text, snippet: text.slice(0, 500), fetchedAt: new Date().toISOString() };
+    return {
+      ...ev,
+      extracted: text,
+      snippet: text.slice(0, 500),
+      fetchedAt: new Date().toISOString(),
+    };
   } catch {
     return ev;
   }
 }
 
-export async function extractAll(evs: Evidence[], concurrency = 3): Promise<Evidence[]> {
+export async function extractAll(
+  evs: Evidence[],
+  concurrency = 3,
+): Promise<Evidence[]> {
   const out: Evidence[] = [];
   for (let i = 0; i < evs.length; i += concurrency) {
     const chunk = evs.slice(i, i + concurrency);
