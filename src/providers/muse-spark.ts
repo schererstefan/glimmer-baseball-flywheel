@@ -9,7 +9,7 @@ export class MuseSparkProvider implements ModelProvider {
   constructor(
     opts: { model?: string; baseUrl?: string; apiKey?: string } = {},
   ) {
-    this.model = opts.model ?? process.env.MUSE_SPARK_MODEL ?? "muse-spark-1.2";
+    this.model = opts.model ?? process.env.MUSE_SPARK_MODEL ?? "muse-spark-1.3";
     this.baseUrl = (
       opts.baseUrl ??
       process.env.MUSE_SPARK_BASE_URL ??
