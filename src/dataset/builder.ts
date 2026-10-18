@@ -6,16 +6,15 @@
 import fs from "node:fs";
 import path from "node:path";
 import { generateSynthetic } from "@/src/training/synthetic.ts";
+import { getFlag } from "@/src/utils/args.ts";
 import { type BaseballCase, DatasetManifestSchema } from "./schema.ts";
 
 function parseArgs() {
   const a = process.argv.slice(2);
   return {
-    n: Number(a.find((x) => x.startsWith("--n="))?.split("=")[1] ?? 0),
-    dataset:
-      a.find((x) => x.startsWith("--dataset="))?.split("=")[1] ??
-      "dataset/v1/baseball.json",
-    out: a.find((x) => x.startsWith("--out="))?.split("=")[1],
+    n: Number(getFlag(a, "--n") ?? 0),
+    dataset: getFlag(a, "--dataset") ?? "dataset/v1/baseball.json",
+    out: getFlag(a, "--out"),
     verifyOnly: a.includes("--verify"),
   };
 }
