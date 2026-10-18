@@ -45,6 +45,7 @@ import { OllamaProvider } from "@/src/providers/ollama.ts";
 import { buildDPO, writeDPOJsonl } from "@/src/training/dpo.ts";
 import { buildSFT, writeSFTJsonl } from "@/src/training/sft.ts";
 import { generateSynthetic } from "@/src/training/synthetic.ts";
+import { getFlag } from "@/src/utils/args.ts";
 import { wilsonCI } from "@/src/utils/stats.ts";
 import { buildCurriculum } from "./curriculum.ts";
 import { metaEval } from "./meta-eval.ts";
@@ -57,19 +58,12 @@ function parseArgs() {
     dryRun: a.includes("--dry-run"),
     status: a.includes("--status"),
     maxIters: Number(
-      a.find((x) => x.startsWith("--max-iters="))?.split("=")[1] ??
-        process.env.FLYWHEEL_MAX_ITERS ??
-        3,
+      getFlag(a, "--max-iters") ?? process.env.FLYWHEEL_MAX_ITERS ?? 3,
     ),
-    dataset:
-      a.find((x) => x.startsWith("--dataset="))?.split("=")[1] ??
-      "dataset/v1/baseball.json",
-    provider:
-      a.find((x) => x.startsWith("--provider="))?.split("=")[1] ?? "mock",
+    dataset: getFlag(a, "--dataset") ?? "dataset/v1/baseball.json",
+    provider: getFlag(a, "--provider") ?? "mock",
     mockJudge: !a.includes("--judge-live"),
-    syntheticN: Number(
-      a.find((x) => x.startsWith("--synthetic-n="))?.split("=")[1] ?? 20,
-    ),
+    syntheticN: Number(getFlag(a, "--synthetic-n") ?? 20),
   };
 }
 

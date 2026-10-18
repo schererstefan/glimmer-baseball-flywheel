@@ -12,7 +12,10 @@ import type { DatasetManifest } from "@/src/dataset/schema.ts";
 import { MockProvider } from "@/src/providers/mock.ts";
 import { MuseSparkProvider } from "@/src/providers/muse-spark.ts";
 import { OllamaProvider } from "@/src/providers/ollama.ts";
+import { getFlag } from "@/src/utils/args.ts";
 import { runEval, saveEvalRun } from "./harness.ts";
+
+const VALID_PROVIDERS = ["mock", "glimmer", "ollama", "spark"] as const;
 
 function parseArgs() {
   const a = process.argv.slice(2);
@@ -22,25 +25,22 @@ function parseArgs() {
       (!a.includes("--live") && !a.includes("--judge-live")),
     live: a.includes("--live") || a.includes("--judge-live"),
     json: a.includes("--json"),
-    dataset:
-      a.find((x) => x.startsWith("--dataset="))?.split("=")[1] ??
-      "dataset/v1/baseball.json",
-    provider:
-      a.find((x) => x.startsWith("--provider="))?.split("=")[1] ?? "mock",
-    model: a.find((x) => x.startsWith("--model="))?.split("=")[1],
-    only:
-      a
-        .find((x) => x.startsWith("--only="))
-        ?.split("=")[1]
-        ?.split(",") ?? null,
-    limit:
-      Number(a.find((x) => x.startsWith("--limit="))?.split("=")[1] ?? 0) ||
-      undefined,
+    dataset: getFlag(a, "--dataset") ?? "dataset/v1/baseball.json",
+    provider: getFlag(a, "--provider") ?? "mock",
+    model: getFlag(a, "--model"),
+    only: getFlag(a, "--only")?.split(",") ?? null,
+    limit: Number(getFlag(a, "--limit") ?? 0) || undefined,
   };
 }
 
 async function main() {
   const args = parseArgs();
+  if (!(VALID_PROVIDERS as readonly string[]).includes(args.provider)) {
+    console.error(
+      `Unknown --provider "${args.provider}". Valid values: ${VALID_PROVIDERS.join(", ")}`,
+    );
+    process.exit(1);
+  }
   const datasetPath = path.resolve(args.dataset);
   if (!fs.existsSync(datasetPath)) {
     console.error(`Dataset not found: ${datasetPath}`);
