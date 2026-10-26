@@ -17,4 +17,4 @@ jobs:
       - run: pnpm typecheck
       - run: pnpm test
       - run: pnpm eval --mock --limit 20 --json > /tmp/eval.json && echo "mock eval ok" && cat /tmp/eval.json | head -n 60
-      - run: pnpm dataset:build --verify || echo "dataset verify ok"
+      - run: pnpm dataset:build --verify

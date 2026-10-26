@@ -26,7 +26,7 @@
     "eval:baseball": "tsx --env-file-if-exists=.env.local src/eval/runner.ts --dataset dataset/v1/baseball.json",
     "judge": "tsx --env-file-if-exists=.env.local src/judge/verifier.ts",
     "dataset:build": "tsx --env-file-if-exists=.env.local src/dataset/builder.ts",
-    "dataset:verify": "tsx --env-file-if-exists=.env.local src/dataset/verifier.ts",
+    "dataset:verify": "tsx --env-file-if-exists=.env.local src/dataset/builder.ts --verify",
     "train:sft": "tsx --env-file-if-exists=.env.local src/training/sft.ts",
     "train:dpo": "tsx --env-file-if-exists=.env.local src/training/dpo.ts",
     "train:synthetic": "tsx --env-file-if-exists=.env.local src/training/synthetic.ts",
