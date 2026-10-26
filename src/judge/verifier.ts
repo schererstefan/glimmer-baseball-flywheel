@@ -216,6 +216,7 @@ export async function judgeAnswer(
   let confidence = rubric.pass ? 0.85 : 0.75;
   let reasoning = `[rubric] ${rubric.reason} score=${rubric.score}`;
   let hallucination = !rubric.pass && inp.modelAnswer.length > 20;
+  let llmApplied = false;
   if (!useMock && opts.useLLM !== false) {
     const llm = await llmAdjudicate(inp, evidence);
     if (llm) {
@@ -223,6 +224,7 @@ export async function judgeAnswer(
       confidence = llm.confidence;
       reasoning = `[llm:${JUDGE_MODEL}] ${llm.reasoning} | [rubric] ${rubric.reason}`;
       hallucination = llm.hallucination;
+      llmApplied = true;
     }
   }
   const evText = evidence
@@ -249,11 +251,7 @@ export async function judgeAnswer(
     evidence,
     citations,
     latencyMs: Date.now() - t0,
-    judgeModel: useMock
-      ? "mock/rubric"
-      : process.env.ANTHROPIC_API_KEY
-        ? JUDGE_MODEL
-        : "rubric",
+    judgeModel: useMock ? "mock/rubric" : llmApplied ? JUDGE_MODEL : "rubric",
     abstained: false,
   };
 }
