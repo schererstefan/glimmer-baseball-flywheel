@@ -239,7 +239,7 @@ src/
   eval/       harness, metrics, reporter, runner
   training/   sft, dpo, synthetic, pipeline, configs
   flywheel/   orchestrator, curriculum, meta-eval, state
-  dataset/    builder, verifier
+  dataset/    builder
 evals/results/  <iso>.json + <iso>.md + COMPARISON.md
 flywheel/state/ flywheel.json
 flywheel/reports/ per-iteration

@@ -40,6 +40,7 @@ async function main() {
       console.warn(
         `  warn ${c.id}: stale live case (verified_at ${c.verified_at})`,
       );
+      errs++;
     }
   }
   if (args.verifyOnly) {
