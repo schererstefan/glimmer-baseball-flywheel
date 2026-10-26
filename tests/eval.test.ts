@@ -74,6 +74,7 @@ describe("computeMetrics", () => {
     expect(m.byCategory.stats).toBeDefined();
     expect(m.byDifficulty.easy).toBeDefined();
     expect(m.accuracyCI.length).toBe(2);
+    expect(m.judgeModel).toBe("mock/rubric");
   });
 });
 

@@ -202,10 +202,7 @@ export function computeMetrics(
   const timeDecayedAccuracy = tdTotal ? tdCorrect / tdTotal : accuracy;
   const timeDecayedScore = tdWeightSum ? tdScoreSum / tdWeightSum : avgScore;
 
-  const judgeModel = verdicts[0]
-    ? (((verdicts[0] as unknown as Record<string, unknown>).model as string) ??
-      "unknown")
-    : "unknown";
+  const judgeModel = verdicts[0]?.judgeModel ?? "unknown";
 
   return {
     total,
