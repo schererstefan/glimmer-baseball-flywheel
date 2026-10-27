@@ -46,8 +46,26 @@ jobs:
         run: |
           git config user.name "glimmer-bb-flywheel[bot]"
           git config user.email "flywheel@users.noreply.github.com"
-          git add -A evals/results/ flywheel/reports/ flywheel/state/ dataset/synthetic/ training/datasets/ || true
-          git diff --staged --quiet && echo "no changes" && exit 0
+          if [ ! -s flywheel/state/flywheel.json ]; then
+            echo "::error::flywheel/state/flywheel.json is missing or empty — refusing to silently succeed without state"
+            exit 1
+          fi
+          git add -f -A evals/results/ flywheel/reports/ flywheel/state/ dataset/synthetic/ training/datasets/
+          if [ -f flywheel/state.json ]; then
+            git add -f flywheel/state.json
+          fi
+          if ! git diff --quiet -- flywheel/state/flywheel.json; then
+            echo "::error::flywheel/state/flywheel.json has unstaged changes after staging — state not fully staged"
+            exit 1
+          fi
+          if ! git ls-files --cached --error-unmatch flywheel/state/flywheel.json >/dev/null; then
+            echo "::error::flywheel/state/flywheel.json is not staged in the index"
+            exit 1
+          fi
+          if git diff --staged --quiet; then
+            echo "no changes"
+            exit 0
+          fi
           git commit -m "flywheel: $(date -u +%Y-%m-%d) auto hill-climb — $(cat flywheel/state/flywheel.json | jq -r '.bestAccuracy // 0' 2>/dev/null || echo 'no state')"
           git push
 
