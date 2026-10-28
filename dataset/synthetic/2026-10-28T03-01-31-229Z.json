@@ -1,0 +1,646 @@
+{
+  "version": "synth-2026-10-28T03-01-31-229Z",
+  "created_at": "2026-10-28T03:01:31.240Z",
+  "cases": [
+    {
+      "id": "bb_synth_live_season_mvrj2rqd_1_000::aug0::paraphrase",
+      "question": "What is the current record of the Los Angeles Dodgers in the 2023 season?",
+      "answer": "Mock grounded snippet: answer to \"What is the current record of the Los Angeles Dodgers in the 2023 season?\" would be verified via live search. In mock mode we assume gold-compatible evidence exists.",
+      "alternates": [],
+      "category": "live_season",
+      "team": null,
+      "difficulty": "medium",
+      "freshness": "seasonal",
+      "gold_sources": [
+        "https://example.com/search?q=What%20is%20the%20current%20record%20of%20the%20Los%20Angeles%20Dodgers%20in%20the%202023%20season%3F"
+      ],
+      "must_cite": [
+        "Mock",
+        "result",
+        "for"
+      ],
+      "numeric_answer": null,
+      "tolerance": null,
+      "tags": [
+        "synthetic",
+        "live_season",
+        "flywheel",
+        "depth:1",
+        "aug:paraphrase"
+      ],
+      "verified_at": "2026-10-28T03:01:31.237Z",
+      "expected_tools": [
+        "web_search"
+      ],
+      "explanation": "Synthesized from weak slice targeting live_season (depth 1)."
+    },
+    {
+      "id": "bb_synth_live_season_mvrj2rqd_1_000::aug1::reverse",
+      "question": "Mock grounded snippet: answer to \"What is the current record of the Los Angeles  — what question does this answer? What is the current record of the Los Angeles Dodgers in the 2023 season?",
+      "answer": "Mock grounded snippet: answer to \"What is the current record of the Los Angeles Dodgers in the 2023 season?\" would be verified via live search. In mock mode we assume gold-compatible evidence exists.",
+      "alternates": [],
+      "category": "live_season",
+      "team": null,
+      "difficulty": "medium",
+      "freshness": "seasonal",
+      "gold_sources": [
+        "https://example.com/search?q=What%20is%20the%20current%20record%20of%20the%20Los%20Angeles%20Dodgers%20in%20the%202023%20season%3F"
+      ],
+      "must_cite": [
+        "Mock",
+        "result",
+        "for"
+      ],
+      "numeric_answer": null,
+      "tolerance": null,
+      "tags": [
+        "synthetic",
+        "live_season",
+        "flywheel",
+        "depth:1",
+        "aug:reverse"
+      ],
+      "verified_at": "2026-10-28T03:01:31.237Z",
+      "expected_tools": [
+        "web_search"
+      ],
+      "explanation": "Synthesized from weak slice targeting live_season (depth 1)."
+    },
+    {
+      "id": "bb_synth_live_season_mvrj2rqd_1_000::aug2::concise",
+      "question": "What is the current record of the Los Angeles Dodgers in the 2023 season? (Answer concisely.)",
+      "answer": "Mock grounded snippet: answer to \"What is the current record of the Los Angeles Dodgers in the 2023 season?\" would be verified via live search",
+      "alternates": [],
+      "category": "live_season",
+      "team": null,
+      "difficulty": "medium",
+      "freshness": "seasonal",
+      "gold_sources": [
+        "https://example.com/search?q=What%20is%20the%20current%20record%20of%20the%20Los%20Angeles%20Dodgers%20in%20the%202023%20season%3F"
+      ],
+      "must_cite": [
+        "Mock",
+        "result",
+        "for"
+      ],
+      "numeric_answer": null,
+      "tolerance": null,
+      "tags": [
+        "synthetic",
+        "live_season",
+        "flywheel",
+        "depth:1",
+        "aug:concise"
+      ],
+      "verified_at": "2026-10-28T03:01:31.237Z",
+      "expected_tools": [
+        "web_search"
+      ],
+      "explanation": "Synthesized from weak slice targeting live_season (depth 1)."
+    },
+    {
+      "id": "bb_synth_live_season_mvrj2rqd_1_000::aug3::cloze",
+      "question": "Fill in the blank: ___ is the current record of the Los Angeles Dodgers in the 2023 season?",
+      "answer": "Mock grounded snippet: answer to \"What is the current record of the Los Angeles Dodgers in the 2023 season?\" would be verified via live search. In mock mode we assume gold-compatible evidence exists.",
+      "alternates": [],
+      "category": "live_season",
+      "team": null,
+      "difficulty": "medium",
+      "freshness": "seasonal",
+      "gold_sources": [
+        "https://example.com/search?q=What%20is%20the%20current%20record%20of%20the%20Los%20Angeles%20Dodgers%20in%20the%202023%20season%3F"
+      ],
+      "must_cite": [
+        "Mock",
+        "result",
+        "for"
+      ],
+      "numeric_answer": null,
+      "tolerance": null,
+      "tags": [
+        "synthetic",
+        "live_season",
+        "flywheel",
+        "depth:1",
+        "aug:cloze"
+      ],
+      "verified_at": "2026-10-28T03:01:31.237Z",
+      "expected_tools": [
+        "web_search"
+      ],
+      "explanation": "Synthesized from weak slice targeting live_season (depth 1)."
+    },
+    {
+      "id": "bb_synth_live_season_mvrj2rqd_1_000::aug4::multi_hop",
+      "question": "What is the current record of the Los Angeles Dodgers in the 2023 season? Explain briefly why.",
+      "answer": "Mock grounded snippet: answer to \"What is the current record of the Los Angeles Dodgers in the 2023 season?\" would be verified via live search. In mock mode we assume gold-compatible evidence exists. (verified via MLB official records).",
+      "alternates": [],
+      "category": "live_season",
+      "team": null,
+      "difficulty": "medium",
+      "freshness": "seasonal",
+      "gold_sources": [
+        "https://example.com/search?q=What%20is%20the%20current%20record%20of%20the%20Los%20Angeles%20Dodgers%20in%20the%202023%20season%3F"
+      ],
+      "must_cite": [
+        "Mock",
+        "result",
+        "for"
+      ],
+      "numeric_answer": null,
+      "tolerance": null,
+      "tags": [
+        "synthetic",
+        "live_season",
+        "flywheel",
+        "depth:1",
+        "aug:multi_hop"
+      ],
+      "verified_at": "2026-10-28T03:01:31.237Z",
+      "expected_tools": [
+        "web_search"
+      ],
+      "explanation": "Synthesized from weak slice targeting live_season (depth 1)."
+    },
+    {
+      "id": "bb_synth_trivia_mvrj2rqe_1_001::aug0::paraphrase",
+      "question": "Why is The Bambino nicknamed that?",
+      "answer": "Mock grounded snippet: answer to \"Why is The Bambino nicknamed that?\" would be verified via live search. In mock mode we assume gold-compatible evidence exists.",
+      "alternates": [],
+      "category": "trivia",
+      "team": null,
+      "difficulty": "medium",
+      "freshness": "seasonal",
+      "gold_sources": [
+        "https://example.com/search?q=Why%20is%20The%20Bambino%20nicknamed%20that%3F"
+      ],
+      "must_cite": [
+        "Mock",
+        "result",
+        "for"
+      ],
+      "numeric_answer": null,
+      "tolerance": null,
+      "tags": [
+        "synthetic",
+        "trivia",
+        "flywheel",
+        "depth:1",
+        "aug:paraphrase"
+      ],
+      "verified_at": "2026-10-28T03:01:31.238Z",
+      "expected_tools": [
+        "web_search"
+      ],
+      "explanation": "Synthesized from weak slice targeting trivia (depth 1)."
+    },
+    {
+      "id": "bb_synth_trivia_mvrj2rqe_1_001::aug1::reverse",
+      "question": "Mock grounded snippet: answer to \"Why is The Bambino nicknamed that?\" would be v — what question does this answer? Why is The Bambino nicknamed that?",
+      "answer": "Mock grounded snippet: answer to \"Why is The Bambino nicknamed that?\" would be verified via live search. In mock mode we assume gold-compatible evidence exists.",
+      "alternates": [],
+      "category": "trivia",
+      "team": null,
+      "difficulty": "medium",
+      "freshness": "seasonal",
+      "gold_sources": [
+        "https://example.com/search?q=Why%20is%20The%20Bambino%20nicknamed%20that%3F"
+      ],
+      "must_cite": [
+        "Mock",
+        "result",
+        "for"
+      ],
+      "numeric_answer": null,
+      "tolerance": null,
+      "tags": [
+        "synthetic",
+        "trivia",
+        "flywheel",
+        "depth:1",
+        "aug:reverse"
+      ],
+      "verified_at": "2026-10-28T03:01:31.238Z",
+      "expected_tools": [
+        "web_search"
+      ],
+      "explanation": "Synthesized from weak slice targeting trivia (depth 1)."
+    },
+    {
+      "id": "bb_synth_trivia_mvrj2rqe_1_001::aug2::concise",
+      "question": "Why is The Bambino nicknamed that? (Answer concisely.)",
+      "answer": "Mock grounded snippet: answer to \"Why is The Bambino nicknamed that?\" would be verified via live search",
+      "alternates": [],
+      "category": "trivia",
+      "team": null,
+      "difficulty": "medium",
+      "freshness": "seasonal",
+      "gold_sources": [
+        "https://example.com/search?q=Why%20is%20The%20Bambino%20nicknamed%20that%3F"
+      ],
+      "must_cite": [
+        "Mock",
+        "result",
+        "for"
+      ],
+      "numeric_answer": null,
+      "tolerance": null,
+      "tags": [
+        "synthetic",
+        "trivia",
+        "flywheel",
+        "depth:1",
+        "aug:concise"
+      ],
+      "verified_at": "2026-10-28T03:01:31.238Z",
+      "expected_tools": [
+        "web_search"
+      ],
+      "explanation": "Synthesized from weak slice targeting trivia (depth 1)."
+    },
+    {
+      "id": "bb_synth_trivia_mvrj2rqe_1_001::aug3::cloze",
+      "question": "Fill in the blank: Why is The Bambino nicknamed that?",
+      "answer": "Mock grounded snippet: answer to \"Why is The Bambino nicknamed that?\" would be verified via live search. In mock mode we assume gold-compatible evidence exists.",
+      "alternates": [],
+      "category": "trivia",
+      "team": null,
+      "difficulty": "medium",
+      "freshness": "seasonal",
+      "gold_sources": [
+        "https://example.com/search?q=Why%20is%20The%20Bambino%20nicknamed%20that%3F"
+      ],
+      "must_cite": [
+        "Mock",
+        "result",
+        "for"
+      ],
+      "numeric_answer": null,
+      "tolerance": null,
+      "tags": [
+        "synthetic",
+        "trivia",
+        "flywheel",
+        "depth:1",
+        "aug:cloze"
+      ],
+      "verified_at": "2026-10-28T03:01:31.238Z",
+      "expected_tools": [
+        "web_search"
+      ],
+      "explanation": "Synthesized from weak slice targeting trivia (depth 1)."
+    },
+    {
+      "id": "bb_synth_trivia_mvrj2rqe_1_001::aug4::multi_hop",
+      "question": "Why is The Bambino nicknamed that? Explain briefly why.",
+      "answer": "Mock grounded snippet: answer to \"Why is The Bambino nicknamed that?\" would be verified via live search. In mock mode we assume gold-compatible evidence exists. (verified via MLB official records).",
+      "alternates": [],
+      "category": "trivia",
+      "team": null,
+      "difficulty": "medium",
+      "freshness": "seasonal",
+      "gold_sources": [
+        "https://example.com/search?q=Why%20is%20The%20Bambino%20nicknamed%20that%3F"
+      ],
+      "must_cite": [
+        "Mock",
+        "result",
+        "for"
+      ],
+      "numeric_answer": null,
+      "tolerance": null,
+      "tags": [
+        "synthetic",
+        "trivia",
+        "flywheel",
+        "depth:1",
+        "aug:multi_hop"
+      ],
+      "verified_at": "2026-10-28T03:01:31.238Z",
+      "expected_tools": [
+        "web_search"
+      ],
+      "explanation": "Synthesized from weak slice targeting trivia (depth 1)."
+    },
+    {
+      "id": "bb_synth_rules_mvrj2rqe_1_002::aug0::paraphrase",
+      "question": "Explain the infield fly rule in baseball.",
+      "answer": "Mock grounded snippet: answer to \"Explain the infield fly rule in baseball.\" would be verified via live search. In mock mode we assume gold-compatible evidence exists.",
+      "alternates": [],
+      "category": "rules",
+      "team": null,
+      "difficulty": "medium",
+      "freshness": "seasonal",
+      "gold_sources": [
+        "https://example.com/search?q=Explain%20the%20infield%20fly%20rule%20in%20baseball."
+      ],
+      "must_cite": [
+        "Mock",
+        "result",
+        "for"
+      ],
+      "numeric_answer": null,
+      "tolerance": null,
+      "tags": [
+        "synthetic",
+        "rules",
+        "flywheel",
+        "depth:1",
+        "aug:paraphrase"
+      ],
+      "verified_at": "2026-10-28T03:01:31.238Z",
+      "expected_tools": [
+        "web_search"
+      ],
+      "explanation": "Synthesized from weak slice targeting rules (depth 1)."
+    },
+    {
+      "id": "bb_synth_rules_mvrj2rqe_1_002::aug1::reverse",
+      "question": "Mock grounded snippet: answer to \"Explain the infield fly rule in baseball.\" wou — what question does this answer? Explain the infield fly rule in baseball.",
+      "answer": "Mock grounded snippet: answer to \"Explain the infield fly rule in baseball.\" would be verified via live search. In mock mode we assume gold-compatible evidence exists.",
+      "alternates": [],
+      "category": "rules",
+      "team": null,
+      "difficulty": "medium",
+      "freshness": "seasonal",
+      "gold_sources": [
+        "https://example.com/search?q=Explain%20the%20infield%20fly%20rule%20in%20baseball."
+      ],
+      "must_cite": [
+        "Mock",
+        "result",
+        "for"
+      ],
+      "numeric_answer": null,
+      "tolerance": null,
+      "tags": [
+        "synthetic",
+        "rules",
+        "flywheel",
+        "depth:1",
+        "aug:reverse"
+      ],
+      "verified_at": "2026-10-28T03:01:31.238Z",
+      "expected_tools": [
+        "web_search"
+      ],
+      "explanation": "Synthesized from weak slice targeting rules (depth 1)."
+    },
+    {
+      "id": "bb_synth_rules_mvrj2rqe_1_002::aug2::concise",
+      "question": "Explain the infield fly rule in baseball. (Answer concisely.)",
+      "answer": "Mock grounded snippet: answer to \"Explain the infield fly rule in baseball",
+      "alternates": [],
+      "category": "rules",
+      "team": null,
+      "difficulty": "medium",
+      "freshness": "seasonal",
+      "gold_sources": [
+        "https://example.com/search?q=Explain%20the%20infield%20fly%20rule%20in%20baseball."
+      ],
+      "must_cite": [
+        "Mock",
+        "result",
+        "for"
+      ],
+      "numeric_answer": null,
+      "tolerance": null,
+      "tags": [
+        "synthetic",
+        "rules",
+        "flywheel",
+        "depth:1",
+        "aug:concise"
+      ],
+      "verified_at": "2026-10-28T03:01:31.238Z",
+      "expected_tools": [
+        "web_search"
+      ],
+      "explanation": "Synthesized from weak slice targeting rules (depth 1)."
+    },
+    {
+      "id": "bb_synth_rules_mvrj2rqe_1_002::aug3::cloze",
+      "question": "Fill in the blank: Explain the infield fly rule in baseball.",
+      "answer": "Mock grounded snippet: answer to \"Explain the infield fly rule in baseball.\" would be verified via live search. In mock mode we assume gold-compatible evidence exists.",
+      "alternates": [],
+      "category": "rules",
+      "team": null,
+      "difficulty": "medium",
+      "freshness": "seasonal",
+      "gold_sources": [
+        "https://example.com/search?q=Explain%20the%20infield%20fly%20rule%20in%20baseball."
+      ],
+      "must_cite": [
+        "Mock",
+        "result",
+        "for"
+      ],
+      "numeric_answer": null,
+      "tolerance": null,
+      "tags": [
+        "synthetic",
+        "rules",
+        "flywheel",
+        "depth:1",
+        "aug:cloze"
+      ],
+      "verified_at": "2026-10-28T03:01:31.238Z",
+      "expected_tools": [
+        "web_search"
+      ],
+      "explanation": "Synthesized from weak slice targeting rules (depth 1)."
+    },
+    {
+      "id": "bb_synth_rules_mvrj2rqe_1_002::aug4::multi_hop",
+      "question": "Explain the infield fly rule in baseball. Explain briefly why.",
+      "answer": "Mock grounded snippet: answer to \"Explain the infield fly rule in baseball.\" would be verified via live search. In mock mode we assume gold-compatible evidence exists. (verified via MLB official records).",
+      "alternates": [],
+      "category": "rules",
+      "team": null,
+      "difficulty": "medium",
+      "freshness": "seasonal",
+      "gold_sources": [
+        "https://example.com/search?q=Explain%20the%20infield%20fly%20rule%20in%20baseball."
+      ],
+      "must_cite": [
+        "Mock",
+        "result",
+        "for"
+      ],
+      "numeric_answer": null,
+      "tolerance": null,
+      "tags": [
+        "synthetic",
+        "rules",
+        "flywheel",
+        "depth:1",
+        "aug:multi_hop"
+      ],
+      "verified_at": "2026-10-28T03:01:31.238Z",
+      "expected_tools": [
+        "web_search"
+      ],
+      "explanation": "Synthesized from weak slice targeting rules (depth 1)."
+    },
+    {
+      "id": "bb_synth_live_season_mvrj2rqe_1_003::aug0::paraphrase",
+      "question": "Which player leads MLB in ERA as of today?",
+      "answer": "Mock grounded snippet: answer to \"Who leads MLB in ERA as of today?\" would be verified via live search. In mock mode we assume gold-compatible evidence exists.",
+      "alternates": [],
+      "category": "live_season",
+      "team": null,
+      "difficulty": "medium",
+      "freshness": "seasonal",
+      "gold_sources": [
+        "https://example.com/search?q=Who%20leads%20MLB%20in%20ERA%20as%20of%20today%3F"
+      ],
+      "must_cite": [
+        "Mock",
+        "result",
+        "for"
+      ],
+      "numeric_answer": null,
+      "tolerance": null,
+      "tags": [
+        "synthetic",
+        "live_season",
+        "flywheel",
+        "depth:1",
+        "aug:paraphrase"
+      ],
+      "verified_at": "2026-10-28T03:01:31.238Z",
+      "expected_tools": [
+        "web_search"
+      ],
+      "explanation": "Synthesized from weak slice targeting live_season (depth 1)."
+    },
+    {
+      "id": "bb_synth_live_season_mvrj2rqe_1_003::aug1::reverse",
+      "question": "Mock grounded snippet: answer to \"Who leads MLB in ERA as of today?\" would be ve — what question does this answer? Who leads MLB in ERA as of today?",
+      "answer": "Mock grounded snippet: answer to \"Who leads MLB in ERA as of today?\" would be verified via live search. In mock mode we assume gold-compatible evidence exists.",
+      "alternates": [],
+      "category": "live_season",
+      "team": null,
+      "difficulty": "medium",
+      "freshness": "seasonal",
+      "gold_sources": [
+        "https://example.com/search?q=Who%20leads%20MLB%20in%20ERA%20as%20of%20today%3F"
+      ],
+      "must_cite": [
+        "Mock",
+        "result",
+        "for"
+      ],
+      "numeric_answer": null,
+      "tolerance": null,
+      "tags": [
+        "synthetic",
+        "live_season",
+        "flywheel",
+        "depth:1",
+        "aug:reverse"
+      ],
+      "verified_at": "2026-10-28T03:01:31.238Z",
+      "expected_tools": [
+        "web_search"
+      ],
+      "explanation": "Synthesized from weak slice targeting live_season (depth 1)."
+    },
+    {
+      "id": "bb_synth_live_season_mvrj2rqe_1_003::aug2::concise",
+      "question": "Who leads MLB in ERA as of today? (Answer concisely.)",
+      "answer": "Mock grounded snippet: answer to \"Who leads MLB in ERA as of today?\" would be verified via live search",
+      "alternates": [],
+      "category": "live_season",
+      "team": null,
+      "difficulty": "medium",
+      "freshness": "seasonal",
+      "gold_sources": [
+        "https://example.com/search?q=Who%20leads%20MLB%20in%20ERA%20as%20of%20today%3F"
+      ],
+      "must_cite": [
+        "Mock",
+        "result",
+        "for"
+      ],
+      "numeric_answer": null,
+      "tolerance": null,
+      "tags": [
+        "synthetic",
+        "live_season",
+        "flywheel",
+        "depth:1",
+        "aug:concise"
+      ],
+      "verified_at": "2026-10-28T03:01:31.238Z",
+      "expected_tools": [
+        "web_search"
+      ],
+      "explanation": "Synthesized from weak slice targeting live_season (depth 1)."
+    },
+    {
+      "id": "bb_synth_live_season_mvrj2rqe_1_003::aug3::cloze",
+      "question": "Fill in the blank: ___ leads MLB in ERA as of today?",
+      "answer": "Mock grounded snippet: answer to \"Who leads MLB in ERA as of today?\" would be verified via live search. In mock mode we assume gold-compatible evidence exists.",
+      "alternates": [],
+      "category": "live_season",
+      "team": null,
+      "difficulty": "medium",
+      "freshness": "seasonal",
+      "gold_sources": [
+        "https://example.com/search?q=Who%20leads%20MLB%20in%20ERA%20as%20of%20today%3F"
+      ],
+      "must_cite": [
+        "Mock",
+        "result",
+        "for"
+      ],
+      "numeric_answer": null,
+      "tolerance": null,
+      "tags": [
+        "synthetic",
+        "live_season",
+        "flywheel",
+        "depth:1",
+        "aug:cloze"
+      ],
+      "verified_at": "2026-10-28T03:01:31.238Z",
+      "expected_tools": [
+        "web_search"
+      ],
+      "explanation": "Synthesized from weak slice targeting live_season (depth 1)."
+    },
+    {
+      "id": "bb_synth_live_season_mvrj2rqe_1_003::aug4::multi_hop",
+      "question": "Who leads MLB in ERA as of today? Explain briefly why.",
+      "answer": "Mock grounded snippet: answer to \"Who leads MLB in ERA as of today?\" would be verified via live search. In mock mode we assume gold-compatible evidence exists. (verified via MLB official records).",
+      "alternates": [],
+      "category": "live_season",
+      "team": null,
+      "difficulty": "medium",
+      "freshness": "seasonal",
+      "gold_sources": [
+        "https://example.com/search?q=Who%20leads%20MLB%20in%20ERA%20as%20of%20today%3F"
+      ],
+      "must_cite": [
+        "Mock",
+        "result",
+        "for"
+      ],
+      "numeric_answer": null,
+      "tolerance": null,
+      "tags": [
+        "synthetic",
+        "live_season",
+        "flywheel",
+        "depth:1",
+        "aug:multi_hop"
+      ],
+      "verified_at": "2026-10-28T03:01:31.238Z",
+      "expected_tools": [
+        "web_search"
+      ],
+      "explanation": "Synthesized from weak slice targeting live_season (depth 1)."
+    }
+  ]
+}

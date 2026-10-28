@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "updatedAt": "2026-10-28T03:01:31.245Z",
+  "iteration": 1,
+  "bestRunId": "2026-10-28T03-01-31-229Z",
+  "bestAccuracy": 0.45,
+  "bestModel": "mock-glimmer-iter1",
+  "history": [
+    {
+      "iteration": 1,
+      "runId": "2026-10-28T03-01-31-229Z",
+      "accuracy": 0.45,
+      "weightedAccuracy": 0.45,
+      "model": "mock-glimmer-iter1",
+      "promoted": true,
+      "at": "2026-10-28T03:01:31.245Z"
+    }
+  ],
+  "curriculum": {
+    "weakSlices": [],
+    "focusCategories": [
+      "stats",
+      "live_season"
+    ],
+    "freshnessRefreshDue": "2026-11-04T03:01:31.227Z"
+  },
+  "nextAction": "eval",
+  "totalIters": 1
+}
