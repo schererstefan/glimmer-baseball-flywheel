@@ -1,0 +1,1059 @@
+{
+  "runId": "2026-10-31T03-01-29-866Z",
+  "timestamp": "2026-10-31T03:01:29.867Z",
+  "provider": "mock",
+  "model": "mock-glimmer-iter4",
+  "datasetVersion": "v1.0.0",
+  "datasetPath": "dataset/v1/baseball.json",
+  "judgeModel": "mock/rubric",
+  "total": 20,
+  "cases": [
+    {
+      "id": "bb_roster_001",
+      "question": "Where do the New York Yankees play their home games?",
+      "goldAnswer": "Yankee Stadium in the Bronx, New York City",
+      "alternates": [
+        "Yankee Stadium",
+        "the Bronx"
+      ],
+      "category": "ballpark",
+      "team": "NYY",
+      "difficulty": "easy",
+      "freshness": "static",
+      "verified_at": "2026-08-16",
+      "modelAnswer": "Mock answer for baseball question: Where do the New York Yankees play their home games? — (would be grounded via web_search in live mode).",
+      "toolCalls": [],
+      "latencyMs": 0,
+      "verdict": {
+        "id": "bb_roster_001",
+        "verdict": "incorrect",
+        "score": 0,
+        "confidence": 0.75,
+        "grounded": false,
+        "hallucinationDetected": true,
+        "reasoning": "[rubric] mid token recall 0.50 score=0.4",
+        "evidence": [
+          {
+            "url": "https://example.com/search?q=Where%20do%20the%20New%20York%20Yankees%20play%20their%20home%20games%3F",
+            "title": "Mock result for: Where do the New York Yankees play their home games?",
+            "snippet": "Mock grounded snippet: answer to \"Where do the New York Yankees play their home games?\" would be verified via live search. In mock mode we assume gold-compatible evidence exists.",
+            "fetchedAt": "2026-10-31T03:01:29.868Z",
+            "source": "mock",
+            "score": 0.5
+          }
+        ],
+        "citations": [
+          "https://example.com/search?q=Where%20do%20the%20New%20York%20Yankees%20play%20their%20home%20games%3F"
+        ],
+        "latencyMs": 1,
+        "judgeModel": "mock/rubric",
+        "abstained": false
+      }
+    },
+    {
+      "id": "bb_history_001",
+      "question": "Who won the 2024 World Series and what was the series score?",
+      "goldAnswer": "Los Angeles Dodgers defeated the New York Yankees 4-1",
+      "alternates": [
+        "Dodgers beat Yankees 4-1",
+        "LA Dodgers won 4-1 over Yankees"
+      ],
+      "category": "history",
+      "team": null,
+      "difficulty": "easy",
+      "freshness": "seasonal",
+      "verified_at": "2026-08-16",
+      "modelAnswer": "The Los Angeles Dodgers won the 2024 World Series, defeating the New York Yankees 4-1.",
+      "toolCalls": [],
+      "latencyMs": 0,
+      "verdict": {
+        "id": "bb_history_001",
+        "verdict": "partial",
+        "score": 0.5,
+        "confidence": 0.85,
+        "grounded": true,
+        "hallucinationDetected": false,
+        "reasoning": "[rubric] high token recall 0.90 — partial score=0.7",
+        "evidence": [
+          {
+            "url": "https://en.wikipedia.org/wiki/2024_World_Series",
+            "title": "2024 World Series",
+            "snippet": "The Los Angeles Dodgers defeated the New York Yankees 4-1 to win the 2024 World Series. Freddie Freeman was MVP.",
+            "fetchedAt": "2026-10-31T03:01:29.868Z",
+            "source": "mock",
+            "score": 0.99
+          }
+        ],
+        "citations": [
+          "https://en.wikipedia.org/wiki/2024_World_Series"
+        ],
+        "latencyMs": 1,
+        "judgeModel": "mock/rubric",
+        "abstained": false
+      }
+    },
+    {
+      "id": "bb_history_002",
+      "question": "Who won the 2023 World Series?",
+      "goldAnswer": "Texas Rangers defeated the Arizona Diamondbacks 4-1",
+      "alternates": [
+        "Texas Rangers beat Diamondbacks 4-1"
+      ],
+      "category": "history",
+      "team": null,
+      "difficulty": "easy",
+      "freshness": "static",
+      "verified_at": "2026-08-16",
+      "modelAnswer": "The Texas Rangers won the 2023 World Series, beating the Arizona Diamondbacks 4-1.",
+      "toolCalls": [],
+      "latencyMs": 0,
+      "verdict": {
+        "id": "bb_history_002",
+        "verdict": "partial",
+        "score": 0.5,
+        "confidence": 0.85,
+        "grounded": true,
+        "hallucinationDetected": false,
+        "reasoning": "[rubric] high token recall 0.88 — partial score=0.7",
+        "evidence": [
+          {
+            "url": "https://en.wikipedia.org/wiki/2023_World_Series",
+            "title": "2023 World Series",
+            "snippet": "The Texas Rangers defeated the Arizona Diamondbacks 4-1 to win the 2023 World Series.",
+            "fetchedAt": "2026-10-31T03:01:29.869Z",
+            "source": "mock",
+            "score": 0.99
+          }
+        ],
+        "citations": [
+          "https://en.wikipedia.org/wiki/2023_World_Series"
+        ],
+        "latencyMs": 0,
+        "judgeModel": "mock/rubric",
+        "abstained": false
+      }
+    },
+    {
+      "id": "bb_history_003",
+      "question": "Which team has won the most World Series titles and how many?",
+      "goldAnswer": "New York Yankees with 27 World Series championships",
+      "alternates": [
+        "Yankees 27 titles"
+      ],
+      "category": "history",
+      "team": "NYY",
+      "difficulty": "easy",
+      "freshness": "static",
+      "verified_at": "2026-08-16",
+      "modelAnswer": "The New York Yankees have won 27 World Series championships, the most in MLB history.",
+      "toolCalls": [],
+      "latencyMs": 0,
+      "verdict": {
+        "id": "bb_history_003",
+        "verdict": "correct",
+        "score": 1,
+        "confidence": 0.85,
+        "grounded": false,
+        "hallucinationDetected": false,
+        "reasoning": "[rubric] numeric within tol 0: gold=27 pred=27 diff=0 score=1",
+        "evidence": [
+          {
+            "url": "https://example.com/search?q=Which%20team%20has%20won%20the%20most%20World%20Series%20titles%20and%20how%20many%3F",
+            "title": "Mock result for: Which team has won the most World Series titles and how many?",
+            "snippet": "Mock grounded snippet: answer to \"Which team has won the most World Series titles and how many?\" would be verified via live search. In mock mode we assume gold-compatible evidence exists.",
+            "fetchedAt": "2026-10-31T03:01:29.869Z",
+            "source": "mock",
+            "score": 0.5
+          }
+        ],
+        "citations": [
+          "https://example.com/search?q=Which%20team%20has%20won%20the%20most%20World%20Series%20titles%20and%20how%20many%3F"
+        ],
+        "latencyMs": 0,
+        "judgeModel": "mock/rubric",
+        "abstained": false
+      }
+    },
+    {
+      "id": "bb_roster_002",
+      "question": "Which team does Shohei Ohtani play for as of the 2024 season and what positions does he play?",
+      "goldAnswer": "Los Angeles Dodgers — designated hitter and pitcher (two-way), though he only DH'd in 2024 while recovering from elbow surgery",
+      "alternates": [
+        "Los Angeles Dodgers DH/P",
+        "Dodgers"
+      ],
+      "category": "roster",
+      "team": "LAD",
+      "difficulty": "easy",
+      "freshness": "seasonal",
+      "verified_at": "2026-08-16",
+      "modelAnswer": "Shohei Ohtani plays for the Los Angeles Dodgers (previously Angels). He won the 2024 NL MVP with a historic 54 HR / 59 SB season.",
+      "toolCalls": [],
+      "latencyMs": 1,
+      "verdict": {
+        "id": "bb_roster_002",
+        "verdict": "correct",
+        "score": 1,
+        "confidence": 0.85,
+        "grounded": false,
+        "hallucinationDetected": false,
+        "reasoning": "[rubric] matches alternate: Dodgers score=1",
+        "evidence": [
+          {
+            "url": "https://www.mlb.com/player/shohei-ohtani-660271",
+            "title": "Shohei Ohtani - MLB.com",
+            "snippet": "Shohei Ohtani, Los Angeles Dodgers DH/P, 2024 NL MVP with 54 HR and 59 SB, first 50/50 season.",
+            "fetchedAt": "2026-10-31T03:01:29.869Z",
+            "source": "mock",
+            "score": 0.99
+          }
+        ],
+        "citations": [
+          "https://www.mlb.com/player/shohei-ohtani-660271"
+        ],
+        "latencyMs": 0,
+        "judgeModel": "mock/rubric",
+        "abstained": false
+      }
+    },
+    {
+      "id": "bb_stats_001",
+      "question": "What were Aaron Judge's stats in the 2024 regular season (AVG, HR, RBI) and what award did he win?",
+      "goldAnswer": ".322 AVG, 58 home runs, 144 RBI — won 2024 AL MVP",
+      "alternates": [
+        ".322/58/144 AL MVP"
+      ],
+      "category": "stats",
+      "team": "NYY",
+      "difficulty": "medium",
+      "freshness": "seasonal",
+      "verified_at": "2026-08-16",
+      "modelAnswer": "Aaron Judge hit .322 with 58 home runs and 144 RBI in 2024, winning the AL MVP.",
+      "toolCalls": [],
+      "latencyMs": 1,
+      "verdict": {
+        "id": "bb_stats_001",
+        "verdict": "correct",
+        "score": 1,
+        "confidence": 0.85,
+        "grounded": false,
+        "hallucinationDetected": false,
+        "reasoning": "[rubric] numeric within tol 0: gold=58 pred=58 diff=0 score=1",
+        "evidence": [
+          {
+            "url": "https://example.com/search?q=What%20were%20Aaron%20Judge's%20stats%20in%20the%202024%20regular%20season%20(AVG%2C%20HR%2C%20RBI)%20and%20what%20award%20did%20he%20win%3F",
+            "title": "Mock result for: What were Aaron Judge's stats in the 2024 regular season (AVG, HR, RBI) and what award did he win?",
+            "snippet": "Mock grounded snippet: answer to \"What were Aaron Judge's stats in the 2024 regular season (AVG, HR, RBI) and what award did he win?\" would be verified via live search. In mock mode we assume gold-compatible evidence exists.",
+            "fetchedAt": "2026-10-31T03:01:29.869Z",
+            "source": "mock",
+            "score": 0.5
+          }
+        ],
+        "citations": [
+          "https://example.com/search?q=What%20were%20Aaron%20Judge's%20stats%20in%20the%202024%20regular%20season%20(AVG%2C%20HR%2C%20RBI)%20and%20what%20award%20did%20he%20win%3F"
+        ],
+        "latencyMs": 0,
+        "judgeModel": "mock/rubric",
+        "abstained": false
+      }
+    },
+    {
+      "id": "bb_stats_002",
+      "question": "Who won the 2024 NL MVP and what historic milestone did he achieve?",
+      "goldAnswer": "Shohei Ohtani — first 50 home run / 50 stolen base season in MLB history (54 HR, 59 SB)",
+      "alternates": [
+        "Ohtani 50-50",
+        "54 HR 59 SB"
+      ],
+      "category": "stats",
+      "team": "LAD",
+      "difficulty": "medium",
+      "freshness": "seasonal",
+      "verified_at": "2026-08-16",
+      "modelAnswer": "Shohei Ohtani won the 2024 NL MVP with the first 50/50 season (54 HR, 59 SB).",
+      "toolCalls": [],
+      "latencyMs": 1,
+      "verdict": {
+        "id": "bb_stats_002",
+        "verdict": "correct",
+        "score": 1,
+        "confidence": 0.85,
+        "grounded": false,
+        "hallucinationDetected": false,
+        "reasoning": "[rubric] numeric within tol 0: gold=54 pred=54 diff=0 score=1",
+        "evidence": [
+          {
+            "url": "https://example.com/search?q=Who%20won%20the%202024%20NL%20MVP%20and%20what%20historic%20milestone%20did%20he%20achieve%3F",
+            "title": "Mock result for: Who won the 2024 NL MVP and what historic milestone did he achieve?",
+            "snippet": "Mock grounded snippet: answer to \"Who won the 2024 NL MVP and what historic milestone did he achieve?\" would be verified via live search. In mock mode we assume gold-compatible evidence exists.",
+            "fetchedAt": "2026-10-31T03:01:29.869Z",
+            "source": "mock",
+            "score": 0.5
+          }
+        ],
+        "citations": [
+          "https://example.com/search?q=Who%20won%20the%202024%20NL%20MVP%20and%20what%20historic%20milestone%20did%20he%20achieve%3F"
+        ],
+        "latencyMs": 0,
+        "judgeModel": "mock/rubric",
+        "abstained": false
+      }
+    },
+    {
+      "id": "bb_stats_003",
+      "question": "Who led MLB in ERA in 2024 (qualified starters) and what was his ERA?",
+      "goldAnswer": "Tarik Skubal (DET) led qualified starters with a 2.39 ERA and also won the AL Cy Young",
+      "alternates": [
+        "Skubal 2.39"
+      ],
+      "category": "stats",
+      "team": "DET",
+      "difficulty": "hard",
+      "freshness": "seasonal",
+      "verified_at": "2026-08-16",
+      "modelAnswer": "Tarik Skubal led qualified starters in ERA in 2024 with 2.39 and won the AL Cy Young.",
+      "toolCalls": [],
+      "latencyMs": 1,
+      "verdict": {
+        "id": "bb_stats_003",
+        "verdict": "correct",
+        "score": 1,
+        "confidence": 0.85,
+        "grounded": false,
+        "hallucinationDetected": false,
+        "reasoning": "[rubric] numeric within tol 0.02: gold=2.39 pred=2.39 diff=0 score=1",
+        "evidence": [
+          {
+            "url": "https://example.com/search?q=Who%20led%20MLB%20in%20ERA%20in%202024%20(qualified%20starters)%20and%20what%20was%20his%20ERA%3F",
+            "title": "Mock result for: Who led MLB in ERA in 2024 (qualified starters) and what was his ERA?",
+            "snippet": "Mock grounded snippet: answer to \"Who led MLB in ERA in 2024 (qualified starters) and what was his ERA?\" would be verified via live search. In mock mode we assume gold-compatible evidence exists.",
+            "fetchedAt": "2026-10-31T03:01:29.869Z",
+            "source": "mock",
+            "score": 0.5
+          }
+        ],
+        "citations": [
+          "https://example.com/search?q=Who%20led%20MLB%20in%20ERA%20in%202024%20(qualified%20starters)%20and%20what%20was%20his%20ERA%3F"
+        ],
+        "latencyMs": 0,
+        "judgeModel": "mock/rubric",
+        "abstained": false
+      }
+    },
+    {
+      "id": "bb_stats_004",
+      "question": "What is the MLB single-season home run record and who holds it?",
+      "goldAnswer": "Barry Bonds holds the single-season record with 73 home runs in 2001",
+      "alternates": [
+        "Bonds 73 in 2001"
+      ],
+      "category": "history",
+      "team": null,
+      "difficulty": "easy",
+      "freshness": "static",
+      "verified_at": "2026-08-16",
+      "modelAnswer": "Barry Bonds holds the single-season home run record with 73 in 2001.",
+      "toolCalls": [],
+      "latencyMs": 0,
+      "verdict": {
+        "id": "bb_stats_004",
+        "verdict": "correct",
+        "score": 1,
+        "confidence": 0.85,
+        "grounded": false,
+        "hallucinationDetected": false,
+        "reasoning": "[rubric] numeric within tol 0: gold=73 pred=73 diff=0 score=1",
+        "evidence": [
+          {
+            "url": "https://example.com/search?q=What%20is%20the%20MLB%20single-season%20home%20run%20record%20and%20who%20holds%20it%3F",
+            "title": "Mock result for: What is the MLB single-season home run record and who holds it?",
+            "snippet": "Mock grounded snippet: answer to \"What is the MLB single-season home run record and who holds it?\" would be verified via live search. In mock mode we assume gold-compatible evidence exists.",
+            "fetchedAt": "2026-10-31T03:01:29.869Z",
+            "source": "mock",
+            "score": 0.5
+          }
+        ],
+        "citations": [
+          "https://example.com/search?q=What%20is%20the%20MLB%20single-season%20home%20run%20record%20and%20who%20holds%20it%3F"
+        ],
+        "latencyMs": 1,
+        "judgeModel": "mock/rubric",
+        "abstained": false
+      }
+    },
+    {
+      "id": "bb_roster_003",
+      "question": "Which pitcher won the 2023 AL Cy Young and what team was he on?",
+      "goldAnswer": "Gerrit Cole of the New York Yankees (unanimous 2023 AL Cy Young)",
+      "alternates": [
+        "Gerrit Cole Yankees 2023 Cy Young"
+      ],
+      "category": "roster",
+      "team": "NYY",
+      "difficulty": "medium",
+      "freshness": "static",
+      "verified_at": "2026-08-16",
+      "modelAnswer": "Mock answer for baseball question: Which pitcher won the 2023 AL Cy Young and what team was he on? — (would be grounded via web_search in live mode).",
+      "toolCalls": [],
+      "latencyMs": 0,
+      "verdict": {
+        "id": "bb_roster_003",
+        "verdict": "incorrect",
+        "score": 0,
+        "confidence": 0.75,
+        "grounded": false,
+        "hallucinationDetected": true,
+        "reasoning": "[rubric] no containment or alternate match score=0",
+        "evidence": [
+          {
+            "url": "https://example.com/search?q=Which%20pitcher%20won%20the%202023%20AL%20Cy%20Young%20and%20what%20team%20was%20he%20on%3F",
+            "title": "Mock result for: Which pitcher won the 2023 AL Cy Young and what team was he on?",
+            "snippet": "Mock grounded snippet: answer to \"Which pitcher won the 2023 AL Cy Young and what team was he on?\" would be verified via live search. In mock mode we assume gold-compatible evidence exists.",
+            "fetchedAt": "2026-10-31T03:01:29.870Z",
+            "source": "mock",
+            "score": 0.5
+          }
+        ],
+        "citations": [
+          "https://example.com/search?q=Which%20pitcher%20won%20the%202023%20AL%20Cy%20Young%20and%20what%20team%20was%20he%20on%3F"
+        ],
+        "latencyMs": 1,
+        "judgeModel": "mock/rubric",
+        "abstained": false
+      }
+    },
+    {
+      "id": "bb_transactions_001",
+      "question": "What was the contract Juan Soto signed going into the 2025 season and with which team?",
+      "goldAnswer": "15-year, $765 million contract with the New York Mets (signed December 2024, largest in professional sports history)",
+      "alternates": [
+        "Mets 15yr $765M Soto"
+      ],
+      "category": "transactions",
+      "team": "NYM",
+      "difficulty": "medium",
+      "freshness": "live",
+      "verified_at": "2026-08-16",
+      "modelAnswer": "Juan Soto signed a 15-year, $765 million contract with the New York Mets in December 2024.",
+      "toolCalls": [],
+      "latencyMs": 0,
+      "verdict": {
+        "id": "bb_transactions_001",
+        "verdict": "correct",
+        "score": 1,
+        "confidence": 0.85,
+        "grounded": false,
+        "hallucinationDetected": false,
+        "reasoning": "[rubric] numeric within tol 1: gold=765 pred=765 diff=0 score=1",
+        "evidence": [
+          {
+            "url": "https://example.com/search?q=What%20was%20the%20contract%20Juan%20Soto%20signed%20going%20into%20the%202025%20season%20and%20with%20which%20team%3F",
+            "title": "Mock result for: What was the contract Juan Soto signed going into the 2025 season and with which team?",
+            "snippet": "Mock grounded snippet: answer to \"What was the contract Juan Soto signed going into the 2025 season and with which team?\" would be verified via live search. In mock mode we assume gold-compatible evidence exists.",
+            "fetchedAt": "2026-10-31T03:01:29.870Z",
+            "source": "mock",
+            "score": 0.5
+          }
+        ],
+        "citations": [
+          "https://example.com/search?q=What%20was%20the%20contract%20Juan%20Soto%20signed%20going%20into%20the%202025%20season%20and%20with%20which%20team%3F"
+        ],
+        "latencyMs": 0,
+        "judgeModel": "mock/rubric",
+        "abstained": false
+      }
+    },
+    {
+      "id": "bb_rules_001",
+      "question": "How many strikes is a batter allowed before striking out under current MLB rules, and how many balls for a walk?",
+      "goldAnswer": "3 strikes for a strikeout, 4 balls for a walk — the count goes to 3-2 as a full count",
+      "alternates": [
+        "3 strikes, 4 balls"
+      ],
+      "category": "rules",
+      "team": null,
+      "difficulty": "easy",
+      "freshness": "static",
+      "verified_at": "2026-08-16",
+      "modelAnswer": "A batter gets 3 strikes for a strikeout and 4 balls for a walk; 3-2 is a full count.",
+      "toolCalls": [],
+      "latencyMs": 0,
+      "verdict": {
+        "id": "bb_rules_001",
+        "verdict": "incorrect",
+        "score": 0,
+        "confidence": 0.75,
+        "grounded": false,
+        "hallucinationDetected": true,
+        "reasoning": "[rubric] mid token recall 0.73 score=0.4",
+        "evidence": [
+          {
+            "url": "https://example.com/search?q=How%20many%20strikes%20is%20a%20batter%20allowed%20before%20striking%20out%20under%20current%20MLB%20rules%2C%20and%20how%20many%20balls%20for%20a%20walk%3F",
+            "title": "Mock result for: How many strikes is a batter allowed before striking out under current MLB rules, and how many balls for a walk?",
+            "snippet": "Mock grounded snippet: answer to \"How many strikes is a batter allowed before striking out under current MLB rules, and how many balls for a walk?\" would be verified via live search. In mock mode we assume gold-compatible evidence exists.",
+            "fetchedAt": "2026-10-31T03:01:29.870Z",
+            "source": "mock",
+            "score": 0.5
+          }
+        ],
+        "citations": [
+          "https://example.com/search?q=How%20many%20strikes%20is%20a%20batter%20allowed%20before%20striking%20out%20under%20current%20MLB%20rules%2C%20and%20how%20many%20balls%20for%20a%20walk%3F"
+        ],
+        "latencyMs": 0,
+        "judgeModel": "mock/rubric",
+        "abstained": false
+      }
+    },
+    {
+      "id": "bb_rules_002",
+      "question": "What is the distance from the pitcher's rubber to home plate in MLB?",
+      "goldAnswer": "60 feet 6 inches (18.44 meters)",
+      "alternates": [
+        "60'6\"",
+        "60 feet 6 inches"
+      ],
+      "category": "rules",
+      "team": null,
+      "difficulty": "easy",
+      "freshness": "static",
+      "verified_at": "2026-08-16",
+      "modelAnswer": "The pitcher's rubber is 60 feet 6 inches from home plate.",
+      "toolCalls": [],
+      "latencyMs": 0,
+      "verdict": {
+        "id": "bb_rules_002",
+        "verdict": "incorrect",
+        "score": 0,
+        "confidence": 0.75,
+        "grounded": false,
+        "hallucinationDetected": true,
+        "reasoning": "[rubric] numeric far: gold=60.5 pred=60 diff=0.5 score=0",
+        "evidence": [
+          {
+            "url": "https://example.com/search?q=What%20is%20the%20distance%20from%20the%20pitcher's%20rubber%20to%20home%20plate%20in%20MLB%3F",
+            "title": "Mock result for: What is the distance from the pitcher's rubber to home plate in MLB?",
+            "snippet": "Mock grounded snippet: answer to \"What is the distance from the pitcher's rubber to home plate in MLB?\" would be verified via live search. In mock mode we assume gold-compatible evidence exists.",
+            "fetchedAt": "2026-10-31T03:01:29.870Z",
+            "source": "mock",
+            "score": 0.5
+          }
+        ],
+        "citations": [
+          "https://example.com/search?q=What%20is%20the%20distance%20from%20the%20pitcher's%20rubber%20to%20home%20plate%20in%20MLB%3F"
+        ],
+        "latencyMs": 0,
+        "judgeModel": "mock/rubric",
+        "abstained": false
+      }
+    },
+    {
+      "id": "bb_ballpark_001",
+      "question": "What is unique about Fenway Park's left field wall and what is it called?",
+      "goldAnswer": "The Green Monster — a 37-foot-2-inch high left field wall, the tallest and oldest in MLB (built 1912)",
+      "alternates": [
+        "Green Monster 37 feet"
+      ],
+      "category": "ballpark",
+      "team": "BOS",
+      "difficulty": "easy",
+      "freshness": "static",
+      "verified_at": "2026-08-16",
+      "modelAnswer": "Fenway Park's Green Monster is a 37-foot-2-inch left field wall, the tallest in MLB.",
+      "toolCalls": [],
+      "latencyMs": 0,
+      "verdict": {
+        "id": "bb_ballpark_001",
+        "verdict": "correct",
+        "score": 1,
+        "confidence": 0.85,
+        "grounded": false,
+        "hallucinationDetected": false,
+        "reasoning": "[rubric] numeric within tol 1: gold=37 pred=37 diff=0 score=1",
+        "evidence": [
+          {
+            "url": "https://example.com/search?q=What%20is%20unique%20about%20Fenway%20Park's%20left%20field%20wall%20and%20what%20is%20it%20called%3F",
+            "title": "Mock result for: What is unique about Fenway Park's left field wall and what is it called?",
+            "snippet": "Mock grounded snippet: answer to \"What is unique about Fenway Park's left field wall and what is it called?\" would be verified via live search. In mock mode we assume gold-compatible evidence exists.",
+            "fetchedAt": "2026-10-31T03:01:29.870Z",
+            "source": "mock",
+            "score": 0.5
+          }
+        ],
+        "citations": [
+          "https://example.com/search?q=What%20is%20unique%20about%20Fenway%20Park's%20left%20field%20wall%20and%20what%20is%20it%20called%3F"
+        ],
+        "latencyMs": 0,
+        "judgeModel": "mock/rubric",
+        "abstained": false
+      }
+    },
+    {
+      "id": "bb_ballpark_002",
+      "question": "Which MLB stadium has the deepest center field at 409 feet and which has the shortest porch?",
+      "goldAnswer": "Coors Field (DEN) and Comerica Park are among deepest (~412+), but Oracle Park's Triples Alley 421' is deepest; Fenway's Pesky Pole is shortest at 302' to right field",
+      "alternates": [
+        "Pesky Pole 302 feet shortest"
+      ],
+      "category": "ballpark",
+      "team": null,
+      "difficulty": "hard",
+      "freshness": "static",
+      "verified_at": "2026-08-16",
+      "modelAnswer": "Mock answer for baseball question: Which MLB stadium has the deepest center field at 409 feet and which has the shortest porch? — (would be grounded via web_search in live mode).",
+      "toolCalls": [],
+      "latencyMs": 0,
+      "verdict": {
+        "id": "bb_ballpark_002",
+        "verdict": "incorrect",
+        "score": 0,
+        "confidence": 0.75,
+        "grounded": false,
+        "hallucinationDetected": true,
+        "reasoning": "[rubric] no containment or alternate match score=0",
+        "evidence": [
+          {
+            "url": "https://example.com/search?q=Which%20MLB%20stadium%20has%20the%20deepest%20center%20field%20at%20409%20feet%20and%20which%20has%20the%20shortest%20porch%3F",
+            "title": "Mock result for: Which MLB stadium has the deepest center field at 409 feet and which has the shortest porch?",
+            "snippet": "Mock grounded snippet: answer to \"Which MLB stadium has the deepest center field at 409 feet and which has the shortest porch?\" would be verified via live search. In mock mode we assume gold-compatible evidence exists.",
+            "fetchedAt": "2026-10-31T03:01:29.870Z",
+            "source": "mock",
+            "score": 0.5
+          }
+        ],
+        "citations": [
+          "https://example.com/search?q=Which%20MLB%20stadium%20has%20the%20deepest%20center%20field%20at%20409%20feet%20and%20which%20has%20the%20shortest%20porch%3F"
+        ],
+        "latencyMs": 0,
+        "judgeModel": "mock/rubric",
+        "abstained": false
+      }
+    },
+    {
+      "id": "bb_history_004",
+      "question": "Why did the Houston Astros' 2017 World Series title become controversial?",
+      "goldAnswer": "Sign-stealing scandal: Astros used a center-field camera and trash-can banging to illegally steal signs during the 2017 season and postseason",
+      "alternates": [
+        "Astros sign stealing trash can"
+      ],
+      "category": "history",
+      "team": "HOU",
+      "difficulty": "medium",
+      "freshness": "static",
+      "verified_at": "2026-08-16",
+      "modelAnswer": "The Astros' 2017 title was tainted by a sign-stealing scandal using a camera and trash-can banging.",
+      "toolCalls": [],
+      "latencyMs": 0,
+      "verdict": {
+        "id": "bb_history_004",
+        "verdict": "incorrect",
+        "score": 0,
+        "confidence": 0.75,
+        "grounded": false,
+        "hallucinationDetected": true,
+        "reasoning": "[rubric] mid token recall 0.55 score=0.4",
+        "evidence": [
+          {
+            "url": "https://example.com/search?q=Why%20did%20the%20Houston%20Astros'%202017%20World%20Series%20title%20become%20controversial%3F",
+            "title": "Mock result for: Why did the Houston Astros' 2017 World Series title become controversial?",
+            "snippet": "Mock grounded snippet: answer to \"Why did the Houston Astros' 2017 World Series title become controversial?\" would be verified via live search. In mock mode we assume gold-compatible evidence exists.",
+            "fetchedAt": "2026-10-31T03:01:29.870Z",
+            "source": "mock",
+            "score": 0.5
+          }
+        ],
+        "citations": [
+          "https://example.com/search?q=Why%20did%20the%20Houston%20Astros'%202017%20World%20Series%20title%20become%20controversial%3F"
+        ],
+        "latencyMs": 0,
+        "judgeModel": "mock/rubric",
+        "abstained": false
+      }
+    },
+    {
+      "id": "bb_stats_005",
+      "question": "What does WAR stand for in baseball analytics and who had the highest bWAR in 2024?",
+      "goldAnswer": "Wins Above Replacement — Aaron Judge led MLB with 10.8 bWAR (Baseball-Reference) in 2024; Shohei Ohtani led fWAR at 9.2 (FanGraphs) as DH-only",
+      "alternates": [
+        "Wins Above Replacement Judge 10.8"
+      ],
+      "category": "stats",
+      "team": null,
+      "difficulty": "hard",
+      "freshness": "seasonal",
+      "verified_at": "2026-08-16",
+      "modelAnswer": "WAR stands for Wins Above Replacement; Aaron Judge led MLB in 2024 with 10.8 bWAR.",
+      "toolCalls": [],
+      "latencyMs": 0,
+      "verdict": {
+        "id": "bb_stats_005",
+        "verdict": "correct",
+        "score": 1,
+        "confidence": 0.85,
+        "grounded": false,
+        "hallucinationDetected": false,
+        "reasoning": "[rubric] numeric within tol 0.5: gold=10.8 pred=10.8 diff=0 score=1",
+        "evidence": [
+          {
+            "url": "https://example.com/search?q=What%20does%20WAR%20stand%20for%20in%20baseball%20analytics%20and%20who%20had%20the%20highest%20bWAR%20in%202024%3F",
+            "title": "Mock result for: What does WAR stand for in baseball analytics and who had the highest bWAR in 2024?",
+            "snippet": "Mock grounded snippet: answer to \"What does WAR stand for in baseball analytics and who had the highest bWAR in 2024?\" would be verified via live search. In mock mode we assume gold-compatible evidence exists.",
+            "fetchedAt": "2026-10-31T03:01:29.870Z",
+            "source": "mock",
+            "score": 0.5
+          }
+        ],
+        "citations": [
+          "https://example.com/search?q=What%20does%20WAR%20stand%20for%20in%20baseball%20analytics%20and%20who%20had%20the%20highest%20bWAR%20in%202024%3F"
+        ],
+        "latencyMs": 0,
+        "judgeModel": "mock/rubric",
+        "abstained": false
+      }
+    },
+    {
+      "id": "bb_transactions_002",
+      "question": "Which team drafted Paul Skenes 1st overall and when did he debut?",
+      "goldAnswer": "Pittsburgh Pirates drafted him 1st overall in 2023; debuted May 11, 2024 vs Cubs; won 2024 NL Rookie of the Year",
+      "alternates": [
+        "Pirates 1st 2023 Skenes debut May 11 2024"
+      ],
+      "category": "transactions",
+      "team": "PIT",
+      "difficulty": "medium",
+      "freshness": "seasonal",
+      "verified_at": "2026-08-16",
+      "modelAnswer": "The Pirates drafted Paul Skenes 1st overall in 2023; he debuted May 11, 2024 vs Cubs and won NL Rookie of the Year.",
+      "toolCalls": [],
+      "latencyMs": 0,
+      "verdict": {
+        "id": "bb_transactions_002",
+        "verdict": "partial",
+        "score": 0.5,
+        "confidence": 0.85,
+        "grounded": false,
+        "hallucinationDetected": false,
+        "reasoning": "[rubric] high token recall 0.90 — partial score=0.7",
+        "evidence": [
+          {
+            "url": "https://example.com/search?q=Which%20team%20drafted%20Paul%20Skenes%201st%20overall%20and%20when%20did%20he%20debut%3F",
+            "title": "Mock result for: Which team drafted Paul Skenes 1st overall and when did he debut?",
+            "snippet": "Mock grounded snippet: answer to \"Which team drafted Paul Skenes 1st overall and when did he debut?\" would be verified via live search. In mock mode we assume gold-compatible evidence exists.",
+            "fetchedAt": "2026-10-31T03:01:29.870Z",
+            "source": "mock",
+            "score": 0.5
+          }
+        ],
+        "citations": [
+          "https://example.com/search?q=Which%20team%20drafted%20Paul%20Skenes%201st%20overall%20and%20when%20did%20he%20debut%3F"
+        ],
+        "latencyMs": 0,
+        "judgeModel": "mock/rubric",
+        "abstained": false
+      }
+    },
+    {
+      "id": "bb_live_001",
+      "question": "Who are the current top 3 teams in the AL East standings as of the most recent completed season (2024)?",
+      "goldAnswer": "New York Yankees (94-68), Baltimore Orioles (91-71), Boston Red Sox (81-81) — standings vary by date; answer must cite a live source with timestamp",
+      "alternates": [
+        "Yankees Orioles 2024 AL East"
+      ],
+      "category": "live_season",
+      "team": null,
+      "difficulty": "medium",
+      "freshness": "live",
+      "verified_at": "2026-08-16",
+      "modelAnswer": "In 2024 the AL East was led by the Yankees (94-68) and Orioles (91-71), then Red Sox.",
+      "toolCalls": [],
+      "latencyMs": 0,
+      "verdict": {
+        "id": "bb_live_001",
+        "verdict": "incorrect",
+        "score": 0,
+        "confidence": 0.75,
+        "grounded": false,
+        "hallucinationDetected": true,
+        "reasoning": "[rubric] no containment or alternate match score=0",
+        "evidence": [
+          {
+            "url": "https://example.com/search?q=Who%20are%20the%20current%20top%203%20teams%20in%20the%20AL%20East%20standings%20as%20of%20the%20most%20recent%20completed%20season%20(2024)%3F",
+            "title": "Mock result for: Who are the current top 3 teams in the AL East standings as of the most recent completed season (2024)?",
+            "snippet": "Mock grounded snippet: answer to \"Who are the current top 3 teams in the AL East standings as of the most recent completed season (2024)?\" would be verified via live search. In mock mode we assume gold-compatible evidence exists.",
+            "fetchedAt": "2026-10-31T03:01:29.870Z",
+            "source": "mock",
+            "score": 0.5
+          }
+        ],
+        "citations": [
+          "https://example.com/search?q=Who%20are%20the%20current%20top%203%20teams%20in%20the%20AL%20East%20standings%20as%20of%20the%20most%20recent%20completed%20season%20(2024)%3F"
+        ],
+        "latencyMs": 0,
+        "judgeModel": "mock/rubric",
+        "abstained": false
+      }
+    },
+    {
+      "id": "bb_trivia_001",
+      "question": "What is a 'Mendoza Line' in baseball and what batting average does it refer to?",
+      "goldAnswer": "A .200 batting average — named after Mario Mendoza (career .215), it denotes a poor offensive threshold",
+      "alternates": [
+        ".200 Mendoza"
+      ],
+      "category": "trivia",
+      "team": null,
+      "difficulty": "easy",
+      "freshness": "static",
+      "verified_at": "2026-08-16",
+      "modelAnswer": "The Mendoza Line is a .200 batting average, named after Mario Mendoza.",
+      "toolCalls": [],
+      "latencyMs": 0,
+      "verdict": {
+        "id": "bb_trivia_001",
+        "verdict": "incorrect",
+        "score": 0,
+        "confidence": 0.75,
+        "grounded": false,
+        "hallucinationDetected": true,
+        "reasoning": "[rubric] numeric far: gold=0.2 pred=200 diff=199.8 score=0",
+        "evidence": [
+          {
+            "url": "https://example.com/search?q=What%20is%20a%20'Mendoza%20Line'%20in%20baseball%20and%20what%20batting%20average%20does%20it%20refer%20to%3F",
+            "title": "Mock result for: What is a 'Mendoza Line' in baseball and what batting average does it refer to?",
+            "snippet": "Mock grounded snippet: answer to \"What is a 'Mendoza Line' in baseball and what batting average does it refer to?\" would be verified via live search. In mock mode we assume gold-compatible evidence exists.",
+            "fetchedAt": "2026-10-31T03:01:29.870Z",
+            "source": "mock",
+            "score": 0.5
+          }
+        ],
+        "citations": [
+          "https://example.com/search?q=What%20is%20a%20'Mendoza%20Line'%20in%20baseball%20and%20what%20batting%20average%20does%20it%20refer%20to%3F"
+        ],
+        "latencyMs": 0,
+        "judgeModel": "mock/rubric",
+        "abstained": false
+      }
+    }
+  ],
+  "metrics": {
+    "total": 20,
+    "correct": 9,
+    "partial": 3,
+    "incorrect": 8,
+    "abstain": 0,
+    "accuracy": 0.45,
+    "partialCreditAccuracy": 0.525,
+    "hallucinationRate": 0.4,
+    "abstentionRate": 0,
+    "groundedRate": 0.1,
+    "citationRate": 1,
+    "avgLatencyMs": 0,
+    "p50LatencyMs": 0,
+    "p95LatencyMs": 1,
+    "accuracyCI": [
+      0.25819502085709295,
+      0.6579179916924003
+    ],
+    "accuracyBootstrapCI": [
+      0.25,
+      0.7
+    ],
+    "scoreBootstrapCI": [
+      0.325,
+      0.725
+    ],
+    "byCategory": {
+      "ballpark": {
+        "total": 3,
+        "correct": 1,
+        "partial": 0,
+        "acc": 0.3333333333333333,
+        "partialAcc": 0.3333333333333333
+      },
+      "history": {
+        "total": 5,
+        "correct": 2,
+        "partial": 2,
+        "acc": 0.4,
+        "partialAcc": 0.6
+      },
+      "roster": {
+        "total": 2,
+        "correct": 1,
+        "partial": 0,
+        "acc": 0.5,
+        "partialAcc": 0.5
+      },
+      "stats": {
+        "total": 4,
+        "correct": 4,
+        "partial": 0,
+        "acc": 1,
+        "partialAcc": 1
+      },
+      "transactions": {
+        "total": 2,
+        "correct": 1,
+        "partial": 1,
+        "acc": 0.5,
+        "partialAcc": 0.75
+      },
+      "rules": {
+        "total": 2,
+        "correct": 0,
+        "partial": 0,
+        "acc": 0,
+        "partialAcc": 0
+      },
+      "live_season": {
+        "total": 1,
+        "correct": 0,
+        "partial": 0,
+        "acc": 0,
+        "partialAcc": 0
+      },
+      "trivia": {
+        "total": 1,
+        "correct": 0,
+        "partial": 0,
+        "acc": 0,
+        "partialAcc": 0
+      }
+    },
+    "byTeam": {
+      "NYY": {
+        "total": 4,
+        "correct": 2,
+        "partial": 0,
+        "acc": 0.5,
+        "partialAcc": 0.5
+      },
+      "unknown": {
+        "total": 9,
+        "correct": 2,
+        "partial": 2,
+        "acc": 0.2222222222222222,
+        "partialAcc": 0.3333333333333333
+      },
+      "LAD": {
+        "total": 2,
+        "correct": 2,
+        "partial": 0,
+        "acc": 1,
+        "partialAcc": 1
+      },
+      "DET": {
+        "total": 1,
+        "correct": 1,
+        "partial": 0,
+        "acc": 1,
+        "partialAcc": 1
+      },
+      "NYM": {
+        "total": 1,
+        "correct": 1,
+        "partial": 0,
+        "acc": 1,
+        "partialAcc": 1
+      },
+      "BOS": {
+        "total": 1,
+        "correct": 1,
+        "partial": 0,
+        "acc": 1,
+        "partialAcc": 1
+      },
+      "HOU": {
+        "total": 1,
+        "correct": 0,
+        "partial": 0,
+        "acc": 0,
+        "partialAcc": 0
+      },
+      "PIT": {
+        "total": 1,
+        "correct": 0,
+        "partial": 1,
+        "acc": 0,
+        "partialAcc": 0.5
+      }
+    },
+    "byDifficulty": {
+      "easy": {
+        "total": 10,
+        "correct": 4,
+        "partial": 2,
+        "acc": 0.4,
+        "partialAcc": 0.5
+      },
+      "medium": {
+        "total": 7,
+        "correct": 3,
+        "partial": 1,
+        "acc": 0.42857142857142855,
+        "partialAcc": 0.5
+      },
+      "hard": {
+        "total": 3,
+        "correct": 2,
+        "partial": 0,
+        "acc": 0.6666666666666666,
+        "partialAcc": 0.6666666666666666
+      }
+    },
+    "byFreshness": {
+      "static": {
+        "total": 11,
+        "correct": 3,
+        "partial": 1,
+        "acc": 0.2727272727272727,
+        "partialAcc": 0.3181818181818182
+      },
+      "seasonal": {
+        "total": 7,
+        "correct": 5,
+        "partial": 2,
+        "acc": 0.7142857142857143,
+        "partialAcc": 0.8571428571428571
+      },
+      "live": {
+        "total": 2,
+        "correct": 1,
+        "partial": 0,
+        "acc": 0.5,
+        "partialAcc": 0.5
+      }
+    },
+    "weightedAccuracy": 0.5830238726790452,
+    "timeDecayedAccuracy": 0.46113989637305697,
+    "timeDecayedScore": 0.5362694300518135,
+    "avgScore": 0.525,
+    "judgeModel": "mock/rubric"
+  },
+  "weakestSlices": [
+    {
+      "slice": "category:rules",
+      "acc": 0,
+      "total": 2
+    },
+    {
+      "slice": "category:live_season",
+      "acc": 0,
+      "total": 1
+    },
+    {
+      "slice": "category:trivia",
+      "acc": 0,
+      "total": 1
+    },
+    {
+      "slice": "team:unknown",
+      "acc": 0.2222222222222222,
+      "total": 9
+    },
+    {
+      "slice": "freshness:static",
+      "acc": 0.2727272727272727,
+      "total": 11
+    }
+  ]
+}
