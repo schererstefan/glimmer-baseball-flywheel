@@ -57,6 +57,7 @@ function parseArgs() {
     once: a.includes("--once"),
     dryRun: a.includes("--dry-run"),
     status: a.includes("--status"),
+    help: a.includes("--help") || a.includes("-h"),
     maxIters: Number(
       getFlag(a, "--max-iters") ?? process.env.FLYWHEEL_MAX_ITERS ?? 3,
     ),
@@ -65,6 +66,26 @@ function parseArgs() {
     mockJudge: !a.includes("--judge-live"),
     syntheticN: Number(getFlag(a, "--synthetic-n") ?? 20),
   };
+}
+
+function printFlywheelHelp() {
+  console.log(`
+glimmer-bb flywheel — recursive flywheel loop
+
+Usage:
+  glimmer-bb flywheel [--once] [--dry-run] [--status] [--max-iters 3] [--provider mock|glimmer] [--judge-live] [--synthetic-n N] [--dataset path]
+
+Options:
+  --once              Run a single iteration
+  --dry-run           Skip synthetic generation and training side-effects
+  --status            Print persisted flywheel state and exit
+  --max-iters 3       Maximum iterations when not using --once (default 3)
+  --provider mock|glimmer  Model provider (default mock); any other --provider value falls back to mock with a warning
+  --judge-live        Use the live judge instead of the mock judge
+  --synthetic-n N     Number of synthetic cases to generate (default 20)
+  --dataset path      Dataset manifest path (default dataset/v1/baseball.json)
+  --help, -h          Show this help and exit
+`);
 }
 
 function isSignificant(
@@ -105,10 +126,18 @@ async function oneIteration(
   manifest: DatasetManifest,
   state: ReturnType<typeof loadState>,
 ): Promise<{ acc: number; runId: string; model: string; promoted: boolean }> {
+  const providerSubstituted =
+    args.provider !== "glimmer" && args.provider !== "mock";
+  if (providerSubstituted) {
+    console.warn(
+      `[flywheel] WARNING: requested provider "${args.provider}" is not supported — substituting MockProvider (mock). Only "glimmer" and "mock" are supported; any other --provider value falls back to mock.`,
+    );
+  }
   const provider =
     args.provider === "glimmer"
       ? new OllamaProvider()
       : new MockProvider(`mock-glimmer-iter${state.iteration + 1}`);
+  const evaluatedN = manifest.cases.length;
 
   console.log(`\n[flywheel] ── iteration ${state.iteration + 1} ──`);
   console.log(
@@ -200,13 +229,29 @@ async function oneIteration(
   fs.mkdirSync(reportDir, { recursive: true });
   const reportPath = path.join(reportDir, `${run.runId}.md`);
   let report = `# Flywheel iteration ${state.iteration + 1} — ${run.runId}\n\n`;
-  report += `**Model:** \`${provider.model}\`  \n**Dataset:** ${manifest.version} (${manifest.cases.length}+${syntheticKept} synth)  \n`;
-  report += `**Judge:** ${run.metrics.judgeModel}  \n**Accuracy:** ${(run.metrics.accuracy * 100).toFixed(1)}% (prev best ${(prevBest * 100).toFixed(1)}%)  \n`;
+  const isMockMode = provider.id === "mock" || args.mockJudge;
+  if (isMockMode) {
+    report += `> **MOCK MODE — no model learning occurred**\n`;
+    report += `> Mock answers are deterministic stubs and the train step is a log line, not training.\n\n`;
+  }
+  report += `**Model:** \`${provider.model}\`  \n`;
+  if (syntheticKept > 0) {
+    report += `**Dataset:** ${manifest.version} (${evaluatedN} cases evaluated) — ${syntheticKept} synthetic cases built AFTER eval for SFT/DPO and were not part of this eval  \n`;
+  } else {
+    report += `**Dataset:** ${manifest.version} (${evaluatedN} cases evaluated)  \n`;
+  }
+  if (providerSubstituted) {
+    report += `**Provider note:** requested provider "${args.provider}" was substituted by mock (MockProvider).  \n`;
+  }
+  const [ciLo, ciHi] = run.metrics.accuracyCI;
+  report += `**Judge:** ${run.metrics.judgeModel}  \n**Accuracy:** ${(run.metrics.accuracy * 100).toFixed(1)}% (Wilson 95% CI [${(ciLo * 100).toFixed(1)}%, ${(ciHi * 100).toFixed(1)}%]) (prev best ${(prevBest * 100).toFixed(1)}%)  \n`;
   report += `**Promotion:** ${promoted ? "✅ promoted" : "⏸ hold"} — ${reason}  \n\n`;
   report += `**Curriculum focus:** ${curriculum.focusCategories.join(", ")} | nextN=${curriculum.nextN}  \n\n`;
   report += `**Weak slices:** ${run.weakestSlices.map((s) => `${s.slice} ${(s.acc * 100).toFixed(0)}%`).join(", ")}  \n\n`;
   report += `**Meta:** health=${meta.health} — ${meta.recommendations.join("; ") || "no issues"}  \n\n`;
-  report += `**Artifacts:** [eval JSON](${jsonPath}) · [eval MD](${mdPath})  \n`;
+  const relJsonPath = `../../${jsonPath}`;
+  const relMdPath = `../../${mdPath}`;
+  report += `**Artifacts:** [eval JSON](${relJsonPath}) · [eval MD](${relMdPath})  \n`;
   report += report ? "" : "";
   fs.writeFileSync(reportPath, report);
   console.log(`[flywheel] report -> ${reportPath}`);
@@ -221,6 +266,10 @@ async function oneIteration(
 
 async function main() {
   const args = parseArgs();
+  if (args.help) {
+    printFlywheelHelp();
+    return;
+  }
   if (args.status) {
     const s = loadState();
     console.log(JSON.stringify(s, null, 2));
