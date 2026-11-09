@@ -42,21 +42,3 @@ export function bootstrapCI(
   const hi = boots[Math.floor((1 - alpha / 2) * boots.length)] ?? m;
   return [lo, hi];
 }
-
-export function pValueMcNemar(b: number, c: number): number {
-  // b = A correct B wrong, c = A wrong B correct
-  const n = b + c;
-  if (n === 0) return 1;
-  // Exact binomial two-sided
-  const k = Math.min(b, c);
-  let p = 0;
-  for (let i = 0; i <= k; i++) p += binom(n, i) * 0.5 ** n;
-  return Math.min(1, p * 2);
-}
-
-function binom(n: number, k: number): number {
-  if (k < 0 || k > n) return 0;
-  let r = 1;
-  for (let i = 1; i <= k; i++) r = (r * (n - i + 1)) / i;
-  return r;
-}
