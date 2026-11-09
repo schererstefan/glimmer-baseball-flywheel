@@ -5,6 +5,7 @@
  * pnpm eval --mock           -> same
  * pnpm eval --live           -> live judge (needs TAVILY/BRAVE + ANTHROPIC)
  * pnpm eval --provider glimmer --model muse-glimmer
+ * pnpm eval --mock --min-accuracy 0.40  -> exit 1 if accuracy < 40%
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -19,6 +20,7 @@ const VALID_PROVIDERS = ["mock", "glimmer", "ollama", "spark"] as const;
 
 function parseArgs() {
   const a = process.argv.slice(2);
+  const minAccuracyRaw = getFlag(a, "--min-accuracy");
   return {
     mock:
       a.includes("--mock") ||
@@ -30,6 +32,9 @@ function parseArgs() {
     model: getFlag(a, "--model"),
     only: getFlag(a, "--only")?.split(",") ?? null,
     limit: Number(getFlag(a, "--limit") ?? 0) || undefined,
+    minAccuracy:
+      minAccuracyRaw === undefined ? undefined : Number(minAccuracyRaw),
+    minAccuracyRaw,
   };
 }
 
@@ -38,6 +43,17 @@ async function main() {
   if (!(VALID_PROVIDERS as readonly string[]).includes(args.provider)) {
     console.error(
       `Unknown --provider "${args.provider}". Valid values: ${VALID_PROVIDERS.join(", ")}`,
+    );
+    process.exit(1);
+  }
+  if (
+    args.minAccuracy !== undefined &&
+    (!Number.isFinite(args.minAccuracy) ||
+      args.minAccuracy < 0 ||
+      args.minAccuracy > 1)
+  ) {
+    console.error(
+      `Invalid --min-accuracy "${args.minAccuracyRaw}". Expected a number between 0 and 1.`,
     );
     process.exit(1);
   }
@@ -87,6 +103,16 @@ async function main() {
     console.log(`[eval] wrote ${jsonPath}`);
     console.log(`[eval] wrote ${mdPath}`);
     console.log(`[eval] wrote evals/COMPARISON.md`);
+  }
+
+  if (
+    args.minAccuracy !== undefined &&
+    run.metrics.accuracy < args.minAccuracy
+  ) {
+    console.error(
+      `[eval] accuracy ${(run.metrics.accuracy * 100).toFixed(1)}% below floor ${(args.minAccuracy * 100).toFixed(1)}%`,
+    );
+    process.exit(1);
   }
 }
 

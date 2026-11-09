@@ -16,5 +16,5 @@ jobs:
       - run: pnpm lint
       - run: pnpm typecheck
       - run: pnpm test
-      - run: pnpm eval --mock --limit 20 --json > /tmp/eval.json && echo "mock eval ok" && cat /tmp/eval.json | head -n 60
+      - run: pnpm eval --mock --limit 20 --json --min-accuracy 0.40 > /tmp/eval.json && echo "mock eval ok" && cat /tmp/eval.json | head -n 60
       - run: pnpm dataset:build --verify
