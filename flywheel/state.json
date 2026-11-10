@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-09T03:01:37.152Z",
-  "iteration": 13,
+  "updatedAt": "2026-11-10T03:01:41.020Z",
+  "iteration": 14,
   "bestRunId": "2026-10-28T03-01-31-229Z",
   "bestAccuracy": 0.45,
   "bestModel": "mock-glimmer-iter1",
@@ -122,6 +122,15 @@
       "model": "mock-glimmer-iter13",
       "promoted": false,
       "at": "2026-11-09T03:01:37.152Z"
+    },
+    {
+      "iteration": 14,
+      "runId": "2026-11-10T03-01-41-001Z",
+      "accuracy": 0.45,
+      "weightedAccuracy": 0.45,
+      "model": "mock-glimmer-iter14",
+      "promoted": false,
+      "at": "2026-11-10T03:01:41.020Z"
     }
   ],
   "curriculum": {
@@ -133,5 +142,5 @@
     "freshnessRefreshDue": "2026-11-04T03:01:31.227Z"
   },
   "nextAction": "eval",
-  "totalIters": 13
+  "totalIters": 14
 }
