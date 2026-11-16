@@ -6,6 +6,8 @@ Hill-climb flywheel for **fine-tuning Meta Glimmer on MLB baseball** — grounde
 
 ![CI](https://img.shields.io/badge/ci-pnpm%20test%20%2B%20mock%20eval-blue) ![Judge](https://img.shields.io/badge/judge-web--search%20grounded-0ea5e9) ![Dataset](https://img.shields.io/badge/dataset-v1%2020%20seed%20%E2%86%92%20120%2B%20synth-f59e0b) ![Flywheel](https://img.shields.io/badge/flywheel-nightly%2003%3A00%20UTC-22c55e)
 
+> **Current status (mock mode):** accuracy **0.45** has plateaued since iteration 1 (`flywheel/state/flywheel.json`). The mock trainer **trains nothing** — it only logs. Promotion **re-checks the same eval run** (`src/flywheel/orchestrator.ts` has a single `runEval` at line 117; promotion at lines 178–186 compares that same run against `bestAccuracy`) — no candidate re-eval yet.
+
 ## Why this exists
 
 Glimmer is great at tool-use but hallucinates baseball facts when forced to recall:
@@ -40,9 +42,10 @@ pnpm flywheel --once
 
 # 4) Inspect state
 pnpm flywheel --status          # flywheel/state/flywheel.json
-cat evals/COMPARISON.md         # latest report
-ls flywheel/reports/            # per-iteration narratives
+ls flywheel/reports/            # latest report (2026-11-16: HOLD — delta 0.0pp)
 ```
+
+> `evals/COMPARISON.md` is frozen (2026-08-21) and omitted from the `.github/workflows/flywheel.yml` `git add -f` list — use `flywheel/reports/` for the current per-iteration report.
 
 ### With live judge + real model (optional, not required for CI)
 
@@ -202,7 +205,7 @@ Local LoRA example (when you have Ollama + HF):
 TRAINER_BACKEND=unsloth pnpm train:pipeline --dataset dataset/v1/baseball.json --provider glimmer
 ```
 
-CI uses `TRAINER_BACKEND=mock` — logs “would train … +2.1pp” without GPU.
+CI uses `TRAINER_BACKEND=mock` — it trains nothing: `src/flywheel/orchestrator.ts:174` logs `[mock-trainer] would fine-tune … (backend=mock)` and `src/training/pipeline.ts:170` logs `would LoRA-finetune Glimmer (skipped in CI)`.
 
 ## Flywheel: `src/flywheel/`
 
@@ -282,6 +285,12 @@ All gates are **mock-safe** (no secrets required).
 3. **Train real LoRA**: set `ANTHROPIC_API_KEY` + `TAVILY_API_KEY`, `pnpm flywheel --once --provider glimmer --judge-live`, then `TRAINER_BACKEND=unsloth pnpm train:pipeline`.
 4. **Make judge stricter**: tighten `src/judge/rubric.ts` tolerances or add a `ballpark` rule.
 5. **Make dataset curate itself**: set `FLYWHEEL_CRON` and let Actions loop — each PR is a new `dataset/synthetic/<run>.json` + eval.
+
+## Contributing notes
+
+- Running `pnpm flywheel --once` locally dirties tracked bot artifacts — they are gitignored-but-tracked, so expect them in `git status`; don't commit them.
+- `pnpm glimmer:setup` (`scripts/glimmer-setup.ts`) — Ollama/Glimmer presence check before a live run.
+- `scripts/github-init.sh` — one-shot bootstrap: create the GitHub repo, initial commit, and push.
 
 ## License
 
