@@ -9,13 +9,9 @@
 import fs from "node:fs";
 import path from "node:path";
 import type { DatasetManifest } from "@/src/dataset/schema.ts";
-import { MockProvider } from "@/src/providers/mock.ts";
-import { MuseSparkProvider } from "@/src/providers/muse-spark.ts";
-import { OllamaProvider } from "@/src/providers/ollama.ts";
+import { selectProvider } from "@/src/providers/select.ts";
 import { getFlag } from "@/src/utils/args.ts";
 import { runEval, saveEvalRun } from "./harness.ts";
-
-const VALID_PROVIDERS = ["mock", "glimmer", "ollama", "spark"] as const;
 
 function parseArgs() {
   const a = process.argv.slice(2);
@@ -35,12 +31,6 @@ function parseArgs() {
 
 async function main() {
   const args = parseArgs();
-  if (!(VALID_PROVIDERS as readonly string[]).includes(args.provider)) {
-    console.error(
-      `Unknown --provider "${args.provider}". Valid values: ${VALID_PROVIDERS.join(", ")}`,
-    );
-    process.exit(1);
-  }
   const datasetPath = path.resolve(args.dataset);
   if (!fs.existsSync(datasetPath)) {
     console.error(`Dataset not found: ${datasetPath}`);
@@ -53,12 +43,7 @@ async function main() {
   if (args.only) cases = cases.filter((c) => args.only!.includes(c.id));
   if (args.limit) cases = cases.slice(0, args.limit);
 
-  let provider: import("@/src/providers/types.ts").ModelProvider;
-  if (args.provider === "glimmer" || args.provider === "ollama")
-    provider = new OllamaProvider({ model: args.model });
-  else if (args.provider === "spark")
-    provider = new MuseSparkProvider({ model: args.model });
-  else provider = new MockProvider(args.model ?? "mock-glimmer-v1");
+  const provider = selectProvider(args.provider, args.model);
 
   // If live, unset mock judge so retriever uses real API
   if (args.live) process.env.MOCK_JUDGE = "0";
