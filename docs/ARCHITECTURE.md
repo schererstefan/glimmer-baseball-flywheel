@@ -39,7 +39,7 @@ SFT builds `messages[]` with gold+explanation+citations; DPO mines `verdict=inco
 
 ## Flywheel
 
-State machine in `flywheel/state.json`. Orchestrator loops: eval_current → curriculum → synthetic → SFT/DPO → mock train → promotion (Wilson non-overlap or +2pp) → meta-eval → report. Curriculum upweights weak slices, decides `nextN = gap*80`. Meta-eval flags stale live, coverage gaps, leakage, hallucination.
+State machine in `flywheel/state/flywheel.json` (`statePath()` in `src/flywheel/state.ts`). Orchestrator loops: eval_current → curriculum → synthetic → SFT/DPO → mock train → promotion (Wilson non-overlap or +2pp) → meta-eval → report. Curriculum upweights weak slices, decides `nextN = gap*80`. Meta-eval flags stale live, coverage gaps, leakage, hallucination.
 
 ## CI
 

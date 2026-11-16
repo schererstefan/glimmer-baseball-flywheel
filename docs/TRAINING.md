@@ -46,7 +46,7 @@ TRAINER_BACKEND=axolotl pnpm train:pipeline   # accelerate launch
 TRAINER_BACKEND=ollama pnpm train:pipeline    # ollama create + modelfile
 ```
 
-Mock trainer logs: `[mock-trainer] SFT N records + DPO M pairs -> would LoRA … Simulating +2.1pp`.
+Mock trainer logs: `src/flywheel/orchestrator.ts:174` `[mock-trainer] would fine-tune … (backend=mock)`; `src/training/pipeline.ts:170` `would LoRA-finetune Glimmer (skipped in CI)`.
 
 ## Configs
 

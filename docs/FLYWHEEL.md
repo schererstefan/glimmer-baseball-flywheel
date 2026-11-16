@@ -58,4 +58,4 @@ Each commit triggers `eval.yml` (dataset change → eval). Next night’s flywhe
 
 ## Training backends
 
-`TRAINER_BACKEND=mock` (default) → logs “would train … +2.1pp”. Replace with `unsloth`/`axolotl` by adding a script that reads `training/datasets/*.jsonl` and calls `accelerate launch`. The manifest’s `candidateModel` would then be a real Ollama model id for next eval.
+`TRAINER_BACKEND=mock` (default) → trains nothing: `src/flywheel/orchestrator.ts:174` logs `[mock-trainer] would fine-tune … (backend=mock)` and `src/training/pipeline.ts:170` logs `would LoRA-finetune Glimmer (skipped in CI)`. Replace with `unsloth`/`axolotl` by adding a script that reads `training/datasets/*.jsonl` and calls `accelerate launch`. The manifest’s `candidateModel` would then be a real Ollama model id for next eval.
