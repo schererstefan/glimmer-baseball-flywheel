@@ -14,7 +14,8 @@ Usage:
   glimmer-bb sft [--dataset path] [--out path] [--augment 1]
   glimmer-bb dpo --eval evals/results/<run>.json [--out path]
   glimmer-bb synthetic [--n 20]
-  glimmer-bb flywheel [--once] [--dry-run] [--status] [--max-iters 3]
+  glimmer-bb flywheel [--once] [--dry-run] [--status] [--max-iters 3] [--provider mock|glimmer] [--judge-live] [--synthetic-n N] [--dataset path]
+                       (any other --provider value falls back to mock with a warning)
   glimmer-bb pipeline [--dataset path] [--provider mock|glimmer]
 
 Examples:
