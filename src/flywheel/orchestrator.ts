@@ -40,8 +40,7 @@ import fs from "node:fs";
 import path from "node:path";
 import type { DatasetManifest } from "@/src/dataset/schema.ts";
 import { runEval, saveEvalRun } from "@/src/eval/harness.ts";
-import { MockProvider } from "@/src/providers/mock.ts";
-import { OllamaProvider } from "@/src/providers/ollama.ts";
+import { selectProvider } from "@/src/providers/select.ts";
 import { buildDPO, writeDPOJsonl } from "@/src/training/dpo.ts";
 import { buildSFT, writeSFTJsonl } from "@/src/training/sft.ts";
 import { generateSynthetic } from "@/src/training/synthetic.ts";
@@ -105,10 +104,12 @@ async function oneIteration(
   manifest: DatasetManifest,
   state: ReturnType<typeof loadState>,
 ): Promise<{ acc: number; runId: string; model: string; promoted: boolean }> {
-  const provider =
-    args.provider === "glimmer"
-      ? new OllamaProvider()
-      : new MockProvider(`mock-glimmer-iter${state.iteration + 1}`);
+  const provider = selectProvider(
+    args.provider,
+    args.provider === "mock"
+      ? `mock-glimmer-iter${state.iteration + 1}`
+      : undefined,
+  );
 
   console.log(`\n[flywheel] ── iteration ${state.iteration + 1} ──`);
   console.log(
