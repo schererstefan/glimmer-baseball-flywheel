@@ -117,7 +117,7 @@ async function oneIteration(
   );
   const run = await runEval({
     provider,
-    cases: manifest.cases as any,
+    cases: manifest.cases,
     datasetVersion: manifest.version,
     datasetPath: args.dataset,
     mockJudge: args.mockJudge,
@@ -128,7 +128,7 @@ async function oneIteration(
   );
 
   // Curriculum
-  const curriculum = buildCurriculum(run, manifest.cases as any);
+  const curriculum = buildCurriculum(run, manifest.cases);
   console.log(
     `[flywheel] curriculum focus=${curriculum.focusCategories.join(",")} nextN=${curriculum.nextN} weak=${run.weakestSlices.map((s) => s.slice).join(", ")}`,
   );
@@ -136,7 +136,7 @@ async function oneIteration(
   // Synthetic (skip if dryRun)
   let syntheticKept = 0;
   if (!args.dryRun) {
-    const { kept } = await generateSynthetic(manifest.cases as any, {
+    const { kept } = await generateSynthetic(manifest.cases, {
       weakSlices: run.weakestSlices,
       n: args.syntheticN ?? curriculum.nextN,
     });
@@ -159,12 +159,12 @@ async function oneIteration(
     console.log(`[flywheel] synthetic kept ${kept.length} -> ${synPath}`);
 
     // Extend dataset in-memory for candidate training (not yet committed to v1)
-    const extendedCases = [...manifest.cases, ...(kept as any[])];
+    const extendedCases = [...manifest.cases, ...kept];
     // Build SFT/DPO over extended
-    const sft = buildSFT(extendedCases as any, { augment: 1 });
+    const sft = buildSFT(extendedCases, { augment: 1 });
     const sftPath = path.join("training/datasets", `${run.runId}.sft.jsonl`);
     writeSFTJsonl(sft, sftPath);
-    const dpo = buildDPO(run.cases as any, { includePartial: true });
+    const dpo = buildDPO(run.cases, { includePartial: true });
     const dpoPath = path.join("training/datasets", `${run.runId}.dpo.jsonl`);
     writeDPOJsonl(dpo, dpoPath);
     console.log(
@@ -190,7 +190,7 @@ async function oneIteration(
   );
 
   // Meta-eval
-  const meta = metaEval(run, manifest as any);
+  const meta = metaEval(run, manifest);
   console.log(
     `[flywheel] meta health=${meta.health} staleLive=${meta.dataset.staleLive} gaps=${meta.dataset.coverageGaps.length}`,
   );

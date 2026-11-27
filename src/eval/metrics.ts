@@ -138,9 +138,11 @@ export function computeMetrics(
     const map = new Map<string, JudgeVerdict[]>();
     for (let i = 0; i < verdicts.length; i++) {
       const k = String((cases[i] as Record<string, unknown>)[key] ?? "unknown");
+      const v = verdicts[i];
+      if (v === undefined) continue;
       const list = map.get(k);
-      if (list) list.push(verdicts[i]!);
-      else map.set(k, [verdicts[i]!]);
+      if (list) list.push(v);
+      else map.set(k, [v]);
     }
     for (const [k, vs] of map) {
       const tot = vs.length;
@@ -164,13 +166,15 @@ export function computeMetrics(
   let wSum = 0;
   let wTot = 0;
   for (let i = 0; i < verdicts.length; i++) {
-    const c = cases[i]!;
+    const c = cases[i];
+    if (c === undefined) continue;
     const cw = CATEGORY_WEIGHTS[c.category] ?? 1;
     const dw =
       (DIFFICULTY_WEIGHTS as Record<string, number>)[c.difficulty] ??
       (c.difficulty === "expert" ? 1.4 : 1);
     const w = cw * dw;
-    wSum += verdicts[i]!.score * w;
+    const v = verdicts[i];
+    if (v !== undefined) wSum += v.score * w;
     wTot += w;
   }
   const weightedAccuracy = wTot ? wSum / wTot : accuracy;
@@ -183,8 +187,9 @@ export function computeMetrics(
   let tdScoreSum = 0;
   let tdWeightSum = 0;
   for (let i = 0; i < verdicts.length; i++) {
-    const v = verdicts[i]!;
-    const c = cases[i]!;
+    const v = verdicts[i];
+    const c = cases[i];
+    if (v === undefined || c === undefined) continue;
     const decay = timeDecayWeight(
       c.verified_at ?? new Date().toISOString().slice(0, 10),
       halfLife,

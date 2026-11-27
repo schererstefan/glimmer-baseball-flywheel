@@ -208,8 +208,11 @@ export async function runEval(opts: {
     opts.judgeConcurrency ?? 4,
   );
 
-  for (let i = 0; i < partialResults.length; i++)
-    partialResults[i]!.verdict = verdicts[i]!;
+  for (let i = 0; i < partialResults.length; i++) {
+    const pr = partialResults[i];
+    const v = verdicts[i];
+    if (pr !== undefined && v !== undefined) pr.verdict = v;
+  }
 
   // 3) Metrics — include time-decayed via verified_at
   const metrics = computeMetrics(

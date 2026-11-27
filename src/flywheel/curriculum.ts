@@ -253,12 +253,14 @@ export function sampleSlices(
     let r = rand() * t;
     let idx = 0;
     for (; idx < pool.length; idx++) {
-      const w = pool[idx]!;
+      const w = pool[idx];
+      if (w === undefined) break;
       if (r < w.weight) break;
       r -= w.weight;
     }
     if (idx >= pool.length) idx = pool.length - 1;
-    sampled.push(pool[idx]!);
+    const picked = pool[idx];
+    if (picked !== undefined) sampled.push(picked);
     pool.splice(idx, 1);
   }
   return sampled;
