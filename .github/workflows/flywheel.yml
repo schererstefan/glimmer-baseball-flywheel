@@ -20,6 +20,7 @@ on:
 jobs:
   hill-climb:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     permissions:
       contents: write
       pull-requests: write
@@ -71,6 +72,7 @@ jobs:
 
   meta-eval:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     needs: hill-climb
     if: always()
     steps:

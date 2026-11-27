@@ -1,3 +1,4 @@
+import { fetchWithTimeout } from "../utils/fetch.ts";
 import type { Evidence } from "./types.ts";
 
 export interface Retriever {
@@ -184,17 +185,21 @@ export class TavilyRetriever implements Retriever {
   name = "tavily";
   constructor(private apiKey: string) {}
   async search(query: string, count = 5): Promise<Evidence[]> {
-    const res = await fetch("https://api.tavily.com/search", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        api_key: this.apiKey,
-        query,
-        max_results: count,
-        search_depth: "advanced",
-        include_answer: false,
-      }),
-    });
+    const res = await fetchWithTimeout(
+      "https://api.tavily.com/search",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          api_key: this.apiKey,
+          query,
+          max_results: count,
+          search_depth: "advanced",
+          include_answer: false,
+        }),
+      },
+      30000,
+    );
     if (!res.ok)
       throw new Error(
         `Tavily ${res.status}: ${await res.text().then((t) => t.slice(0, 300))}`,
@@ -217,7 +222,7 @@ export class BraveRetriever implements Retriever {
   name = "brave";
   constructor(private apiKey: string) {}
   async search(query: string, count = 5): Promise<Evidence[]> {
-    const res = await fetch(
+    const res = await fetchWithTimeout(
       `https://api.search.brave.com/res/v1/web/search?q=${encodeURIComponent(query)}&count=${count}`,
       {
         headers: {
@@ -225,6 +230,7 @@ export class BraveRetriever implements Retriever {
           "X-Subscription-Token": this.apiKey,
         },
       },
+      30000,
     );
     if (!res.ok)
       throw new Error(

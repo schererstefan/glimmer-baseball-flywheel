@@ -1,3 +1,4 @@
+import { fetchWithTimeout } from "../utils/fetch.ts";
 import type { ChatOptions, Delta, ModelProvider, ToolCall } from "./types.ts";
 
 export class MuseSparkProvider implements ModelProvider {
@@ -50,20 +51,24 @@ export class MuseSparkProvider implements ModelProvider {
       },
     }));
 
-    const res = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${this.apiKey}`,
+    const res = await fetchWithTimeout(
+      url,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${this.apiKey}`,
+        },
+        body: JSON.stringify({
+          model: this.model,
+          messages,
+          tools,
+          temperature: options.temperature ?? 0,
+          stream: true,
+        }),
       },
-      body: JSON.stringify({
-        model: this.model,
-        messages,
-        tools,
-        temperature: options.temperature ?? 0,
-        stream: true,
-      }),
-    });
+      120000,
+    );
 
     if (!res.ok || !res.body) {
       const txt = await res.text().catch(() => "");

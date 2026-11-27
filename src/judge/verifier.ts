@@ -105,7 +105,7 @@ async function llmAdjudicate(
   if (!key) return null;
   try {
     const { default: Anthropic } = await import("@anthropic-ai/sdk");
-    const client = new Anthropic({ apiKey: key });
+    const client = new Anthropic({ apiKey: key, timeout: 120000 });
     const evBlock = evidence
       .slice(0, 5)
       .map(

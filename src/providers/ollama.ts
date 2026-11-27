@@ -1,3 +1,4 @@
+import { fetchWithTimeout } from "../utils/fetch.ts";
 import type { ChatOptions, Delta, ModelProvider, ToolCall } from "./types.ts";
 
 export class OllamaProvider implements ModelProvider {
@@ -42,11 +43,15 @@ export class OllamaProvider implements ModelProvider {
 
     let res: Response;
     try {
-      res = await fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      });
+      res = await fetchWithTimeout(
+        url,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        },
+        120000,
+      );
     } catch (e) {
       throw new Error(
         `Ollama fetch failed at ${url}: ${e instanceof Error ? e.message : String(e)}`,
