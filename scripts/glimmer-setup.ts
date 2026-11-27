@@ -6,8 +6,8 @@ async function check() {
   try {
     const res = await fetch(`${host}/api/tags`);
     if (!res.ok) throw new Error(`${res.status}`);
-    const j: any = await res.json();
-    const models = (j.models ?? []).map((m: any) => m.name);
+    const j = (await res.json()) as { models?: Array<{ name: string }> };
+    const models = (j.models ?? []).map((m) => m.name);
     console.log(`Ollama at ${host}: ${models.join(", ") || "(no models)"}`);
     if (models.some((m: string) => m.includes(model)))
       console.log(`✓ ${model} present`);

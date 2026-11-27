@@ -8,7 +8,7 @@ describe("retriever (mock)", () => {
     const r = new MockRetriever();
     const hits = await r.search("Where do the Yankees play?");
     expect(hits.length).toBeGreaterThan(0);
-    expect(hits[0]!.url).toContain("Yankee");
+    expect(hits[0]?.url).toContain("Yankee");
   });
   it("cached retriever dedupes and caches", async () => {
     const inner = new MockRetriever();

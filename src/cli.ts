@@ -32,7 +32,11 @@ if (args.length === 0 || args.includes("--help") || args.includes("-h")) {
   process.exit(0);
 }
 
-const cmd = args[0]!;
+const cmd = args[0];
+if (cmd === undefined) {
+  help();
+  process.exit(0);
+}
 const rest = args.slice(1);
 
 async function dispatch() {

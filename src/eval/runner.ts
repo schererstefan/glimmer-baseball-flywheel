@@ -40,7 +40,8 @@ async function main() {
     fs.readFileSync(datasetPath, "utf8"),
   ) as DatasetManifest;
   let cases = manifest.cases;
-  if (args.only) cases = cases.filter((c) => args.only!.includes(c.id));
+  const only = args.only;
+  if (only) cases = cases.filter((c) => only.includes(c.id));
   if (args.limit) cases = cases.slice(0, args.limit);
 
   const provider = selectProvider(args.provider, args.model);
@@ -50,7 +51,7 @@ async function main() {
 
   const run = await runEval({
     provider,
-    cases: cases as any,
+    cases,
     datasetVersion: manifest.version,
     datasetPath: args.dataset,
     mockJudge: args.mock,
